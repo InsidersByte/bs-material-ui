@@ -43,26 +43,26 @@ let make = (~name, _children) => {
 ## Bindings
 
 - [x] AppBar
-- [ ] Avatar
-- [ ] Badge
+- [x] Avatar
+- [x] Badge
 - [ ] BottomNavigationButton
 - [ ] BottomNavigation
-- [ ] ButtonBase
-- [ ] Button
-- [ ] CardActions
-- [ ] CardContent
-- [ ] CardHeader
-- [ ] CardMedia
-- [ ] Card
-- [ ] Checkbox
-- [ ] Chip
-- [ ] CircularProgress
+- [x] ButtonBase
+- [x] Button
+- [x] CardActions
+- [x] CardContent
+- [x] CardHeader
+- [x] CardMedia
+- [x] Card
+- [x] Checkbox
+- [x] Chip
+- [x] CircularProgress
 - [ ] Collapse
-- [ ] DialogActions
-- [ ] DialogContentText
-- [ ] DialogConent
-- [ ] DialogTitle
-- [ ] Dialog
+- [x] DialogActions
+- [x] DialogContentText
+- [x] DialogConent
+- [x] DialogTitle
+- [x] Dialog
 - [ ] Divider
 - [ ] Drawer
 - [ ] Fade
