@@ -1,0 +1,42 @@
+{
+  "name": "bs-material-ui",
+  "version": "0.0.0",
+  "description": "Reason bindings for material-ui",
+  "main": "lib/js/src/MaterialUI.js",
+  "keywords": [
+    "react",
+    "react-component",
+    "material design",
+    "material-ui",
+    "bucklescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InsidersByte/bs-material-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/InsidersByte/bs-material-ui/issues"
+  },
+  "homepage": "https://github.com/InsidersByte/bs-material-ui#readme",
+  "scripts": {
+    "build": "bsb -make-world",
+    "start": "bsb -make-world -w",
+    "clean": "bsb -clean-world",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "yarn run clean && yarn run build"
+  },
+  "author": "Jonathon Kelly <jonathon@insidersbyte.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "bs-platform": "2.0.0",
+    "material-ui": "1.0.0-beta.19",
+    "reason-react": "0.2.4"
+  },
+  "peerDependencies": {
+    "material-ui": "1.0.0-beta.x",
+    "react": "^15.3.0 || ^16.0.0",
+    "react-dom": "^15.3.0 || ^16.0.0",
+    "reason-react": "^0.2.4"
+  }
+}
