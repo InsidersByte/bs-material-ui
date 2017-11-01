@@ -108,11 +108,11 @@ module ButtonBase = {
       ~props=
         Js.Nullable.(
           {
-            "focusRipple": focusRipple |> unwrap_bool,
-            "centerRipple": centerRipple |> unwrap_bool,
-            "disableRipple": disableRipple |> unwrap_bool,
-            "disabled": disabled |> unwrap_bool,
-            "onClick": onClick |> Js.Undefined.from_opt,
+            "focusRipple": unwrap_bool(focusRipple),
+            "centerRipple": unwrap_bool(centerRipple),
+            "disableRipple": unwrap_bool(disableRipple),
+            "disabled": unwrap_bool(disabled),
+            "onClick": from_opt(onClick),
             "component": from_opt(component),
             "className": from_opt(className),
             "style": from_opt(style)
@@ -141,13 +141,13 @@ module Button = {
       ~props=
         Js.Nullable.(
           {
-            "raised": raised |> unwrap_bool,
-            "dense": dense |> unwrap_bool,
-            "disableFocusRipple": disableFocusRipple |> unwrap_bool,
-            "disableRipple": disableRipple |> unwrap_bool,
-            "disabled": disabled |> unwrap_bool,
-            "fab": fab |> unwrap_bool,
-            "onClick": onClick |> from_opt,
+            "raised": unwrap_bool(raised),
+            "dense": unwrap_bool(dense),
+            "disableFocusRipple": unwrap_bool(disableFocusRipple),
+            "disableRipple": unwrap_bool(disableRipple),
+            "disabled": unwrap_bool(disabled),
+            "fab": unwrap_bool(fab),
+            "onClick": from_opt(onClick),
             "className": from_opt(className)
           }
         ),
@@ -256,7 +256,7 @@ module Checkbox = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
-        Js.Undefined.(
+        Js.Nullable.(
           {
             "checked": from_opt(checked),
             "checkedClassName": from_opt(checkedClassName),
@@ -530,7 +530,7 @@ module FormControlLabel = {
     ReasonReact.wrapJsForReason(
       ~reactClass=formControlLabel,
       ~props=
-        Js.Undefined.(
+        Js.Nullable.(
           {
             "checked": from_opt(checked),
             "label": from_opt(label),
@@ -563,7 +563,7 @@ module FormLabel = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
-        Js.Undefined.(
+        Js.Nullable.(
           {
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
@@ -602,7 +602,7 @@ module Grid = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
-        Js.Undefined.(
+        Js.Nullable.(
           {
             "container": unwrap_bool(container),
             "item": unwrap_bool(item),
