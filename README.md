@@ -54,13 +54,13 @@ let make = (~name, _children) => {
 - [x] CardHeader
 - [x] CardMedia
 - [x] Card
-- [x] Checkbox
+- [ ] Checkbox
 - [x] Chip
 - [x] CircularProgress
-- [ ] Collapse
+- [x] Collapse
 - [x] DialogActions
 - [x] DialogContentText
-- [x] DialogConent
+- [x] DialogContent
 - [x] DialogTitle
 - [x] Dialog
 - [ ] Divider
