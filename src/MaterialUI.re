@@ -434,8 +434,8 @@ module Divider = {
     );
 };
 
-module Form = {
-  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "default";
+module FormControl = {
+  [@bs.module "material-ui/FormControl"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~disabled=?,
@@ -455,6 +455,74 @@ module Form = {
             "disabled": unwrapBool(disabled),
             "error": unwrapBool(error),
             "fullWidth": unwrapBool(fullWidth),
+            "required": unwrapBool(required),
+            "margin": from_opt(margin),
+            "className": from_opt(className),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module FormControlLabel = {
+  [@bs.module "material-ui/FormControlLabel"] external formControlLabel : ReasonReact.reactClass =
+    "default";
+  let make =
+      /* technically a union bool|string but why are you passing a string to `checked`? */
+      (
+        ~disabled=?,
+        ~checked: option(bool)=?,
+        ~control: option(ReasonReact.reactElement)=?,
+        ~label: option(string)=?,
+        ~name: option(string)=?,
+        ~onChange: option((ReactEventRe.Selection.t => unit))=?,
+        ~value: option(string)=?,
+        ~className: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=formControlLabel,
+      ~props=
+        Js.Undefined.(
+          {
+            "checked": from_opt(checked),
+            "label": from_opt(label),
+            "control": from_opt(control),
+            "disabled": unwrapBool(disabled),
+            "name": from_opt(name),
+            "onChange": from_opt(onChange),
+            "value": from_opt(value),
+            "style": from_opt(style),
+            "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
+module FormLabel = {
+  [@bs.module "material-ui/FormLabel"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~disabled=?,
+        ~error=?,
+        ~focused=?,
+        ~required=?,
+        ~margin: option(string)=?,
+        ~className: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Undefined.(
+          {
+            "disabled": unwrapBool(disabled),
+            "error": unwrapBool(error),
+            "focused": unwrapBool(focused),
             "required": unwrapBool(required),
             "margin": from_opt(margin),
             "className": from_opt(className),
