@@ -690,4 +690,97 @@ module Input = {
     );
 };
 
-[@bs.module "material-ui"] external input : ReasonReact.reactClass = "Input";
+module LinearProgress = {
+  [@bs.module "material-ui/LinearProgress"] external reactClass : ReasonReact.reactClass =
+    "default";
+  let make =
+      (
+        ~style: option(ReactDOMRe.style)=?,
+        ~className: option(string)=?,
+        ~color: option(string)=?,
+        ~value: option(int)=?,
+        ~valueBuffer: option(int)=?,
+        ~mode: option(string)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "style": from_opt(style),
+            "mode": from_opt(mode),
+            "color": from_opt(color),
+            "valueBuffer": from_opt(valueBuffer),
+            "value": from_opt(value),
+            "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
+module List = {
+  [@bs.module "material-ui/LinearProgress"] external reactClass : ReasonReact.reactClass =
+    "default";
+  let make =
+      (
+        ~dense: option(bool)=?,
+        ~disablePadding: option(bool)=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        ~subheader: option(ReasonReact.reactElement)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "dense": unwrap_bool(dense),
+            "disablePadding": unwrap_bool(disablePadding),
+            "style": from_opt(style),
+            "component": from_opt(component),
+            "className": from_opt(className),
+            "subheader": from_opt(subheader)
+          }
+        ),
+      children
+    );
+};
+
+module ListItem = {
+  [@bs.module "material-ui/ListItem"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~button: option(bool)=?,
+        ~classes: option(Js.t({..}))=?,
+        ~component: option(string)=?,
+        ~dense: option(bool)=?,
+        ~disableGutters: option(bool)=?,
+        ~divider: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        ~className: option(string)=?,
+        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "button": unwrap_bool(button),
+            "classes": from_opt(classes),
+            "component": from_opt(component),
+            "dense": unwrap_bool(dense),
+            "disableGutters": unwrap_bool(disableGutters),
+            "divider": unwrap_bool(divider),
+            "style": from_opt(style),
+            "className": from_opt(className),
+            "onClick": from_opt(onClick)
+          }
+        ),
+      children
+    );
+};
