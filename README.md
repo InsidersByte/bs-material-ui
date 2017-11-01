@@ -74,7 +74,7 @@ let make = (~name, _children) => {
 - [ ] GridListTitleBar
 - [ ] GridListTitle
 - [ ] GridList
-- [ ] Grid
+- [x] Grid
 - [ ] Grow
 - [ ] Hidden
 - [ ] IconButton
