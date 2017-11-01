@@ -26,6 +26,9 @@
     "prepublish": "yarn run clean && yarn run build"
   },
   "author": "Jonathon Kelly <jonathon@insidersbyte.com>",
+  "contributors": [
+    "Remi Bernal <bernal.rs@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {

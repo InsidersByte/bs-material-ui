@@ -43,52 +43,52 @@ let make = (~name, _children) => {
 ## Bindings
 
 - [x] AppBar
-- [ ] Avatar
-- [ ] Badge
+- [x] Avatar
+- [x] Badge
 - [ ] BottomNavigationButton
 - [ ] BottomNavigation
-- [ ] ButtonBase
-- [ ] Button
-- [ ] CardActions
-- [ ] CardContent
-- [ ] CardHeader
-- [ ] CardMedia
-- [ ] Card
-- [ ] Checkbox
-- [ ] Chip
-- [ ] CircularProgress
-- [ ] Collapse
-- [ ] DialogActions
-- [ ] DialogContentText
-- [ ] DialogConent
-- [ ] DialogTitle
-- [ ] Dialog
+- [x] ButtonBase
+- [x] Button
+- [x] CardActions
+- [x] CardContent
+- [x] CardHeader
+- [x] CardMedia
+- [x] Card
+- [x] Checkbox
+- [x] Chip
+- [x] CircularProgress
+- [x] Collapse
+- [x] DialogActions
+- [x] DialogContentText
+- [x] DialogContent
+- [x] DialogTitle
+- [x] Dialog
 - [ ] Divider
 - [ ] Drawer
 - [ ] Fade
-- [ ] FormControlLabel
-- [ ] FormControl
+- [x] FormControlLabel
+- [x] FormControl
 - [ ] FormGroup
 - [ ] FormHelperText
 - [ ] FormLabel
 - [ ] GridListTitleBar
 - [ ] GridListTitle
 - [ ] GridList
-- [ ] Grid
+- [x] Grid
 - [ ] Grow
 - [ ] Hidden
 - [ ] IconButton
 - [ ] Icon
 - [ ] InputAdornment
 - [ ] InputLabel
-- [ ] Input
-- [ ] LinearProgress
+- [x] Input
+- [x] LinearProgress
 - [ ] ListItemAvatar
 - [ ] ListItemIcon
 - [ ] ListItemSecondaryAction
 - [ ] ListItemText
-- [ ] ListItem
-- [ ] List
+- [x] ListItem
+- [x] List
 - [ ] MenuItem
 - [ ] MenuList
 - [ ] Menu
