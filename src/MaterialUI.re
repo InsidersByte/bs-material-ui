@@ -650,3 +650,44 @@ module IconButton = {
       children
     );
 };
+
+module Input = {
+  [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~disableUnderline: option(bool)=?,
+        ~disabled: option(bool)=?,
+        ~error: option(bool)=?,
+        ~autoFocus: option(bool)=?,
+        ~fullWidth: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        ~value: option(string)=?,
+        ~onChange: option((ReactEventRe.Form.t => unit))=?,
+        ~placeholder: option(string)=?,
+        ~className: option(string)=?,
+        ~inputType: option(string)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Undefined.(
+          {
+            "disableUnderline": unwrap_bool(disableUnderline),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "fullWidth": unwrap_bool(fullWidth),
+            "autoFocus": unwrap_bool(autoFocus),
+            "style": from_opt(style),
+            "placeholder": from_opt(placeholder),
+            "className": from_opt(className),
+            "type": from_opt(inputType),
+            "value": from_opt(value),
+            "onChange": from_opt(onChange)
+          }
+        ),
+      children
+    );
+};
+
+[@bs.module "material-ui"] external input : ReasonReact.reactClass = "Input";

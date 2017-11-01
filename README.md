@@ -81,7 +81,7 @@ let make = (~name, _children) => {
 - [ ] Icon
 - [ ] InputAdornment
 - [ ] InputLabel
-- [ ] Input
+- [x] Input
 - [ ] LinearProgress
 - [ ] ListItemAvatar
 - [ ] ListItemIcon
