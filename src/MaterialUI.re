@@ -162,7 +162,10 @@ module CardActions = {
       ~reactClass,
       ~props=
         Js.Nullable.(
-          {"disableActionSpacing": unwrap_bool(disableActionSpacing), "style": from_opt(style)}
+          {
+            "disableActionSpacinganchorVariant": unwrap_bool(disableActionSpacing),
+            "style": from_opt(style)
+          }
         ),
       children
     );
@@ -473,6 +476,44 @@ module Divider = {
             "inset": unwrap_bool(inset),
             "absolute": unwrap_bool(absolute),
             "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
+module Drawer = {
+  module Type = {
+    type t =
+      | Left
+      | Top
+      | Right
+      | Bottom;
+    let to_string =
+      fun
+      | Left => "left"
+      | Top => "top"
+      | Right => "right"
+      | Bottom => "bottom";
+  };
+  [@bs.module "material-ui/Drawer"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~modalProps: option(Js.t({..}))=?,
+        ~slideProps: option(Js.t({..}))=?,
+        ~anchor: option(Type.t)=?,
+        ~_open: option(bool),
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "ModalProps": from_opt(modalProps),
+            "SlideProps": from_opt(slideProps),
+            "anchor": from_opt(option_map(Type.to_string, anchor)),
+            "open": unwrap_bool(_open)
           }
         ),
       children
