@@ -162,7 +162,7 @@ module CardActions = {
       ~reactClass,
       ~props=
         Js.Nullable.(
-          {"disableActionSpacing": disableActionSpacing |> unwrap_bool, "style": from_opt(style)}
+          {"disableActionSpacing": unwrap_bool(disableActionSpacing), "style": from_opt(style)}
         ),
       children
     );
@@ -222,7 +222,7 @@ module Card = {
       ~props=
         Js.Nullable.(
           {
-            "raised": raised |> unwrap_bool,
+            "raised": unwrap_bool(raised),
             "style": from_opt(style),
             "className": from_opt(className)
           }
