@@ -1,13 +1,13 @@
-let unwrapBool = (opt) =>
-  switch opt {
-  | Some(b) => b |> Js.Boolean.to_js_boolean |> Js.Undefined.return
-  | None => Js.Undefined.empty
+let unwrap_bool = (b: option(bool)) =>
+  switch b {
+  | Some(value) => Js.Nullable.return(Js.Boolean.to_js_boolean(value))
+  | None => Js.Nullable.undefined
   };
 
-let option_map = (fn, opt_value) =>
-  switch opt_value {
-  | None => None
+let option_map = (fn, option) =>
+  switch option {
   | Some(value) => Some(fn(value))
+  | None => None
   };
 
 module AppBar = {
@@ -108,12 +108,12 @@ module Button = {
       ~props=
         Js.Nullable.(
           {
-            "raised": raised |> unwrapBool,
-            "dense": dense |> unwrapBool,
-            "disableFocusRipple": disableFocusRipple |> unwrapBool,
-            "disableRipple": disableRipple |> unwrapBool,
-            "disabled": disabled |> unwrapBool,
-            "fab": fab |> unwrapBool,
+            "raised": raised |> unwrap_bool,
+            "dense": dense |> unwrap_bool,
+            "disableFocusRipple": disableFocusRipple |> unwrap_bool,
+            "disableRipple": disableRipple |> unwrap_bool,
+            "disabled": disabled |> unwrap_bool,
+            "fab": fab |> unwrap_bool,
             "onClick": onClick |> from_opt,
             "className": from_opt(className)
           }
@@ -141,10 +141,10 @@ module ButtonBase = {
       ~props=
         Js.Nullable.(
           {
-            "focusRipple": focusRipple |> unwrapBool,
-            "centerRipple": centerRipple |> unwrapBool,
-            "disableRipple": disableRipple |> unwrapBool,
-            "disabled": disabled |> unwrapBool,
+            "focusRipple": focusRipple |> unwrap_bool,
+            "centerRipple": centerRipple |> unwrap_bool,
+            "disableRipple": disableRipple |> unwrap_bool,
+            "disabled": disabled |> unwrap_bool,
             "onClick": onClick |> Js.Undefined.from_opt,
             "component": from_opt(component),
             "className": from_opt(className),
@@ -164,7 +164,7 @@ module Card = {
       ~props=
         Js.Nullable.(
           {
-            "raised": raised |> unwrapBool,
+            "raised": raised |> unwrap_bool,
             "style": from_opt(style),
             "className": from_opt(className)
           }
@@ -180,7 +180,7 @@ module CardActions = {
       ~reactClass,
       ~props=
         Js.Nullable.(
-          {"disableActionSpacing": disableActionSpacing |> unwrapBool, "style": from_opt(style)}
+          {"disableActionSpacing": disableActionSpacing |> unwrap_bool, "style": from_opt(style)}
         ),
       children
     );
@@ -291,7 +291,7 @@ module Collapse = {
       ~reactClass,
       ~props=
         Js.Nullable.(
-          {"in": unwrapBool(expanded), "transitionDuration": from_opt(transitionDuration)}
+          {"in": unwrap_bool(expanded), "transitionDuration": from_opt(transitionDuration)}
         ),
       children
     );
@@ -424,9 +424,9 @@ module Divider = {
       ~props=
         Js.Nullable.(
           {
-            "light": unwrapBool(light),
-            "inset": unwrapBool(inset),
-            "absolute": unwrapBool(absolute),
+            "light": unwrap_bool(light),
+            "inset": unwrap_bool(inset),
+            "absolute": unwrap_bool(absolute),
             "className": from_opt(className)
           }
         ),
@@ -452,10 +452,10 @@ module FormControl = {
       ~props=
         Js.Nullable.(
           {
-            "disabled": unwrapBool(disabled),
-            "error": unwrapBool(error),
-            "fullWidth": unwrapBool(fullWidth),
-            "required": unwrapBool(required),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "fullWidth": unwrap_bool(fullWidth),
+            "required": unwrap_bool(required),
             "margin": from_opt(margin),
             "className": from_opt(className),
             "style": from_opt(style)
