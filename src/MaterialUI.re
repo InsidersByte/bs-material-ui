@@ -671,7 +671,7 @@ module Input = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
-        Js.Undefined.(
+        Js.Nullable.(
           {
             "disableUnderline": unwrap_bool(disableUnderline),
             "disabled": unwrap_bool(disabled),
