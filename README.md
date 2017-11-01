@@ -54,7 +54,7 @@ let make = (~name, _children) => {
 - [x] CardHeader
 - [x] CardMedia
 - [x] Card
-- [ ] Checkbox
+- [x] Checkbox
 - [x] Chip
 - [x] CircularProgress
 - [x] Collapse
@@ -66,8 +66,8 @@ let make = (~name, _children) => {
 - [ ] Divider
 - [ ] Drawer
 - [ ] Fade
-- [ ] FormControlLabel
-- [ ] FormControl
+- [x] FormControlLabel
+- [x] FormControl
 - [ ] FormGroup
 - [ ] FormHelperText
 - [ ] FormLabel
