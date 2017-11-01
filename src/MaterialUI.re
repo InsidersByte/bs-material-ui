@@ -89,39 +89,6 @@ module Badge = {
     );
 };
 
-module Button = {
-  [@bs.module "material-ui/Button"] external reactClass : ReasonReact.reactClass = "default";
-  let make =
-      (
-        ~raised=?,
-        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
-        ~className: option(string)=?,
-        ~dense=?,
-        ~disableFocusRipple=?,
-        ~disableRipple=?,
-        ~disabled=?,
-        ~fab=?,
-        children
-      ) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass,
-      ~props=
-        Js.Nullable.(
-          {
-            "raised": raised |> unwrap_bool,
-            "dense": dense |> unwrap_bool,
-            "disableFocusRipple": disableFocusRipple |> unwrap_bool,
-            "disableRipple": disableRipple |> unwrap_bool,
-            "disabled": disabled |> unwrap_bool,
-            "fab": fab |> unwrap_bool,
-            "onClick": onClick |> from_opt,
-            "className": from_opt(className)
-          }
-        ),
-      children
-    );
-};
-
 module ButtonBase = {
   [@bs.module "material-ui/ButtonBase"] external reactClass : ReasonReact.reactClass = "default";
   let make =
@@ -155,17 +122,32 @@ module ButtonBase = {
     );
 };
 
-module Card = {
-  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "default";
+module Button = {
+  [@bs.module "material-ui/Button"] external reactClass : ReasonReact.reactClass = "default";
   let make =
-      (~raised=?, ~style: option(ReactDOMRe.style)=?, ~className: option(string)=?, children) =>
+      (
+        ~raised=?,
+        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~className: option(string)=?,
+        ~dense=?,
+        ~disableFocusRipple=?,
+        ~disableRipple=?,
+        ~disabled=?,
+        ~fab=?,
+        children
+      ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
         Js.Nullable.(
           {
             "raised": raised |> unwrap_bool,
-            "style": from_opt(style),
+            "dense": dense |> unwrap_bool,
+            "disableFocusRipple": disableFocusRipple |> unwrap_bool,
+            "disableRipple": disableRipple |> unwrap_bool,
+            "disabled": disabled |> unwrap_bool,
+            "fab": fab |> unwrap_bool,
+            "onClick": onClick |> from_opt,
             "className": from_opt(className)
           }
         ),
@@ -227,6 +209,24 @@ module CardMedia = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=Js.Nullable.({"style": from_opt(style), "image": from_opt(image)}),
+      children
+    );
+};
+
+module Card = {
+  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (~raised=?, ~style: option(ReactDOMRe.style)=?, ~className: option(string)=?, children) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "raised": raised |> unwrap_bool,
+            "style": from_opt(style),
+            "className": from_opt(className)
+          }
+        ),
       children
     );
 };
@@ -297,6 +297,59 @@ module Collapse = {
     );
 };
 
+module DialogActions = {
+  [@bs.module "material-ui/DialogActions"] external reactClass : ReasonReact.reactClass =
+    "default";
+  type dialogActionsClasses = {
+    root: option(string),
+    action: option(string),
+    button: option(string)
+  };
+  let make = (~classes: option(dialogActionsClasses)=?, children) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=Js.Nullable.({"classes": from_opt(classes)}),
+      children
+    );
+};
+
+module DialogContentText = {
+  [@bs.module "material-ui/DialogContentText"] external reactClass : ReasonReact.reactClass =
+    "default";
+  let make = (~style: option(ReactDOMRe.style)=?, children) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=Js.Nullable.({"style": from_opt(style)}),
+      children
+    );
+};
+
+module DialogContent = {
+  [@bs.module "material-ui/DialogContent"] external reactClass : ReasonReact.reactClass =
+    "default";
+  type dialogContentClasses = {root: option(string)};
+  let make = (~classes: option(dialogContentClasses)=?, children) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=Js.Nullable.({"classes": from_opt(classes)}),
+      children
+    );
+};
+
+module DialogTitle = {
+  [@bs.module "material-ui/DialogTitle"] external reactClass : ReasonReact.reactClass = "default";
+  type dialogTitleClasses = {root: option(string)};
+  let make = (~classes: option(dialogTitleClasses)=?, ~disableTypography: option(bool)=?, children) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {"classes": from_opt(classes), "disableTypography": from_opt(disableTypography)}
+        ),
+      children
+    );
+};
+
 module Dialog = {
   type dialogClasses = {
     root: option(string),
@@ -351,59 +404,6 @@ module Dialog = {
             "onRequestClose": from_opt(onRequestClose),
             "open": from_opt(openDialog)
           }
-        ),
-      children
-    );
-};
-
-module DialogActions = {
-  [@bs.module "material-ui/DialogActions"] external reactClass : ReasonReact.reactClass =
-    "default";
-  type dialogActionsClasses = {
-    root: option(string),
-    action: option(string),
-    button: option(string)
-  };
-  let make = (~classes: option(dialogActionsClasses)=?, children) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass,
-      ~props=Js.Nullable.({"classes": from_opt(classes)}),
-      children
-    );
-};
-
-module DialogContent = {
-  [@bs.module "material-ui/DialogContent"] external reactClass : ReasonReact.reactClass =
-    "default";
-  type dialogContentClasses = {root: option(string)};
-  let make = (~classes: option(dialogContentClasses)=?, children) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass,
-      ~props=Js.Nullable.({"classes": from_opt(classes)}),
-      children
-    );
-};
-
-module DialogContentText = {
-  [@bs.module "material-ui/DialogContentText"] external reactClass : ReasonReact.reactClass =
-    "default";
-  let make = (~style: option(ReactDOMRe.style)=?, children) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass,
-      ~props=Js.Nullable.({"style": from_opt(style)}),
-      children
-    );
-};
-
-module DialogTitle = {
-  [@bs.module "material-ui/DialogTitle"] external reactClass : ReasonReact.reactClass = "default";
-  type dialogTitleClasses = {root: option(string)};
-  let make = (~classes: option(dialogTitleClasses)=?, ~disableTypography: option(bool)=?, children) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass,
-      ~props=
-        Js.Nullable.(
-          {"classes": from_opt(classes), "disableTypography": from_opt(disableTypography)}
         ),
       children
     );
@@ -490,7 +490,7 @@ module FormControlLabel = {
             "checked": from_opt(checked),
             "label": from_opt(label),
             "control": from_opt(control),
-            "disabled": unwrapBool(disabled),
+            "disabled": unwrap_bool(disabled),
             "name": from_opt(name),
             "onChange": from_opt(onChange),
             "value": from_opt(value),
@@ -520,10 +520,10 @@ module FormLabel = {
       ~props=
         Js.Undefined.(
           {
-            "disabled": unwrapBool(disabled),
-            "error": unwrapBool(error),
-            "focused": unwrapBool(focused),
-            "required": unwrapBool(required),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "focused": unwrap_bool(focused),
+            "required": unwrap_bool(required),
             "margin": from_opt(margin),
             "className": from_opt(className),
             "style": from_opt(style)
