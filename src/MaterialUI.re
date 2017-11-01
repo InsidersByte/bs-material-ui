@@ -370,4 +370,31 @@ module MaterialUI = {
         children
       );
   };
+  module Form = {
+    [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "default";
+    let make =
+        (
+          ~disabled=?,
+          ~error=?,
+          ~fullWidth=?,
+          ~required=?,
+          ~margin: option(string)=?,
+          ~className: option(string)=?,
+          ~style: option(ReactDOMRe.style)=?,
+          children
+        ) =>
+      ReasonReact.wrapJsForReason(
+        ~reactClass,
+        ~props={
+          "disabled": unwrapBool(disabled),
+          "error": unwrapBool(error),
+          "fullWidth": unwrapBool(fullWidth),
+          "required": unwrapBool(required),
+          "margin": from_opt(margin),
+          "className": from_opt(className),
+          "style": from_opt(style)
+        },
+        children
+      );
+  };
 };
