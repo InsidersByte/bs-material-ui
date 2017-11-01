@@ -625,3 +625,28 @@ module Grid = {
       children
     );
 };
+
+module IconButton = {
+  [@bs.module "material-ui/IconButton"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~dense: option(bool)=?,
+        ~disableRipple=?,
+        ~disabled=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "dense": unwrap_bool(dense),
+            "disableRipple": unwrap_bool(disableRipple),
+            "disabled": unwrap_bool(disabled),
+            "onClick": from_opt(onClick)
+          }
+        ),
+      children
+    );
+};
