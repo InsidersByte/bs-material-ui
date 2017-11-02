@@ -945,8 +945,9 @@ module ListItemIcon = {
     );
 };
 
-module ListItemAvatar = {
-  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemAvatar";
+module ListItemSecondaryAction = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass =
+    "ListItemSecondaryAction";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -968,9 +969,8 @@ module ListItemAvatar = {
     );
 };
 
-module ListItemSecondaryAction = {
-  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass =
-    "ListItemSecondaryAction";
+module ListItemAvatar = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemAvatar";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
