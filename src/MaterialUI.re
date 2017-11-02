@@ -507,17 +507,18 @@ module Drawer = {
   [@bs.module "material-ui/Drawer"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
-        ~modalProps: option(Js.t({..}))=?,
-        ~slideProps: option(Js.t({..}))=?,
         ~anchor: option(Anchor.t)=?,
         ~classes: option(Js.t({..}))=?,
-        ~style: option(ReactDOMRe.style)=?,
+        ~className: option(string)=?,
         ~elevation: option(int)=?,
+        ~transitionDuration: option(Js.t({..}))=?,
+        ~modalProps: option(Js.t({..}))=?,
         ~onRequestClose: option((ReactEventRe.Mouse.t => unit))=?,
         ~_open: option(bool),
         ~theme: option(Js.t({..}))=?,
-        ~transitionDuration: option(Js.t({..}))=?,
+        ~slideProps: option(Js.t({..}))=?,
         ~_type: option(Type.t)=?,
+        ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -525,17 +526,18 @@ module Drawer = {
       ~props=
         Js.Nullable.(
           {
-            "ModalProps": from_opt(modalProps),
-            "SlideProps": from_opt(slideProps),
             "anchor": from_opt(option_map(Anchor.to_string, anchor)),
             "classes": from_opt(classes),
-            "style": from_opt(style),
+            "className": from_opt(className),
             "elevation": from_opt(elevation),
+            "transitionDuration": from_opt(transitionDuration),
+            "ModalProps": from_opt(modalProps),
             "onRequestClose": from_opt(onRequestClose),
             "open": unwrap_bool(_open),
             "theme": from_opt(theme),
-            "transitionDuration": from_opt(transitionDuration),
-            "type": from_opt(option_map(Type.to_string, _type))
+            "SlideProps": from_opt(slideProps),
+            "type": from_opt(option_map(Type.to_string, _type)),
+            "style": from_opt(style)
           }
         ),
       children
