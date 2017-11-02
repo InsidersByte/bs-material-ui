@@ -512,8 +512,7 @@ module Drawer = {
         ~transitionDuration: option(Js.t({..}))=?,
         ~modalProps: option(Js.t({..}))=?,
         ~onRequestClose: option(ReasonReact.Callback.t(unit))=?,
-        ~_open: option(bool),
-        ~theme: option(Js.t({..}))=?,
+        ~_open: option(bool)=?,
         ~slideProps: option(Js.t({..}))=?,
         ~_type: option(Type.t)=?,
         ~style: option(ReactDOMRe.style)=?,
@@ -532,7 +531,6 @@ module Drawer = {
             "ModalProps": from_opt(modalProps),
             "onRequestClose": from_opt(onRequestClose),
             "open": unwrap_bool(_open),
-            "theme": from_opt(theme),
             "SlideProps": from_opt(slideProps),
             "type": from_opt(option_map(Type.to_string, _type)),
             "style": from_opt(style)
