@@ -162,10 +162,7 @@ module CardActions = {
       ~reactClass,
       ~props=
         Js.Nullable.(
-          {
-            "disableActionSpacinganchorVariant": unwrap_bool(disableActionSpacing),
-            "style": from_opt(style)
-          }
+          {"disableActionSpacing": unwrap_bool(disableActionSpacing), "style": from_opt(style)}
         ),
       children
     );
@@ -483,7 +480,7 @@ module Divider = {
 };
 
 module Drawer = {
-  module Type = {
+  module Anchor = {
     type t =
       | Left
       | Top
@@ -501,7 +498,7 @@ module Drawer = {
       (
         ~modalProps: option(Js.t({..}))=?,
         ~slideProps: option(Js.t({..}))=?,
-        ~anchor: option(Type.t)=?,
+        ~anchor: option(Anchor.t)=?,
         ~_open: option(bool),
         children
       ) =>
@@ -512,7 +509,7 @@ module Drawer = {
           {
             "ModalProps": from_opt(modalProps),
             "SlideProps": from_opt(slideProps),
-            "anchor": from_opt(option_map(Type.to_string, anchor)),
+            "anchor": from_opt(option_map(Anchor.to_string, anchor)),
             "open": unwrap_bool(_open)
           }
         ),
