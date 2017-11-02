@@ -477,6 +477,69 @@ module Divider = {
     );
 };
 
+module Drawer = {
+  module Anchor = {
+    type t =
+      | Left
+      | Top
+      | Right
+      | Bottom;
+    let to_string =
+      fun
+      | Left => "left"
+      | Top => "top"
+      | Right => "right"
+      | Bottom => "bottom";
+  };
+  module Type = {
+    type t =
+      | Permanent
+      | Persistent
+      | Temporary;
+    let to_string =
+      fun
+      | Permanent => "permanent"
+      | Persistent => "persistent"
+      | Temporary => "temporary";
+  };
+  [@bs.module "material-ui/Drawer"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~anchor: option(Anchor.t)=?,
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~elevation: option(int)=?,
+        ~transitionDuration: option(Js.t({..}))=?,
+        ~modalProps: option(Js.t({..}))=?,
+        ~onRequestClose: option((unit => unit))=?,
+        ~_open: option(bool)=?,
+        ~slideProps: option(Js.t({..}))=?,
+        ~_type: option(Type.t)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "anchor": from_opt(option_map(Anchor.to_string, anchor)),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "elevation": from_opt(elevation),
+            "transitionDuration": from_opt(transitionDuration),
+            "ModalProps": from_opt(modalProps),
+            "onRequestClose": from_opt(onRequestClose),
+            "open": unwrap_bool(_open),
+            "SlideProps": from_opt(slideProps),
+            "type": from_opt(option_map(Type.to_string, _type)),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
 module FormControl = {
   [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormControl";
   let make =
@@ -625,13 +688,31 @@ module Grid = {
 };
 
 module IconButton = {
+  module Color = {
+    type t =
+      | Default
+      | Inherit
+      | Primary
+      | Contrast
+      | Accent;
+    let to_string =
+      fun
+      | Default => "default"
+      | Inherit => "inherit"
+      | Primary => "primary"
+      | Contrast => "contrast"
+      | Accent => "accent";
+  };
   [@bs.module "material-ui/IconButton"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~color: option(Color.t)=?,
+        ~disabled: option(bool)=?,
+        ~disableRipple: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
         ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
-        ~dense: option(bool)=?,
-        ~disableRipple=?,
-        ~disabled=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -639,9 +720,12 @@ module IconButton = {
       ~props=
         Js.Nullable.(
           {
-            "dense": unwrap_bool(dense),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "color": from_opt(option_map(Color.to_string, color)),
             "disableRipple": unwrap_bool(disableRipple),
             "disabled": unwrap_bool(disabled),
+            "style": from_opt(style),
             "onClick": from_opt(onClick)
           }
         ),

@@ -68,7 +68,7 @@ let make = (~name, _children) => {
 - [x] DialogTitle
 - [x] Dialog
 - [ ] Divider
-- [ ] Drawer
+- [x] Drawer
 - [ ] Fade
 - [x] FormControlLabel
 - [x] FormControl
