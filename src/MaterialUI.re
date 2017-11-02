@@ -511,7 +511,7 @@ module Drawer = {
         ~elevation: option(int)=?,
         ~transitionDuration: option(Js.t({..}))=?,
         ~modalProps: option(Js.t({..}))=?,
-        ~onRequestClose: option(ReasonReact.Callback.t(unit))=?,
+        ~onRequestClose: option((unit => unit))=?,
         ~_open: option(bool)=?,
         ~slideProps: option(Js.t({..}))=?,
         ~_type: option(Type.t)=?,
@@ -709,9 +709,8 @@ module IconButton = {
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~color: option(Color.t)=?,
-        ~disableRipple: option(bool)=?,
         ~disabled: option(bool)=?,
-        ~rootRef: option((unit => unit))=?,
+        ~disableRipple: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
         children
@@ -726,7 +725,6 @@ module IconButton = {
             "color": from_opt(option_map(Color.to_string, color)),
             "disableRipple": unwrap_bool(disableRipple),
             "disabled": unwrap_bool(disabled),
-            "rootRef": from_opt(rootRef),
             "style": from_opt(style),
             "onClick": from_opt(onClick)
           }
