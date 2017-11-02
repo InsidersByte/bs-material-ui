@@ -891,6 +891,60 @@ module ListItem = {
     );
 };
 
+module ListItemText = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemText";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~inset: option(bool)=?,
+        ~disableTypography: option(bool)=?,
+        ~primary: option(string)=?,
+        ~secondary: option(string)=?,
+        ~className: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Undefined.(
+          {
+            "classes": from_opt(classes),
+            "inset": unwrap_bool(inset),
+            "disableTypography": unwrap_bool(disableTypography),
+            "primary": from_opt(primary),
+            "secondary": from_opt(secondary),
+            "style": from_opt(style),
+            "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
+module ListItemIcon = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemIcon";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Undefined.(
+          {
+            "classes": from_opt(classes),
+            "style": from_opt(style),
+            "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
 module Toolbar = {
   [@bs.module "material-ui/Toolbar"] external toolbar : ReasonReact.reactClass = "default";
   let make =
