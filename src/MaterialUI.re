@@ -493,13 +493,31 @@ module Drawer = {
       | Right => "right"
       | Bottom => "bottom";
   };
+  module Type = {
+    type t =
+      | Permanent
+      | Persistent
+      | Temporary;
+    let to_string =
+      fun
+      | Permanent => "permanent"
+      | Persistent => "persistent"
+      | Temporary => "temporary";
+  };
   [@bs.module "material-ui/Drawer"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~modalProps: option(Js.t({..}))=?,
         ~slideProps: option(Js.t({..}))=?,
         ~anchor: option(Anchor.t)=?,
+        ~classes: option(Js.t({..}))=?,
+        ~style: option(ReactDOMRe.style)=?,
+        ~elevation: option(int)=?,
+        ~onRequestClose: option((ReactEventRe.Mouse.t => unit))=?,
         ~_open: option(bool),
+        ~theme: option(Js.t({..}))=?,
+        ~transitionDuration: option(Js.t({..}))=?,
+        ~_type: option(Type.t)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -510,7 +528,14 @@ module Drawer = {
             "ModalProps": from_opt(modalProps),
             "SlideProps": from_opt(slideProps),
             "anchor": from_opt(option_map(Anchor.to_string, anchor)),
-            "open": unwrap_bool(_open)
+            "classes": from_opt(classes),
+            "style": from_opt(style),
+            "elevation": from_opt(elevation),
+            "onRequestClose": from_opt(onRequestClose),
+            "open": unwrap_bool(_open),
+            "theme": from_opt(theme),
+            "transitionDuration": from_opt(transitionDuration),
+            "type": from_opt(option_map(Type.to_string, _type))
           }
         ),
       children
