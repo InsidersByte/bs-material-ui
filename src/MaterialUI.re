@@ -690,13 +690,32 @@ module Grid = {
 };
 
 module IconButton = {
+  module Color = {
+    type t =
+      | Default
+      | Inherit
+      | Primary
+      | Contrast
+      | Accent;
+    let to_string =
+      fun
+      | Default => "default"
+      | Inherit => "inherit"
+      | Primary => "primary"
+      | Contrast => "contrast"
+      | Accent => "accent";
+  };
   [@bs.module "material-ui/IconButton"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~color: option(Color.t)=?,
+        ~disableRipple: option(bool)=?,
+        ~disabled: option(bool)=?,
+        ~rootRef: option((unit => unit))=?,
+        ~style: option(ReactDOMRe.style)=?,
         ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
-        ~dense: option(bool)=?,
-        ~disableRipple=?,
-        ~disabled=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -704,9 +723,13 @@ module IconButton = {
       ~props=
         Js.Nullable.(
           {
-            "dense": unwrap_bool(dense),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "color": from_opt(option_map(Color.to_string, color)),
             "disableRipple": unwrap_bool(disableRipple),
             "disabled": unwrap_bool(disabled),
+            "rootRef": from_opt(rootRef),
+            "style": from_opt(style),
             "onClick": from_opt(onClick)
           }
         ),
