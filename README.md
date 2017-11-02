@@ -115,6 +115,6 @@ let make = (~name, _children) => {
 - [ ] Table
 - [ ] Tabs
 - [ ] TextField
-- [ ] Toolbar
+- [X] Toolbar
 - [ ] Tooltip
 - [ ] Typography
