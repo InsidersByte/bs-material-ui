@@ -156,7 +156,7 @@ module Button = {
 };
 
 module CardActions = {
-  [@bs.module "material-ui/CardActions"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "CardActions";
   let make = (~disableActionSpacing=?, ~style: option(ReactDOMRe.style)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -169,7 +169,7 @@ module CardActions = {
 };
 
 module CardContent = {
-  [@bs.module "material-ui/CardContent"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "CardContent";
   let make = (~style: option(ReactDOMRe.style)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -179,7 +179,7 @@ module CardContent = {
 };
 
 module CardHeader = {
-  [@bs.module "material-ui/CardHeader"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "CardHeader";
   let make =
       (
         ~style: option(ReactDOMRe.style)=?,
@@ -204,7 +204,7 @@ module CardHeader = {
 };
 
 module CardMedia = {
-  [@bs.module "material-ui/CardMedia"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "CardMedia";
   let make = (~style: option(ReactDOMRe.style)=?, ~image: option(string)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -293,8 +293,8 @@ module Chip = {
 };
 
 module CircularProgress = {
-  [@bs.module "material-ui/CircularProgress"] external reactClass : ReasonReact.reactClass =
-    "default";
+  [@bs.module "material-ui/Progress"] external reactClass : ReasonReact.reactClass =
+    "CircularProgress";
   let make =
       (
         ~style: option(ReactDOMRe.style)=?,
@@ -343,8 +343,7 @@ module Collapse = {
 };
 
 module DialogActions = {
-  [@bs.module "material-ui/DialogActions"] external reactClass : ReasonReact.reactClass =
-    "default";
+  [@bs.module "material-ui/Dialog"] external reactClass : ReasonReact.reactClass = "DialogActions";
   type dialogActionsClasses = {
     root: option(string),
     action: option(string),
@@ -359,8 +358,8 @@ module DialogActions = {
 };
 
 module DialogContentText = {
-  [@bs.module "material-ui/DialogContentText"] external reactClass : ReasonReact.reactClass =
-    "default";
+  [@bs.module "material-ui/Dialog"] external reactClass : ReasonReact.reactClass =
+    "DialogContentText";
   let make = (~style: option(ReactDOMRe.style)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -370,8 +369,7 @@ module DialogContentText = {
 };
 
 module DialogContent = {
-  [@bs.module "material-ui/DialogContent"] external reactClass : ReasonReact.reactClass =
-    "default";
+  [@bs.module "material-ui/Dialog"] external reactClass : ReasonReact.reactClass = "DialogContent";
   type dialogContentClasses = {root: option(string)};
   let make = (~classes: option(dialogContentClasses)=?, children) =>
     ReasonReact.wrapJsForReason(
@@ -382,7 +380,7 @@ module DialogContent = {
 };
 
 module DialogTitle = {
-  [@bs.module "material-ui/DialogTitle"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Dialog"] external reactClass : ReasonReact.reactClass = "DialogTitle";
   type dialogTitleClasses = {root: option(string)};
   let make = (~classes: option(dialogTitleClasses)=?, ~disableTypography: option(bool)=?, children) =>
     ReasonReact.wrapJsForReason(
@@ -480,7 +478,7 @@ module Divider = {
 };
 
 module FormControl = {
-  [@bs.module "material-ui/FormControl"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormControl";
   let make =
       (
         ~disabled=?,
@@ -511,8 +509,8 @@ module FormControl = {
 };
 
 module FormControlLabel = {
-  [@bs.module "material-ui/FormControlLabel"] external formControlLabel : ReasonReact.reactClass =
-    "default";
+  [@bs.module "material-ui/Form"] external formControlLabel : ReasonReact.reactClass =
+    "FormControlLabel";
   let make =
       /* technically a union bool|string but why are you passing a string to `checked`? */
       (
@@ -548,7 +546,7 @@ module FormControlLabel = {
 };
 
 module FormLabel = {
-  [@bs.module "material-ui/FormLabel"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormLabel";
   let make =
       (
         ~disabled=?,
@@ -691,8 +689,8 @@ module Input = {
 };
 
 module LinearProgress = {
-  [@bs.module "material-ui/LinearProgress"] external reactClass : ReasonReact.reactClass =
-    "default";
+  [@bs.module "material-ui/Progress"] external reactClass : ReasonReact.reactClass =
+    "LinearProgress";
   let make =
       (
         ~style: option(ReactDOMRe.style)=?,
@@ -721,8 +719,7 @@ module LinearProgress = {
 };
 
 module List = {
-  [@bs.module "material-ui/LinearProgress"] external reactClass : ReasonReact.reactClass =
-    "default";
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~dense: option(bool)=?,
@@ -751,7 +748,7 @@ module List = {
 };
 
 module ListItem = {
-  [@bs.module "material-ui/ListItem"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItem";
   let make =
       (
         ~button: option(bool)=?,
