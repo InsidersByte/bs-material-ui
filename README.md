@@ -34,8 +34,12 @@ let component = ReasonReact.statelessComponent("Header");
 let make = (~name, _children) => {
   ...component,
   render: (_self) =>
-    <MaterialUI.AppBar>
-      {ReasonReact.stringToElement("Hello!")}
+    <MaterialUI.AppBar position="static" color="default">
+      <MaterialUI.Toolbar>
+        <MaterialUI.Typography _type="title" color="inherit">
+          (ReasonReact.stringToElement("Title"))
+        </MaterialUI.Typography>
+      </MaterialUI.Toolbar>
     </MaterialUI.AppBar>
 };
 ```
@@ -117,4 +121,4 @@ let make = (~name, _children) => {
 - [ ] TextField
 - [X] Toolbar
 - [ ] Tooltip
-- [ ] Typography
+- [X] Typography
