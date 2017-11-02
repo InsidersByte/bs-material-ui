@@ -781,3 +781,28 @@ module ListItem = {
       children
     );
 };
+
+module Toolbar = {
+  [@bs.module "material-ui/Toolbar"] external toolbar : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~disableGutters=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "disableGutters": unwrap_bool(disableGutters),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
