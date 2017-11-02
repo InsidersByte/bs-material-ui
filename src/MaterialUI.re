@@ -123,17 +123,37 @@ module ButtonBase = {
 };
 
 module Button = {
+  module Color = {
+    type t =
+      | Default
+      | Inherit
+      | Primary
+      | Contrast
+      | Accent;
+    let to_string =
+      fun
+      | Default => "default"
+      | Inherit => "inherit"
+      | Primary => "primary"
+      | Contrast => "contrast"
+      | Accent => "accent";
+  };
   [@bs.module "material-ui/Button"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
-        ~raised=?,
-        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
+        ~color: option(Color.t)=?,
+        ~component: option(string)=?,
         ~dense=?,
+        ~disabled=?,
         ~disableFocusRipple=?,
         ~disableRipple=?,
-        ~disabled=?,
         ~fab=?,
+        ~href: option(string)=?,
+        ~raised=?,
+        ~_type: option(string)=?,
+        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -141,14 +161,19 @@ module Button = {
       ~props=
         Js.Nullable.(
           {
-            "raised": unwrap_bool(raised),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "color": from_opt(option_map(Color.to_string, color)),
+            "component": from_opt(component),
             "dense": unwrap_bool(dense),
+            "disabled": unwrap_bool(disabled),
             "disableFocusRipple": unwrap_bool(disableFocusRipple),
             "disableRipple": unwrap_bool(disableRipple),
-            "disabled": unwrap_bool(disabled),
             "fab": unwrap_bool(fab),
-            "onClick": from_opt(onClick),
-            "className": from_opt(className)
+            "href": from_opt(href),
+            "raised": unwrap_bool(raised),
+            "type": from_opt(_type),
+            "onClick": from_opt(onClick)
           }
         ),
       children
