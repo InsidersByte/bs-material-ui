@@ -907,7 +907,7 @@ module ListItemText = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
-        Js.Undefined.(
+        Js.Nullable.(
           {
             "classes": from_opt(classes),
             "inset": unwrap_bool(inset),
