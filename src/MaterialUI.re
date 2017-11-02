@@ -511,7 +511,7 @@ module Drawer = {
         ~elevation: option(int)=?,
         ~transitionDuration: option(Js.t({..}))=?,
         ~modalProps: option(Js.t({..}))=?,
-        ~onRequestClose: option(ReasonReact.Callback.t(ReactEventRe.Mouse.t))=?,
+        ~onRequestClose: option(ReasonReact.Callback.t(unit))=?,
         ~_open: option(bool),
         ~theme: option(Js.t({..}))=?,
         ~slideProps: option(Js.t({..}))=?,
