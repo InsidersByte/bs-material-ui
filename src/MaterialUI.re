@@ -958,7 +958,7 @@ module ListItemSecondaryAction = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
-        Js.Undefined.(
+        Js.Nullable.(
           {
             "classes": from_opt(classes),
             "style": from_opt(style),
@@ -981,7 +981,7 @@ module ListItemAvatar = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
-        Js.Undefined.(
+        Js.Nullable.(
           {
             "classes": from_opt(classes),
             "style": from_opt(style),
