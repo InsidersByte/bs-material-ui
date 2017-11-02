@@ -992,6 +992,46 @@ module ListItemAvatar = {
     );
 };
 
+module ListSubheader = {
+  module Color = {
+    type t =
+      | Default
+      | Inherit
+      | Primary;
+    let to_string =
+      fun
+      | Default => "default"
+      | Inherit => "inherit"
+      | Primary => "primary";
+  };
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListSubheader";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~color: option(Color.t)=?,
+        ~disableSticky: option(bool)=?,
+        ~inset: option(bool)=?,
+        ~className: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "color": from_opt(option_map(Color.to_string, color)),
+            "disableSticky": unwrap_bool(disableSticky),
+            "inset": unwrap_bool(inset),
+            "style": from_opt(style),
+            "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
 module Toolbar = {
   [@bs.module "material-ui/Toolbar"] external toolbar : ReasonReact.reactClass = "default";
   let make =
