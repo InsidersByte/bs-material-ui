@@ -806,3 +806,42 @@ module Toolbar = {
       children
     );
 };
+
+module Typography = {
+  [@bs.module "material-ui/Typography"] external typography : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~align: option(string)=?,
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~color: option(string)=?,
+        ~gutterBottom=?,
+        ~headlineMapping: option(Js.t({..}))=?,
+        ~noWrap=?,
+        ~paragraph=?,
+        ~_type: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=typography,
+      ~props=
+        Js.Nullable.(
+          {
+            "align": from_opt(align),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "color": from_opt(color),
+            "gutterBottom": unwrap_bool(gutterBottom),
+            "headlineMapping": from_opt(headlineMapping),
+            "noWrap": unwrap_bool(noWrap),
+            "paragraph": unwrap_bool(paragraph),
+            "type": from_opt(_type),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
