@@ -945,6 +945,53 @@ module ListItemIcon = {
     );
 };
 
+module ListItemAvatar = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemAvatar";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Undefined.(
+          {
+            "classes": from_opt(classes),
+            "style": from_opt(style),
+            "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
+module ListItemSecondaryAction = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass =
+    "ListItemSecondaryAction";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Undefined.(
+          {
+            "classes": from_opt(classes),
+            "style": from_opt(style),
+            "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
 module Toolbar = {
   [@bs.module "material-ui/Toolbar"] external toolbar : ReasonReact.reactClass = "default";
   let make =
