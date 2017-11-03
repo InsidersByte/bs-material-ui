@@ -44,6 +44,26 @@ let make = (~name, _children) => {
 };
 ```
 
+If you want to avoid repeating the package name you can use the context namespacing:
+
+```reason
+let component = ReasonReact.statelessComponent("Header");
+
+let make = (~name, _children) => {
+  ...component,
+  render: (_self) =>
+    MaterialUI.(
+      <AppBar position="static" color="default">
+        <Toolbar>
+          <Typography _type="title" color="inherit">
+            (ReasonReact.stringToElement("Title"))
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    )
+};
+```
+
 ## Bindings
 
 - [x] AppBar
