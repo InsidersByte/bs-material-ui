@@ -1101,3 +1101,122 @@ module Typography = {
       children
     );
 };
+
+module Select = {
+  [@bs.module "material-ui/Select"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~autoWidth: option(bool)=?,
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~displayEmpty: option(bool)=?,
+        ~input: option(ReasonReact.reactElement)=?,
+        ~inputClasses: option(Js.t({..}))=?,
+        ~native: option(bool)=?,
+        ~multiple: option(bool)=?,
+        ~menuProps: option(Js.t({..}))=?,
+        ~renderValue: option((unit => unit)),
+        ~value: option('a)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "autoWidth": unwrap_bool(autoWidth),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "displayEmpty": unwrap_bool(displayEmpty),
+            "input": from_opt(input),
+            "InputClasses": from_opt(inputClasses),
+            "native": unwrap_bool(native),
+            "multiple": unwrap_bool(multiple),
+            "MenuProps": from_opt(menuProps),
+            "renderValue": from_opt(renderValue),
+            "value": from_opt(value),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module Menu = {
+  [@bs.module "material-ui/Menu"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~anchorEl: option(('a => Dom.htmlElement))=?,
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~menuListProps: option(Js.t({..}))=?,
+        ~popoverClasses: option(Js.t({..}))=?,
+        ~onEnter: option((unit => unit))=?,
+        ~onEntered: option((unit => unit))=?,
+        ~onEntering: option((unit => unit))=?,
+        ~onExit: option((unit => unit))=?,
+        ~onExited: option((unit => unit))=?,
+        ~onExiting: option((unit => unit))=?,
+        ~onRequestClose: option((unit => unit))=?,
+        ~_open: option(bool)=?,
+        ~transitionDuration: option(int),
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "anchorEl": from_opt(anchorEl),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "MenuListProps": from_opt(menuListProps),
+            "PopoverClasses": from_opt(popoverClasses),
+            "onEnter": from_opt(onEnter),
+            "onEntered": from_opt(onEntered),
+            "onEntering": from_opt(onEntering),
+            "onExit": from_opt(onExit),
+            "onExited": from_opt(onExited),
+            "onExiting": from_opt(onExiting),
+            "onRequestClose": from_opt(onRequestClose),
+            "open": unwrap_bool(_open),
+            "transitionDuration": from_opt(transitionDuration)
+          }
+        ),
+      children
+    );
+};
+
+module MenuItem = {
+  [@bs.module "material-ui/Menu"] external reactClass : ReasonReact.reactClass = "MenuItem";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(('a => ReasonReact.reactElement))=?,
+        ~role: option(string)=?,
+        ~selected: option(bool)=?,
+        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~style: option(ReactDOMRe.style)=?,
+        ~value: option('a)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "role": from_opt(role),
+            "style": from_opt(style),
+            "selected": unwrap_bool(selected),
+            "value": from_opt(value),
+            "onClick": from_opt(onClick)
+          }
+        ),
+      children
+    );
+};
