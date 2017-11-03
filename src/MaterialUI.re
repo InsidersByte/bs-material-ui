@@ -827,16 +827,13 @@ module LinearProgress = {
     );
 };
 
-module List = {
-  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "default";
+module ListItemAvatar = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemAvatar";
   let make =
       (
-        ~dense: option(bool)=?,
-        ~disablePadding: option(bool)=?,
+        ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
-        ~component: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        ~subheader: option(ReasonReact.reactElement)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -844,12 +841,87 @@ module List = {
       ~props=
         Js.Nullable.(
           {
-            "dense": unwrap_bool(dense),
-            "disablePadding": unwrap_bool(disablePadding),
+            "classes": from_opt(classes),
             "style": from_opt(style),
-            "component": from_opt(component),
+            "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
+module ListItemIcon = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemIcon";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "style": from_opt(style),
+            "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
+module ListItemSecondaryAction = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass =
+    "ListItemSecondaryAction";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "style": from_opt(style),
+            "className": from_opt(className)
+          }
+        ),
+      children
+    );
+};
+
+module ListItemText = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemText";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~disableTypography: option(bool)=?,
+        ~inset: option(bool)=?,
+        ~primary: option(string)=?,
+        ~secondary: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
             "className": from_opt(className),
-            "subheader": from_opt(subheader)
+            "disableTypography": unwrap_bool(disableTypography),
+            "inset": unwrap_bool(inset),
+            "primary": from_opt(primary),
+            "secondary": from_opt(secondary),
+            "style": from_opt(style)
           }
         ),
       children
@@ -862,13 +934,15 @@ module ListItem = {
       (
         ~button: option(bool)=?,
         ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
         ~component: option(string)=?,
         ~dense: option(bool)=?,
+        ~disabled: option(bool)=?,
         ~disableGutters: option(bool)=?,
         ~divider: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        ~className: option(string)=?,
         ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~href: option(string)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -878,13 +952,86 @@ module ListItem = {
           {
             "button": unwrap_bool(button),
             "classes": from_opt(classes),
+            "className": from_opt(className),
             "component": from_opt(component),
             "dense": unwrap_bool(dense),
+            "disabled": unwrap_bool(disabled),
             "disableGutters": unwrap_bool(disableGutters),
             "divider": unwrap_bool(divider),
             "style": from_opt(style),
+            "onClick": from_opt(onClick),
+            "href": from_opt(href)
+          }
+        ),
+      children
+    );
+};
+
+module ListSubheader = {
+  module Color = {
+    type t =
+      | Default
+      | Inherit
+      | Primary;
+    let to_string =
+      fun
+      | Default => "default"
+      | Inherit => "inherit"
+      | Primary => "primary";
+  };
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListSubheader";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~color: option(Color.t)=?,
+        ~disableSticky: option(bool)=?,
+        ~inset: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
             "className": from_opt(className),
-            "onClick": from_opt(onClick)
+            "color": from_opt(option_map(Color.to_string, color)),
+            "disableSticky": unwrap_bool(disableSticky),
+            "inset": unwrap_bool(inset),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module List = {
+  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~dense: option(bool)=?,
+        ~disablePadding: option(bool)=?,
+        ~subheader: option(ReasonReact.reactElement)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "dense": unwrap_bool(dense),
+            "disablePadding": unwrap_bool(disablePadding),
+            "subheader": from_opt(subheader),
+            "style": from_opt(style)
           }
         ),
       children

@@ -87,11 +87,12 @@ let make = (~name, _children) => {
 - [ ] InputLabel
 - [x] Input
 - [x] LinearProgress
-- [ ] ListItemAvatar
-- [ ] ListItemIcon
-- [ ] ListItemSecondaryAction
-- [ ] ListItemText
+- [x] ListItemAvatar
+- [x] ListItemIcon
+- [x] ListItemSecondaryAction
+- [x] ListItemText
 - [x] ListItem
+- [x] ListSubheader
 - [x] List
 - [ ] MenuItem
 - [ ] MenuList
