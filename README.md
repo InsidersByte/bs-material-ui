@@ -94,16 +94,16 @@ let make = (~name, _children) => {
 - [x] ListItem
 - [x] ListSubheader
 - [x] List
-- [ ] MenuItem
+- [x] MenuItem
 - [ ] MenuList
-- [ ] Menu
+- [x] Menu
 - [ ] MobileStepper
 - [ ] MuiThemeProvider
 - [ ] Paper
 - [ ] Popover
 - [ ] RadioGroup
 - [ ] Radio
-- [ ] Select
+- [x] Select
 - [ ] Slide
 - [ ] SnackbarContent
 - [ ] Snackbar
