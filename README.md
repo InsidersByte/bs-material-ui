@@ -31,7 +31,7 @@ Then add `bs-material-ui` to `bs-dev-dependencies` in your `bsconfig.json`:
 ```reason
 let component = ReasonReact.statelessComponent("Header");
 
-let make = (~name, _children) => {
+let make = () => {
   ...component,
   render: (_self) =>
     MaterialUI.(
