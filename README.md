@@ -28,8 +28,6 @@ Then add `bs-material-ui` to `bs-dev-dependencies` in your `bsconfig.json`:
 
 ## Usage
 
-The code below should be copied into a file named Header.re which is the string paramater passed into the statelessComponent function.
-
 ```reason
 let component = ReasonReact.statelessComponent("Header");
 
@@ -47,9 +45,6 @@ let make = (~name, _children) => {
     )
 };
 ```
-
-To avoid having to reference tags with MaterialUI.AppBar we wrap the JSX in MaterialUI.() context. Not the dot character between the end of the function name and the first parenthesis. 
-
 
 ## Bindings
 
