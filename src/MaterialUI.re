@@ -1038,6 +1038,39 @@ module List = {
     );
 };
 
+module MenuItem = {
+  [@bs.module "material-ui/Menu"] external reactClass : ReasonReact.reactClass = "MenuItem";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(('a => ReasonReact.reactElement))=?,
+        ~role: option(string)=?,
+        ~selected: option(bool)=?,
+        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~style: option(ReactDOMRe.style)=?,
+        ~value: option('a)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "role": from_opt(role),
+            "style": from_opt(style),
+            "selected": unwrap_bool(selected),
+            "value": from_opt(value),
+            "onClick": from_opt(onClick)
+          }
+        ),
+      children
+    );
+};
+
 module Paper = {
   [@bs.module "material-ui/Paper"] external toolbar : ReasonReact.reactClass = "default";
   let make =
@@ -1061,6 +1094,63 @@ module Paper = {
             "elevation": from_opt(elevation),
             "square": unwrap_bool(square),
             "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module Select = {
+  [@bs.module "material-ui/Select"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~autoWidth: option(bool)=?,
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~displayEmpty: option(bool)=?,
+        ~input: option(ReasonReact.reactElement)=?,
+        ~inputClasses: option(Js.t({..}))=?,
+        ~native: option(bool)=?,
+        ~multiple: option(bool)=?,
+        ~menuProps: option(Js.t({..}))=?,
+        ~value: 'a,
+        ~style: option(ReactDOMRe.style)=?,
+        /* Input Props*/
+        ~disableUnderline: option(bool)=?,
+        ~disabled: option(bool)=?,
+        ~error: option(bool)=?,
+        ~autoFocus: option(bool)=?,
+        ~fullWidth: option(bool)=?,
+        ~onChange: option((ReactEventRe.Form.t => unit))=?,
+        ~placeholder: option(string)=?,
+        ~inputType: option(string)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "autoWidth": unwrap_bool(autoWidth),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "displayEmpty": unwrap_bool(displayEmpty),
+            "input": from_opt(input),
+            "InputClasses": from_opt(inputClasses),
+            "native": unwrap_bool(native),
+            "multiple": unwrap_bool(multiple),
+            "MenuProps": from_opt(menuProps),
+            "value": value,
+            "style": from_opt(style),
+            /* Input Props TODO: find a way to rectactor props duplication. */
+            "disableUnderline": unwrap_bool(disableUnderline),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "fullWidth": unwrap_bool(fullWidth),
+            "autoFocus": unwrap_bool(autoFocus),
+            "placeholder": from_opt(placeholder),
+            "type": from_opt(inputType),
+            "onChange": from_opt(onChange)
           }
         ),
       children
@@ -1298,96 +1388,6 @@ module Typography = {
             "paragraph": unwrap_bool(paragraph),
             "type": from_opt(_type),
             "style": from_opt(style)
-          }
-        ),
-      children
-    );
-};
-
-module Select = {
-  [@bs.module "material-ui/Select"] external reactClass : ReasonReact.reactClass = "default";
-  let make =
-      (
-        ~autoWidth: option(bool)=?,
-        ~classes: option(Js.t({..}))=?,
-        ~className: option(string)=?,
-        ~displayEmpty: option(bool)=?,
-        ~input: option(ReasonReact.reactElement)=?,
-        ~inputClasses: option(Js.t({..}))=?,
-        ~native: option(bool)=?,
-        ~multiple: option(bool)=?,
-        ~menuProps: option(Js.t({..}))=?,
-        ~value: 'a,
-        ~style: option(ReactDOMRe.style)=?,
-        /* Input Props*/
-        ~disableUnderline: option(bool)=?,
-        ~disabled: option(bool)=?,
-        ~error: option(bool)=?,
-        ~autoFocus: option(bool)=?,
-        ~fullWidth: option(bool)=?,
-        ~onChange: option((ReactEventRe.Form.t => unit))=?,
-        ~placeholder: option(string)=?,
-        ~inputType: option(string)=?,
-        children
-      ) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass,
-      ~props=
-        Js.Nullable.(
-          {
-            "autoWidth": unwrap_bool(autoWidth),
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "displayEmpty": unwrap_bool(displayEmpty),
-            "input": from_opt(input),
-            "InputClasses": from_opt(inputClasses),
-            "native": unwrap_bool(native),
-            "multiple": unwrap_bool(multiple),
-            "MenuProps": from_opt(menuProps),
-            "value": value,
-            "style": from_opt(style),
-            /* Input Props TODO: find a way to rectactor props duplication. */
-            "disableUnderline": unwrap_bool(disableUnderline),
-            "disabled": unwrap_bool(disabled),
-            "error": unwrap_bool(error),
-            "fullWidth": unwrap_bool(fullWidth),
-            "autoFocus": unwrap_bool(autoFocus),
-            "placeholder": from_opt(placeholder),
-            "type": from_opt(inputType),
-            "onChange": from_opt(onChange)
-          }
-        ),
-      children
-    );
-};
-
-module MenuItem = {
-  [@bs.module "material-ui/Menu"] external reactClass : ReasonReact.reactClass = "MenuItem";
-  let make =
-      (
-        ~classes: option(Js.t({..}))=?,
-        ~className: option(string)=?,
-        ~component: option(('a => ReasonReact.reactElement))=?,
-        ~role: option(string)=?,
-        ~selected: option(bool)=?,
-        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
-        ~style: option(ReactDOMRe.style)=?,
-        ~value: option('a)=?,
-        children
-      ) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass,
-      ~props=
-        Js.Nullable.(
-          {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
-            "role": from_opt(role),
-            "style": from_opt(style),
-            "selected": unwrap_bool(selected),
-            "value": from_opt(value),
-            "onClick": from_opt(onClick)
           }
         ),
       children
