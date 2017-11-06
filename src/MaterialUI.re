@@ -1092,6 +1092,31 @@ module TableCell = {
     );
 };
 
+module TableFooter = {
+  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableFooter";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
 module TableHead = {
   [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableHead";
   let make =
