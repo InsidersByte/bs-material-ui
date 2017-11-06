@@ -1038,6 +1038,35 @@ module List = {
     );
 };
 
+module Paper = {
+  [@bs.module "material-ui/Paper"] external toolbar : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~elevation: option(int)=?,
+        ~square: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "elevation": from_opt(elevation),
+            "square": unwrap_bool(square),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
 module TableBody = {
   [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableBody";
   let make =
