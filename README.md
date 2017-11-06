@@ -117,7 +117,7 @@ let make = (_children) => {
 - [ ] TableFooter
 - [X] TableHead
 - [ ] TablePagination
-- [ ] TableRow
+- [X] TableRow
 - [ ] TableSortLabel
 - [X] Table
 - [ ] Tabs

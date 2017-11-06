@@ -1088,6 +1088,35 @@ module TableHead = {
     );
 };
 
+module TableRow = {
+  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableRow";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~hover: option(bool)=?,
+        ~selected: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "hover": unwrap_bool(hover),
+            "selected": unwrap_bool(selected),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
 module Table = {
   [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "default";
   let make =
