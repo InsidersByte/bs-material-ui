@@ -1142,7 +1142,8 @@ module Select = {
             "MenuProps": from_opt(menuProps),
             "value": from_opt(value),
             "style": from_opt(style),
-            /* Input Props TODO: find a way to rectactor props duplication. */
+            /* Input Props */
+            /* TODO: find a way to rectactor props duplication. */
             "disableUnderline": unwrap_bool(disableUnderline),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
