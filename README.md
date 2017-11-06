@@ -31,16 +31,18 @@ Then add `bs-material-ui` to `bs-dev-dependencies` in your `bsconfig.json`:
 ```reason
 let component = ReasonReact.statelessComponent("Header");
 
-let make = (~name, _children) => {
+let make = (_children) => {
   ...component,
   render: (_self) =>
-    <MaterialUI.AppBar position="static" color="default">
-      <MaterialUI.Toolbar>
-        <MaterialUI.Typography _type="title" color="inherit">
-          (ReasonReact.stringToElement("Title"))
-        </MaterialUI.Typography>
-      </MaterialUI.Toolbar>
-    </MaterialUI.AppBar>
+    MaterialUI.(
+      <AppBar position="static" color="default">
+        <Toolbar>
+          <Typography _type="title" color="inherit">
+            (ReasonReact.stringToElement("Title"))
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    )
 };
 ```
 
@@ -99,7 +101,7 @@ let make = (~name, _children) => {
 - [x] Menu
 - [ ] MobileStepper
 - [ ] MuiThemeProvider
-- [ ] Paper
+- [X] Paper
 - [ ] Popover
 - [ ] RadioGroup
 - [ ] Radio
@@ -110,14 +112,14 @@ let make = (~name, _children) => {
 - [ ] SvgIcon
 - [ ] Switch
 - [ ] Tab
-- [ ] TableBody
-- [ ] TableCell
-- [ ] TableFooter
-- [ ] TableHead
+- [X] TableBody
+- [X] TableCell
+- [X] TableFooter
+- [X] TableHead
 - [ ] TablePagination
-- [ ] TableRow
+- [X] TableRow
 - [ ] TableSortLabel
-- [ ] Table
+- [X] Table
 - [ ] Tabs
 - [ ] TextField
 - [X] Toolbar

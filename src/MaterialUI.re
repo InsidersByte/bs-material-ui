@@ -1038,6 +1038,208 @@ module List = {
     );
 };
 
+module Paper = {
+  [@bs.module "material-ui/Paper"] external toolbar : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~elevation: option(int)=?,
+        ~square: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "elevation": from_opt(elevation),
+            "square": unwrap_bool(square),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module TableBody = {
+  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableBody";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module TableCell = {
+  module Padding = {
+    type t =
+      | Default
+      | Checkbox
+      | Dense
+      | None;
+    let to_string =
+      fun
+      | Default => "default"
+      | Checkbox => "checkbox"
+      | Dense => "dense"
+      | None => "none";
+  };
+  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableCell";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~numeric: option(bool)=?,
+        ~padding: option(Padding.t)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "numeric": unwrap_bool(numeric),
+            "padding": from_opt(option_map(Padding.to_string, padding)),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module TableFooter = {
+  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableFooter";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module TableHead = {
+  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableHead";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module TableRow = {
+  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableRow";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~hover: option(bool)=?,
+        ~selected: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "hover": unwrap_bool(hover),
+            "selected": unwrap_bool(selected),
+            "style": from_opt(style),
+            "onClick": from_opt(onClick)
+          }
+        ),
+      children
+    );
+};
+
+module Table = {
+  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
 module Toolbar = {
   [@bs.module "material-ui/Toolbar"] external toolbar : ReasonReact.reactClass = "default";
   let make =
