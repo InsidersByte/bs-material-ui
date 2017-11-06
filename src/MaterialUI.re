@@ -1093,6 +1093,19 @@ module TableBody = {
 };
 
 module TableCell = {
+  module Padding = {
+    type t =
+      | Default
+      | Checkbox
+      | Dense
+      | None;
+    let to_string =
+      fun
+      | Default => "default"
+      | Checkbox => "checkbox"
+      | Dense => "dense"
+      | None => "none";
+  };
   [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableCell";
   let make =
       (
@@ -1100,7 +1113,7 @@ module TableCell = {
         ~className: option(string)=?,
         ~component: option(string)=?,
         ~numeric: option(bool)=?,
-        ~padding: option(bool)=?,
+        ~padding: option(Padding.t)=?,
         ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
@@ -1113,7 +1126,7 @@ module TableCell = {
             "className": from_opt(className),
             "component": from_opt(component),
             "numeric": unwrap_bool(numeric),
-            "padding": unwrap_bool(padding),
+            "padding": from_opt(option_map(Padding.to_string, padding)),
             "style": from_opt(style)
           }
         ),
@@ -1181,6 +1194,7 @@ module TableRow = {
         ~hover: option(bool)=?,
         ~selected: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
+        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -1193,7 +1207,8 @@ module TableRow = {
             "component": from_opt(component),
             "hover": unwrap_bool(hover),
             "selected": unwrap_bool(selected),
-            "style": from_opt(style)
+            "style": from_opt(style),
+            "onClick": from_opt(onClick)
           }
         ),
       children
