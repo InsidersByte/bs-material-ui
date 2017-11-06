@@ -112,14 +112,14 @@ let make = (_children) => {
 - [ ] SvgIcon
 - [ ] Switch
 - [ ] Tab
-- [ ] TableBody
-- [ ] TableCell
-- [ ] TableFooter
-- [ ] TableHead
+- [X] TableBody
+- [X] TableCell
+- [X] TableFooter
+- [X] TableHead
 - [ ] TablePagination
-- [ ] TableRow
+- [X] TableRow
 - [ ] TableSortLabel
-- [ ] Table
+- [X] Table
 - [ ] Tabs
 - [ ] TextField
 - [X] Toolbar
