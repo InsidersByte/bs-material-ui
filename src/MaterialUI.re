@@ -1038,6 +1038,31 @@ module List = {
     );
 };
 
+module Table = {
+  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
 module Toolbar = {
   [@bs.module "material-ui/Toolbar"] external toolbar : ReasonReact.reactClass = "default";
   let make =

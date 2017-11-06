@@ -119,7 +119,7 @@ let make = (_children) => {
 - [ ] TablePagination
 - [ ] TableRow
 - [ ] TableSortLabel
-- [ ] Table
+- [X] Table
 - [ ] Tabs
 - [ ] TextField
 - [X] Toolbar
