@@ -1,6 +1,6 @@
 {
   "name": "bs-material-ui",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Reason bindings for material-ui",
   "main": "lib/js/src/MaterialUI.js",
   "keywords": [
@@ -26,7 +26,9 @@
     "prepublish": "yarn run clean && yarn run build"
   },
   "author": "Jonathon Kelly <jonathon@insidersbyte.com>",
-  "contributors": ["Remi Bernal <bernal.rs@gmail.com>"],
+  "contributors": [
+    "Remi Bernal <bernal.rs@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
