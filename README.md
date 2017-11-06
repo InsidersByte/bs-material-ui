@@ -101,7 +101,7 @@ let make = (_children) => {
 - [ ] Menu
 - [ ] MobileStepper
 - [ ] MuiThemeProvider
-- [ ] Paper
+- [X] Paper
 - [ ] Popover
 - [ ] RadioGroup
 - [ ] Radio
