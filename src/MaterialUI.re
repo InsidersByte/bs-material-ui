@@ -1044,7 +1044,7 @@ module MenuItem = {
       (
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
-        ~component: option(('a => ReasonReact.reactElement))=?,
+        ~component: option(string)=?,
         ~role: option(string)=?,
         ~selected: option(bool)=?,
         ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
@@ -1061,10 +1061,10 @@ module MenuItem = {
             "className": from_opt(className),
             "component": from_opt(component),
             "role": from_opt(role),
-            "style": from_opt(style),
             "selected": unwrap_bool(selected),
-            "value": from_opt(value),
-            "onClick": from_opt(onClick)
+            "onClick": from_opt(onClick),
+            "style": from_opt(style),
+            "value": from_opt(value)
           }
         ),
       children
@@ -1113,7 +1113,7 @@ module Select = {
         ~native: option(bool)=?,
         ~multiple: option(bool)=?,
         ~menuProps: option(Js.t({..}))=?,
-        ~value: 'a,
+        ~value: option('a),
         ~style: option(ReactDOMRe.style)=?,
         /* Input Props*/
         ~disableUnderline: option(bool)=?,
@@ -1140,7 +1140,7 @@ module Select = {
             "native": unwrap_bool(native),
             "multiple": unwrap_bool(multiple),
             "MenuProps": from_opt(menuProps),
-            "value": value,
+            "value": from_opt(value),
             "style": from_opt(style),
             /* Input Props TODO: find a way to rectactor props duplication. */
             "disableUnderline": unwrap_bool(disableUnderline),
