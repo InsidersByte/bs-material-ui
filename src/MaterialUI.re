@@ -1118,6 +1118,16 @@ module Select = {
         ~renderValue: option((unit => unit)),
         ~value: option('a)=?,
         ~style: option(ReactDOMRe.style)=?,
+        /* Input Props*/
+        ~disableUnderline: option(bool)=?,
+        ~disabled: option(bool)=?,
+        ~error: option(bool)=?,
+        ~autoFocus: option(bool)=?,
+        ~fullWidth: option(bool)=?,
+        ~value: option(string)=?,
+        ~onChange: option((ReactEventRe.Form.t => unit))=?,
+        ~placeholder: option(string)=?,
+        ~inputType: option(string)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -1136,7 +1146,17 @@ module Select = {
             "MenuProps": from_opt(menuProps),
             "renderValue": from_opt(renderValue),
             "value": from_opt(value),
-            "style": from_opt(style)
+            "style": from_opt(style),
+            /* Input Props TODO: find a way to rectactor props duplication. */
+            "disableUnderline": unwrap_bool(disableUnderline),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "fullWidth": unwrap_bool(fullWidth),
+            "autoFocus": unwrap_bool(autoFocus),
+            "placeholder": from_opt(placeholder),
+            "type": from_opt(inputType),
+            "value": from_opt(value),
+            "onChange": from_opt(onChange)
           }
         ),
       children
