@@ -274,7 +274,7 @@ module Checkbox = {
         /* TODO inputProps */
         /* TODO inputRef */
         ~name: option(string)=?,
-        ~onChange: option(((ReactEventRe.Selection.t, bool) => unit))=?,
+        ~onChange: option(((ReactEventRe.Selection.t, Js.boolean) => unit))=?,
         ~value: option(string)=?,
         children
       ) =>
