@@ -1071,6 +1071,51 @@ module MenuItem = {
     );
 };
 
+module Menu = {
+  [@bs.module "material-ui/Menu"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~anchorEl: option(('a => Dom.htmlElement))=?,
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~menuListProps: option(Js.t({..}))=?,
+        ~popoverClasses: option(Js.t({..}))=?,
+        ~onEnter: option((unit => unit))=?,
+        ~onEntered: option((unit => unit))=?,
+        ~onEntering: option((unit => unit))=?,
+        ~onExit: option((unit => unit))=?,
+        ~onExited: option((unit => unit))=?,
+        ~onExiting: option((unit => unit))=?,
+        ~onRequestClose: option((unit => unit))=?,
+        ~_open: option(bool)=?,
+        ~transitionDuration: option(int),
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "anchorEl": from_opt(anchorEl),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "MenuListProps": from_opt(menuListProps),
+            "PopoverClasses": from_opt(popoverClasses),
+            "onEnter": from_opt(onEnter),
+            "onEntered": from_opt(onEntered),
+            "onEntering": from_opt(onEntering),
+            "onExit": from_opt(onExit),
+            "onExited": from_opt(onExited),
+            "onExiting": from_opt(onExiting),
+            "onRequestClose": from_opt(onRequestClose),
+            "open": unwrap_bool(_open),
+            "transitionDuration": from_opt(transitionDuration)
+          }
+        ),
+      children
+    );
+};
+
 module Paper = {
   [@bs.module "material-ui/Paper"] external toolbar : ReasonReact.reactClass = "default";
   let make =
