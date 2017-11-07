@@ -123,5 +123,5 @@ let make = (_children) => {
 - [ ] Tabs
 - [ ] TextField
 - [X] Toolbar
-- [ ] Tooltip
+- [X] Tooltip
 - [X] Typography

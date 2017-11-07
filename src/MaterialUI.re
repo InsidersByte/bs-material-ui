@@ -1355,6 +1355,83 @@ module Toolbar = {
     );
 };
 
+module Tooltip = {
+  module Placement = {
+    type t =
+      | BottomEnd
+      | BottomStart
+      | Bottom
+      | LeftEnd
+      | LeftStart
+      | Left
+      | RightEnd
+      | RightStart
+      | Right
+      | TopEnd
+      | TopStart
+      | Top;
+    let to_string =
+      fun
+      | BottomEnd => "bottom-end"
+      | BottomStart => "bottom-start"
+      | Bottom => "bottom"
+      | LeftEnd => "left-end"
+      | LeftStart => "left-start"
+      | Left => "left"
+      | RightEnd => "right-end"
+      | RightStart => "right-start"
+      | Right => "right"
+      | TopEnd => "top-end"
+      | TopStart => "top-start"
+      | Top => "top";
+  };
+  [@bs.module "material-ui/Tooltip"] external toolbar : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~disableTriggerFocus: option(bool)=?,
+        ~disableTriggerHover: option(bool)=?,
+        ~disableTriggerTouch: option(bool)=?,
+        ~id: option(string)=?,
+        ~onRequestClose: option((unit => unit))=?,
+        ~onRequestOpen: option((unit => unit))=?,
+        ~_open: option(bool)=?,
+        /* TODO: is actually a Node */
+        ~title: option(string)=?,
+        ~enterDelay: option(int)=?,
+        ~leaveDelay: option(int)=?,
+        ~placement: option(Placement.t)=?,
+        ~popperProps: option(Js.t({..}))=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "disableTriggerFocus": unwrap_bool(disableTriggerFocus),
+            "disableTriggerHover": unwrap_bool(disableTriggerHover),
+            "disableTriggerTouch": unwrap_bool(disableTriggerTouch),
+            "id": from_opt(id),
+            "onRequestClose": from_opt(onRequestClose),
+            "onRequestOpen": from_opt(onRequestOpen),
+            "open": unwrap_bool(_open),
+            "title": from_opt(title),
+            "enterDelay": from_opt(enterDelay),
+            "leaveDelay": from_opt(leaveDelay),
+            "placement": from_opt(option_map(Placement.to_string, placement)),
+            "PopperProps": from_opt(popperProps),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
 module Typography = {
   [@bs.module "material-ui/Typography"] external typography : ReasonReact.reactClass = "default";
   let make =
