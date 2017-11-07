@@ -96,7 +96,7 @@ let make = (_children) => {
 - [x] ListItem
 - [x] ListSubheader
 - [x] List
-- [ ] MenuItem
+- [x] MenuItem
 - [ ] MenuList
 - [ ] Menu
 - [ ] MobileStepper
@@ -105,7 +105,7 @@ let make = (_children) => {
 - [ ] Popover
 - [ ] RadioGroup
 - [ ] Radio
-- [ ] Select
+- [x] Select
 - [ ] Slide
 - [ ] SnackbarContent
 - [ ] Snackbar
