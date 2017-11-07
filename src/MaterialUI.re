@@ -283,14 +283,14 @@ module Checkbox = {
       ~props=
         Js.Nullable.(
           {
-            "checked": from_opt(checked),
+            "checked": unwrap_bool(checked),
             "checkedClassName": from_opt(checkedClassName),
             "checkedIcon": from_opt(checkedIcon),
-            "disableRipple": from_opt(disableRipple),
-            "disabled": from_opt(disabled),
+            "disableRipple": unwrap_bool(disableRipple),
+            "disabled": unwrap_bool(disabled),
             "disabledClassName": from_opt(disabledClassName),
             "icon": from_opt(icon),
-            "indeterminate": from_opt(indeterminate),
+            "indeterminate": unwrap_bool(indeterminate),
             "indeterminateIcon": from_opt(indeterminateIcon),
             "name": from_opt(name),
             "onChange": from_opt(onChange),
