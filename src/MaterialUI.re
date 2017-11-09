@@ -577,6 +577,7 @@ module Margin = {
     | Normal => "normal";
 };
 
+module FormControl = {
 [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormControl";
 
 let make =
@@ -614,6 +615,7 @@ let make =
       ),
     children
   );
+};
 
 module FormControlLabel = {
   [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass =
