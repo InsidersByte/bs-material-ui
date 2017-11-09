@@ -602,7 +602,7 @@ module FormControlLabel = {
   let make =
       /* technically a union bool|string but why are you passing a string to `checked`? */
       (
-        ~disabled=?,
+        ~disabled: option(bool)=?,
         ~checked: option(bool)=?,
         ~control: option(ReasonReact.reactElement)=?,
         ~label: option(string)=?,
@@ -637,11 +637,13 @@ module FormLabel = {
   [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormLabel";
   let make =
       (
-        ~disabled=?,
-        ~error=?,
-        ~focused=?,
-        ~required=?,
+        ~classes: option(Js.t({..}))=?,        
         ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~disabled: boolean,
+        ~error: option(bool)=?,
+        ~focused: option(bool)=?,
+        ~required: option(bool)=?,        
         ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
@@ -650,11 +652,13 @@ module FormLabel = {
       ~props=
         Js.Nullable.(
           {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component)
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
             "focused": unwrap_bool(focused),
-            "required": unwrap_bool(required),
-            "className": from_opt(className),
+            "required": unwrap_bool(required),            
             "style": from_opt(style)
           }
         ),
