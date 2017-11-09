@@ -1,3 +1,16 @@
+type jsUnsafe;
+
+external toJsUnsafe : 'a => jsUnsafe = "%identity";
+
+let unwrapValue =
+    (r: [< | `Int(int) | `IntArray(array(int)) | `String(string) | `StringArray(array(string))]) =>
+  switch r {
+  | `String(s) => toJsUnsafe(s)
+  | `Int(i) => toJsUnsafe(i)
+  | `StringArray(a) => toJsUnsafe(a)
+  | `IntArray(a) => toJsUnsafe(a)
+  };
+
 let unwrap_bool = (b: option(bool)) =>
   switch b {
   | Some(value) => Js.Nullable.return(Js.Boolean.to_js_boolean(value))
@@ -1131,7 +1144,7 @@ module MenuItem = {
         ~selected: option(bool)=?,
         ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
         ~style: option(ReactDOMRe.style)=?,
-        ~value: option('a)=?,
+        ~value: option([ | `String(string) | `Int(int)])=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -1146,7 +1159,7 @@ module MenuItem = {
             "selected": unwrap_bool(selected),
             "onClick": from_opt(onClick),
             "style": from_opt(style),
-            "value": from_opt(value)
+            "value": from_opt(option_map(unwrapValue, value))
           }
         ),
       children
@@ -1195,7 +1208,10 @@ module Select = {
         ~native: option(bool)=?,
         ~multiple: option(bool)=?,
         ~menuProps: option(Js.t({..}))=?,
-        ~value: option('a),
+        ~value:
+           option(
+             [ | `Int(int) | `IntArray(array(int)) | `String(string) | `StringArray(array(string))]
+           )=?,
         ~style: option(ReactDOMRe.style)=?,
         /* Input Props*/
         ~disableUnderline: option(bool)=?,
@@ -1222,7 +1238,7 @@ module Select = {
             "native": unwrap_bool(native),
             "multiple": unwrap_bool(multiple),
             "MenuProps": from_opt(menuProps),
-            "value": from_opt(value),
+            "value": from_opt(option_map(unwrapValue, value)),
             "style": from_opt(style),
             /* TODO: Input Props: find a way to rectactor props duplication. */
             "disableUnderline": unwrap_bool(disableUnderline),
