@@ -883,7 +883,7 @@ ReasonReact.wrapJsForReason(
 };
 
 module Input = {
-  [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "Input";
+  [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~disableUnderline: option(bool)=?,
