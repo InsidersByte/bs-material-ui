@@ -74,9 +74,9 @@ let make = (_children) => {
 - [ ] Fade
 - [x] FormControlLabel
 - [x] FormControl
-- [ ] FormGroup
-- [ ] FormHelperText
-- [ ] FormLabel
+- [x] FormGroup
+- [x] FormHelperText
+- [x] FormLabel
 - [ ] GridListTitleBar
 - [ ] GridListTitle
 - [ ] GridList

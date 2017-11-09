@@ -1,12 +1,8 @@
 {
   "name": "bs-material-ui",
   "bsc-flags": ["-bs-super-errors"],
-  "sources": [
-    "src"
-  ],
-  "bs-dependencies": [
-    "reason-react"
-  ],
+  "sources": ["src"],
+  "bs-dependencies": ["reason-react"],
   "reason": {
     "react-jsx": 2
   },
