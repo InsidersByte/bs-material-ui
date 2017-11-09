@@ -3,12 +3,14 @@ type jsUnsafe;
 external toJsUnsafe : 'a => jsUnsafe = "%identity";
 
 let unwrapValue =
-    (r: [< | `Int(int) | `IntArray(array(int)) | `String(string) | `StringArray(array(string))]) =>
+    (r: [< | `Int(int) | `IntArray(array(int)) | `String(string) | `StringArray(array(string)) | `Float(float) | `FloatArray(array(float)) ]) =>
   switch r {
   | `String(s) => toJsUnsafe(s)
   | `Int(i) => toJsUnsafe(i)
   | `StringArray(a) => toJsUnsafe(a)
   | `IntArray(a) => toJsUnsafe(a)
+  | `Float(f) => toJsUnsafe(f)
+  | `FloatArray(f) => toJsUnsafe(f)
   };
 
 let unwrap_bool = (b: option(bool)) =>
@@ -1426,6 +1428,89 @@ module Table = {
         ),
       children
     );
+};
+
+module TextField = {
+  
+    [@bs.module "material-ui/TextField"] external reactClass : ReasonReact.reactClass = "default";
+    let make =
+    (
+      ~autoComplete: option(string)=?,
+      ~autoFocus: option(bool)=?,
+      ~className: option(string)=?,
+      ~defaultValue: option(string)=?,
+      ~disabled: option(bool)=?,
+      ~error: option(bool)=?,
+      ~formHelperTextProps: option(Js.t({..}))=?,
+      ~fullWidth: option(bool)=?,
+      ~helperText: option(ReasonReact.reactElement)=?,
+      ~helperTextClassName: option(string)=?,
+      ~id: option(string)=?,
+      /* Material-UI have two pais of similar props with different case. See: Git hub issue https://github.com/callemall/material-ui/issues/8232 */
+      ~inputClassName: option(string)=?,
+      ~_InputClassName: option(string)=?,
+      ~_InputLabelProps: option(Js.t({..}))=?,
+      ~inputProps: option(Js.t({..}))=?,
+      ~_InputProps: option(Js.t({..}))=?,
+      ~inputRef=?,
+      ~label: option(ReasonReact.reactElement)=?,
+      ~labelClassName: option(string)=?,
+      ~multiline: option(bool)=?,
+      ~name: option(string)=?,
+      ~onChange: option((ReactEventRe.Selection.t => unit))=?,
+      ~placeholder: option(string)=?,
+      ~required: option(bool)=?,
+      ~rootRef=?,
+      ~rows: option([ | `Int(int) | `String(string) ])=?,
+      ~rowsMax: option([ | `Int(int) | `String(string) ])=?,
+      ~select: option(bool)=?,
+      ~selectProps: option(Js.t({..}))=?,
+      ~_type: option(string)=?,
+      ~value:option([ | `Int(int) | `String(string) ])=?,
+      ~margin: option(Margin.t)=?,
+      children
+    ) =>
+  ReasonReact.wrapJsForReason(
+    ~reactClass,
+    ~props=
+      Js.Nullable.(
+        {
+          "autoComplete": from_opt(autoComplete),
+          "autoFocus": unwrap_bool(autoFocus),
+          "className": from_opt(className),
+          "defaultValue": from_opt(defaultValue),
+          "disabled": unwrap_bool(disabled),
+          "error": unwrap_bool(error),
+          "formHelperTextProps": from_opt(formHelperTextProps),
+          "fullWidth": unwrap_bool(fullWidth),
+          "helperText": from_opt(helperText),
+          "helperTextClassName": from_opt(helperTextClassName),
+          "id": from_opt(id),
+          "inputClassName": from_opt(inputClassName),
+          "InputClassName": from_opt(_InputClassName),
+          "InputLabelProps": from_opt(_InputLabelProps),
+          "inputProps": from_opt(inputProps),
+          "InputProps": from_opt(_InputProps),
+          "inputRef": from_opt(inputRef),
+          "label": from_opt(label),
+          "labelClassName": from_opt(labelClassName),
+          "multiline": unwrap_bool(multiline),
+          "name": from_opt(name),
+          "onChange": from_opt(onChange),
+          "placeholder": from_opt(placeholder),
+          "required": unwrap_bool(required),
+          "rootRef": from_opt(rootRef),
+          "rows": from_opt(rows),
+          "rowsMax": from_opt(rowsMax),
+          "select": unwrap_bool(select),
+          "selectProps": from_opt(selectProps),
+          "_type": from_opt(_type),
+          "value": from_opt(value),
+          "margin": from_opt(margin)
+        }
+      ),
+    children
+    )
 };
 
 module Toolbar = {
