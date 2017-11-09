@@ -658,6 +658,31 @@ module FormControlLabel = {
     );
 };
 
+module FormGroup = {
+  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormGroup";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~row: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "row": unwrap_bool(row),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
 module FormLabel = {
   [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormLabel";
   let make =
