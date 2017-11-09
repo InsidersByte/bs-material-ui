@@ -641,7 +641,6 @@ module FormLabel = {
         ~error=?,
         ~focused=?,
         ~required=?,
-        ~margin: option(string)=?,
         ~className: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
         children
@@ -655,7 +654,6 @@ module FormLabel = {
             "error": unwrap_bool(error),
             "focused": unwrap_bool(focused),
             "required": unwrap_bool(required),
-            "margin": from_opt(margin),
             "className": from_opt(className),
             "style": from_opt(style)
           }
