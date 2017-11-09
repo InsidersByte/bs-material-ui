@@ -758,18 +758,6 @@ module IconButton = {
     );
 };
 
-module Margin = {
-    type t =
-      | None
-      | Dense
-      | Normal;
-    let to_string =
-      fun
-      | None => "none"
-      | Dense => "dense"
-      | Normal => "normal";
-  };
-
 module InputLabel = {
   [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "InputLabel";
   let make =
