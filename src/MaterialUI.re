@@ -758,8 +758,59 @@ module IconButton = {
     );
 };
 
+module Margin = {
+    type t =
+      | None
+      | Dense
+      | Normal;
+    let to_string =
+      fun
+      | None => "none"
+      | Dense => "dense"
+      | Normal => "normal";
+  };
+
+module InputLabel = {
+  [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "InputLabel";
+  let make =
+  (    
+    ~classes: option(Js.t({..}))=?,
+    ~className: option(string)=?,
+    ~disableAnimation: option(bool)=?,
+    ~disabled: option(bool)=?,
+    ~error: option(bool)=?,
+    ~_FormControlClasses: option(Js.t({..}))=?,
+    ~focused: option(bool)=?,
+    ~margin: option(Margin.t)=?,
+    ~required: option(bool)=?,
+    ~shrink: option(bool)=?,
+    ~style: option(ReactDOMRe.style)=?,
+    children
+  ) =>
+ReasonReact.wrapJsForReason(
+  ~reactClass,
+  ~props=
+    Js.Nullable.(
+      {
+        "classes": from_opt(classes),
+        "className": from_opt(className),
+        "disableAnimation": unwrap_bool(disableAnimation),
+        "disabled": unwrap_bool(disabled),
+        "error": unwrap_bool(error),
+        "FormControlClasses": from_opt(_FormControlClasses),
+        "focused": unwrap_bool(focused),
+        "margin": from_opt(option_map(Margin.to_string, margin)),
+        "required": unwrap_bool(required),
+        "shrink": unwrap_bool(shrink),
+        "style": from_opt(style)
+      }
+    ),
+  children
+);
+};
+
 module Input = {
-  [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "Input";
   let make =
       (
         ~disableUnderline: option(bool)=?,
