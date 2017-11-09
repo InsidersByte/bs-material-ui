@@ -75,7 +75,7 @@ let make = (_children) => {
 - [x] FormControlLabel
 - [x] FormControl
 - [x] FormGroup
-- [ ] FormHelperText
+- [x] FormHelperText
 - [x] FormLabel
 - [ ] GridListTitleBar
 - [ ] GridListTitle
