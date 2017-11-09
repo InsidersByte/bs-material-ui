@@ -853,6 +853,47 @@ module IconButton = {
     );
 };
 
+module InputLabel = {
+  [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "InputLabel";
+  let make =
+  (    
+    ~classes: option(Js.t({..}))=?,
+    ~className: option(string)=?,
+    ~disableAnimation: option(bool)=?,
+    ~disabled: option(bool)=?,
+    ~error: option(bool)=?,    
+    ~_FormControlClasses: option(Js.t({..}))=?,
+    ~focused: option(bool)=?,
+    ~htmlFor: option(string)=?,
+    ~margin: option(Margin.t)=?,
+    ~required: option(bool)=?,
+    ~shrink: option(bool)=?,
+    ~style: option(ReactDOMRe.style)=?,
+    children
+  ) =>
+ReasonReact.wrapJsForReason(
+  ~reactClass,
+  ~props=
+    Js.Nullable.(
+      {
+        "classes": from_opt(classes),
+        "className": from_opt(className),
+        "disableAnimation": unwrap_bool(disableAnimation),
+        "disabled": unwrap_bool(disabled),
+        "error": unwrap_bool(error),        
+        "FormControlClasses": from_opt(_FormControlClasses),
+        "focused": unwrap_bool(focused),
+        "htmlFor": from_opt(htmlFor),
+        "margin": from_opt(option_map(Margin.to_string, margin)),
+        "required": unwrap_bool(required),
+        "shrink": unwrap_bool(shrink),
+        "style": from_opt(style)
+      }
+    ),
+  children
+);
+};
+
 module Input = {
   [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "default";
   let make =
@@ -860,6 +901,7 @@ module Input = {
         ~disableUnderline: option(bool)=?,
         ~disabled: option(bool)=?,
         ~error: option(bool)=?,
+        ~id: option(string)=?,
         ~autoFocus: option(bool)=?,
         ~fullWidth: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
@@ -878,6 +920,7 @@ module Input = {
             "disableUnderline": unwrap_bool(disableUnderline),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
+            "id": from_opt(id),
             "fullWidth": unwrap_bool(fullWidth),
             "autoFocus": unwrap_bool(autoFocus),
             "style": from_opt(style),
