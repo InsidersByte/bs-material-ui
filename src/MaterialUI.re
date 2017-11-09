@@ -620,9 +620,9 @@ let make =
 module FormControlLabel = {
   [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass =
     "FormControlLabel";
-  let make =
-      /* technically a union bool|string but why are you passing a string to `checked`? */
+  let make =      
       (
+        /* technically a union bool|string but why are you passing a string to `checked`? */
         ~checked: option(bool)=?,
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
