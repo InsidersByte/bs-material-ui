@@ -608,7 +608,7 @@ let make =
           "onBlur": from_opt(onBlur),
           "onFocus": from_opt(onFocus),
           "required": unwrap_bool(required),
-          "margin": from_opt(option_map(Margin.to_string, color)),
+          "margin": from_opt(option_map(Margin.to_string, margin)),
           "style": from_opt(style)
         }
       ),
@@ -646,7 +646,7 @@ module FormControlLabel = {
             "className": from_opt(className),
             "control": from_opt(control),
             "disabled": unwrap_bool(disabled),
-            "": from_opt(inputRef),
+            "inputRef": from_opt(inputRef),
             "label": from_opt(label),
             "name": from_opt(name),
             "onChange": from_opt(onChange),
@@ -665,7 +665,7 @@ module FormLabel = {
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~component: option(string)=?,
-        ~disabled: boolean,
+        ~disabled: option(bool)=?,
         ~error: option(bool)=?,
         ~focused: option(bool)=?,
         ~required: option(bool)=?,
