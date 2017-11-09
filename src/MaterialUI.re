@@ -565,16 +565,76 @@ module Drawer = {
     );
 };
 
+module Margin = {
+  type t =
+    | None
+    | Dense
+    | Normal;
+  let to_string =
+    fun
+    | None => "none"
+    | Dense => "dense"
+    | Normal => "normal";
+};
+
 module FormControl = {
-  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormControl";
-  let make =
+[@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormControl";
+
+let make =
+    (
+      ~classes: option(Js.t({..}))=?,
+      ~className: option(string)=?,
+      ~component: option(string)=?,
+      ~disabled: option(bool)=?,
+      ~error: option(bool)=?,
+      ~fullWidth: option(bool)=?,
+      ~onBlur: option((ReactEventRe.Focus.t => unit))=?,
+      ~onFocus: option((ReactEventRe.Focus.t => unit))=?,
+      ~required: option(bool)=?,
+      ~margin: option(Margin.t)=?,
+      ~style: option(ReactDOMRe.style)=?,
+      children
+    ) =>
+  ReasonReact.wrapJsForReason(
+    ~reactClass,
+    ~props=
+      Js.Nullable.(
+        {
+          "classes": from_opt(classes),
+          "className": from_opt(className),
+          "component": from_opt(component),
+          "disabled": unwrap_bool(disabled),
+          "error": unwrap_bool(error),
+          "fullWidth": unwrap_bool(fullWidth),
+          "onBlur": from_opt(onBlur),
+          "onFocus": from_opt(onFocus),
+          "required": unwrap_bool(required),
+          "margin": from_opt(option_map(Margin.to_string, margin)),
+          "style": from_opt(style)
+        }
+      ),
+    children
+  );
+};
+
+module FormControlLabel = {
+  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass =
+    "FormControlLabel";
+  let make =      
       (
-        ~disabled=?,
-        ~error=?,
-        ~fullWidth=?,
-        ~required=?,
-        ~margin: option(string)=?,
+        /* technically a union bool|string but why are you passing a string to `checked`? */
+        ~checked: option(bool)=?,
+        ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
+        ~control: option(ReasonReact.reactElement)=?,
+        ~disabled: option(bool)=?,
+        /* TODO: is actually a  function */
+        ~inputRef=?,
+        /* TODO: is actually a Node */
+        ~label: option(string)=?,
+        ~name: option(string)=?,
+        ~onChange: option((ReactEventRe.Selection.t => unit))=?,
+        ~value: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
@@ -583,12 +643,16 @@ module FormControl = {
       ~props=
         Js.Nullable.(
           {
-            "disabled": unwrap_bool(disabled),
-            "error": unwrap_bool(error),
-            "fullWidth": unwrap_bool(fullWidth),
-            "required": unwrap_bool(required),
-            "margin": from_opt(margin),
+            "checked": from_opt(checked),
+            "classes": from_opt(classes),
             "className": from_opt(className),
+            "control": from_opt(control),
+            "disabled": unwrap_bool(disabled),
+            "inputRef": from_opt(inputRef),
+            "label": from_opt(label),
+            "name": from_opt(name),
+            "onChange": from_opt(onChange),
+            "value": from_opt(value),
             "style": from_opt(style)
           }
         ),
@@ -596,37 +660,54 @@ module FormControl = {
     );
 };
 
-module FormControlLabel = {
-  [@bs.module "material-ui/Form"] external formControlLabel : ReasonReact.reactClass =
-    "FormControlLabel";
+module FormGroup = {
+  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormGroup";
   let make =
-      /* technically a union bool|string but why are you passing a string to `checked`? */
       (
-        ~disabled=?,
-        ~checked: option(bool)=?,
-        ~control: option(ReasonReact.reactElement)=?,
-        ~label: option(string)=?,
-        ~name: option(string)=?,
-        ~onChange: option((ReactEventRe.Selection.t => unit))=?,
-        ~value: option(string)=?,
+        ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
+        ~row: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
-      ~reactClass=formControlLabel,
+      ~reactClass,
       ~props=
         Js.Nullable.(
           {
-            "checked": from_opt(checked),
-            "label": from_opt(label),
-            "control": from_opt(control),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "row": unwrap_bool(row),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module FormHelperText = {
+  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormHelperText";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~disabled: option(bool)=?,
+        ~error: option(bool)=?,
+        ~margin: option(Margin.t)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
             "disabled": unwrap_bool(disabled),
-            "name": from_opt(name),
-            "onChange": from_opt(onChange),
-            "value": from_opt(value),
-            "style": from_opt(style),
-            "className": from_opt(className)
+            "error": unwrap_bool(error),
+            "margin": from_opt(option_map(Margin.to_string, margin)),
+            "style": from_opt(style)
           }
         ),
       children
@@ -637,12 +718,13 @@ module FormLabel = {
   [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormLabel";
   let make =
       (
-        ~disabled=?,
-        ~error=?,
-        ~focused=?,
-        ~required=?,
-        ~margin: option(string)=?,
+        ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~disabled: option(bool)=?,
+        ~error: option(bool)=?,
+        ~focused: option(bool)=?,
+        ~required: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
@@ -651,12 +733,13 @@ module FormLabel = {
       ~props=
         Js.Nullable.(
           {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
             "focused": unwrap_bool(focused),
             "required": unwrap_bool(required),
-            "margin": from_opt(margin),
-            "className": from_opt(className),
             "style": from_opt(style)
           }
         ),
