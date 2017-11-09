@@ -577,7 +577,7 @@ module Margin = {
     | Normal => "normal";
 };
 
-[@bs.module "material-ui/Form"] external formControl : ReasonReact.reactClass = "FormControl";
+[@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormControl";
 
 let make =
     (
@@ -595,7 +595,7 @@ let make =
       children
     ) =>
   ReasonReact.wrapJsForReason(
-    ~reactClass=formControl,
+    ~reactClass,
     ~props=
       Js.Nullable.(
         {
@@ -616,7 +616,7 @@ let make =
   );
 
 module FormControlLabel = {
-  [@bs.module "material-ui/Form"] external formControlLabel : ReasonReact.reactClass =
+  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass =
     "FormControlLabel";
   let make =
       /* technically a union bool|string but why are you passing a string to `checked`? */
@@ -637,7 +637,7 @@ module FormControlLabel = {
         children
       ) =>
     ReasonReact.wrapJsForReason(
-      ~reactClass=formControlLabel,
+      ~reactClass,
       ~props=
         Js.Nullable.(
           {
