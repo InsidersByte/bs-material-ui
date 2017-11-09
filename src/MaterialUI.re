@@ -565,36 +565,54 @@ module Drawer = {
     );
 };
 
-module FormControl = {
-  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormControl";
-  let make =
-      (
-        ~disabled=?,
-        ~error=?,
-        ~fullWidth=?,
-        ~required=?,
-        ~margin: option(string)=?,
-        ~className: option(string)=?,
-        ~style: option(ReactDOMRe.style)=?,
-        children
-      ) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass,
-      ~props=
-        Js.Nullable.(
-          {
-            "disabled": unwrap_bool(disabled),
-            "error": unwrap_bool(error),
-            "fullWidth": unwrap_bool(fullWidth),
-            "required": unwrap_bool(required),
-            "margin": from_opt(margin),
-            "className": from_opt(className),
-            "style": from_opt(style)
-          }
-        ),
-      children
-    );
+module Margin = {
+  type t =
+    | None
+    | Dense
+    | Normal;
+  let to_string = fun
+  | None => "none"
+  | Dense => "dense"
+  | Normal => "normal";
 };
+
+[@bs.module "material-ui/Form"] external formControl : ReasonReact.reactClass = "FormControl";
+
+let make =
+    (        
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~disabled: option(bool)=?,
+        ~error: option(bool)=?,
+        ~fullWidth: option(bool)=?,
+        ~onBlur: option(ReactEventRe.Focus.t => unit)=?,
+        ~onFocus: option(ReactEventRe.Focus.t => unit)=?,
+        ~required: option(bool)=?,
+        ~margin: option(Margin.t)=?,
+        ~style: option(ReactDOMRe.style)=?
+        children
+    ) =>
+  ReasonReact.wrapJsForReason(
+    ~reactClass=formControl,
+    ~props=
+      Js.Nullable.(
+        {
+          "classes" : from_opt(classes),
+          "className" : from_opt(className),
+          "component" : from_opt(component),
+          "disabled" : unwrap_bool(disabled),
+          "error" : unwrap_bool(error),
+          "fullWidth" : unwrap_bool(fullWidth),
+          "onBlur" : from_opt(onBlur),
+          "onFocus" : from_opt(onFocus),
+          "required" : unwrap_bool(required),
+          "margin" : from_opt(option_map(Margin.to_string, color)),
+          "style": from_opt(style)
+        }
+      ),
+    children
+  );
 
 module FormControlLabel = {
   [@bs.module "material-ui/Form"] external formControlLabel : ReasonReact.reactClass =
