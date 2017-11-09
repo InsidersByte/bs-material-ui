@@ -578,51 +578,50 @@ module Margin = {
 };
 
 module FormControl = {
-[@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormControl";
-
-let make =
-    (
-      ~classes: option(Js.t({..}))=?,
-      ~className: option(string)=?,
-      ~component: option(string)=?,
-      ~disabled: option(bool)=?,
-      ~error: option(bool)=?,
-      ~fullWidth: option(bool)=?,
-      ~onBlur: option((ReactEventRe.Focus.t => unit))=?,
-      ~onFocus: option((ReactEventRe.Focus.t => unit))=?,
-      ~required: option(bool)=?,
-      ~margin: option(Margin.t)=?,
-      ~style: option(ReactDOMRe.style)=?,
+  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormControl";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~component: option(string)=?,
+        ~disabled: option(bool)=?,
+        ~error: option(bool)=?,
+        ~fullWidth: option(bool)=?,
+        ~onBlur: option((ReactEventRe.Focus.t => unit))=?,
+        ~onFocus: option((ReactEventRe.Focus.t => unit))=?,
+        ~required: option(bool)=?,
+        ~margin: option(Margin.t)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "component": from_opt(component),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "fullWidth": unwrap_bool(fullWidth),
+            "onBlur": from_opt(onBlur),
+            "onFocus": from_opt(onFocus),
+            "required": unwrap_bool(required),
+            "margin": from_opt(option_map(Margin.to_string, margin)),
+            "style": from_opt(style)
+          }
+        ),
       children
-    ) =>
-  ReasonReact.wrapJsForReason(
-    ~reactClass,
-    ~props=
-      Js.Nullable.(
-        {
-          "classes": from_opt(classes),
-          "className": from_opt(className),
-          "component": from_opt(component),
-          "disabled": unwrap_bool(disabled),
-          "error": unwrap_bool(error),
-          "fullWidth": unwrap_bool(fullWidth),
-          "onBlur": from_opt(onBlur),
-          "onFocus": from_opt(onFocus),
-          "required": unwrap_bool(required),
-          "margin": from_opt(option_map(Margin.to_string, margin)),
-          "style": from_opt(style)
-        }
-      ),
-    children
-  );
+    );
 };
 
 module FormControlLabel = {
   [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass =
     "FormControlLabel";
-  let make =      
+  let make =
+      /* technically a union bool|string but why are you passing a string to `checked`? */
       (
-        /* technically a union bool|string but why are you passing a string to `checked`? */
         ~checked: option(bool)=?,
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
