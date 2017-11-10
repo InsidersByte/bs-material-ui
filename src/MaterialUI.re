@@ -1492,9 +1492,9 @@ module TextField = {
         ~defaultValue: option(string)=?,
         ~disabled: option(bool)=?,
         ~error: option(bool)=?,
-        ~formHelperTextProps: option(Js.t({..}))=?,
+        ~_FormHelperTextProps: option(Js.t({..}))=?,
         ~fullWidth: option(bool)=?,
-        /* TODO: change to more appropriate type*/
+        /* TODO: change type to match Node */
         ~helperText: option(string)=?,
         ~helperTextClassName: option(string)=?,
         ~id: option(string)=?,
@@ -1504,21 +1504,22 @@ module TextField = {
         ~_InputLabelProps: option(Js.t({..}))=?,
         ~inputProps: option(Js.t({..}))=?,
         ~_InputProps: option(Js.t({..}))=?,
-        /* TODO: Find Function type in ReasonMl */
+        /* TODO: change type to match ref callback (see https://reasonml.github.io/reason-react/docs/en/react-ref.html) */
         ~inputRef=?,
-        /* TODO: Change to more appropriate type*/
+        /* TODO: change type to match Node */
         ~label: option(string)=?,
         ~labelClassName: option(string)=?,
         ~multiline: option(bool)=?,
         ~name: option(string)=?,
-        ~onChange: option((ReactEventRe.Selection.t => unit))=?,
+        ~onChange: option((ReactEventRe.Form.t => unit))=?,
         ~placeholder: option(string)=?,
         ~required: option(bool)=?,
+        /* TODO: change type to match ref callback (see https://reasonml.github.io/reason-react/docs/en/react-ref.html) */
         ~rootRef=?,
-        ~rows: option([ | `Int(int) | `String(string) | `Float(float)])=?,
-        ~rowsMax: option([ | `Int(int) | `String(string) | `Float(float)])=?,
+        ~rows: option([ | `Int(int) | `String(string)])=?,
+        ~rowsMax: option([ | `Int(int) | `String(string)])=?,
         ~select: option(bool)=?,
-        ~selectProps: option(Js.t({..}))=?,
+        ~_SelectProps: option(Js.t({..}))=?,
         ~_type: option(string)=?,
         ~value: option([ | `Int(int) | `String(string) | `Float(float)])=?,
         ~margin: option(Margin.t)=?,
@@ -1535,7 +1536,7 @@ module TextField = {
             "defaultValue": from_opt(defaultValue),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
-            "formHelperTextProps": from_opt(formHelperTextProps),
+            "FormHelperTextProps": from_opt(_FormHelperTextProps),
             "fullWidth": unwrap_bool(fullWidth),
             "helperText": from_opt(helperText),
             "helperTextClassName": from_opt(helperTextClassName),
@@ -1557,10 +1558,10 @@ module TextField = {
             "rows": from_opt(option_map(unwrapValue, rows)),
             "rowsMax": from_opt(option_map(unwrapValue, rowsMax)),
             "select": unwrap_bool(select),
-            "selectProps": from_opt(selectProps),
-            "_type": from_opt(_type),
+            "SelectProps": from_opt(_SelectProps),
+            "type": from_opt(_type),
             "value": from_opt(option_map(unwrapValue, value)),
-            "margin": from_opt(margin)
+            "margin": from_opt(option_map(Margin.to_string, margin))
           }
         ),
       children
