@@ -1523,6 +1523,7 @@ module TextField = {
         ~_type: option(string)=?,
         ~value: option([ | `Int(int) | `String(string) | `Float(float)])=?,
         ~margin: option(Margin.t)=?,
+        ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -1561,7 +1562,8 @@ module TextField = {
             "SelectProps": from_opt(_SelectProps),
             "type": from_opt(_type),
             "value": from_opt(option_map(unwrapValue, value)),
-            "margin": from_opt(option_map(Margin.to_string, margin))
+            "margin": from_opt(option_map(Margin.to_string, margin)),
+            "style": from_opt(style)
           }
         ),
       children
