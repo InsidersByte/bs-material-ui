@@ -3,12 +3,23 @@ type jsUnsafe;
 external toJsUnsafe : 'a => jsUnsafe = "%identity";
 
 let unwrapValue =
-    (r: [< | `Int(int) | `IntArray(array(int)) | `String(string) | `StringArray(array(string))]) =>
+    (
+      r: [<
+        | `Int(int)
+        | `IntArray(array(int))
+        | `String(string)
+        | `StringArray(array(string))
+        | `Float(float)
+        | `FloatArray(array(float))
+      ]
+    ) =>
   switch r {
   | `String(s) => toJsUnsafe(s)
   | `Int(i) => toJsUnsafe(i)
   | `StringArray(a) => toJsUnsafe(a)
   | `IntArray(a) => toJsUnsafe(a)
+  | `Float(a) => toJsUnsafe(a)
+  | `FloatArray(a) => toJsUnsafe(a)
   };
 
 let unwrap_bool = (b: option(bool)) =>
@@ -856,42 +867,42 @@ module IconButton = {
 module InputLabel = {
   [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "InputLabel";
   let make =
-  (    
-    ~classes: option(Js.t({..}))=?,
-    ~className: option(string)=?,
-    ~disableAnimation: option(bool)=?,
-    ~disabled: option(bool)=?,
-    ~error: option(bool)=?,    
-    ~_FormControlClasses: option(Js.t({..}))=?,
-    ~focused: option(bool)=?,
-    ~htmlFor: option(string)=?,
-    ~margin: option(Margin.t)=?,
-    ~required: option(bool)=?,
-    ~shrink: option(bool)=?,
-    ~style: option(ReactDOMRe.style)=?,
-    children
-  ) =>
-ReasonReact.wrapJsForReason(
-  ~reactClass,
-  ~props=
-    Js.Nullable.(
-      {
-        "classes": from_opt(classes),
-        "className": from_opt(className),
-        "disableAnimation": unwrap_bool(disableAnimation),
-        "disabled": unwrap_bool(disabled),
-        "error": unwrap_bool(error),        
-        "FormControlClasses": from_opt(_FormControlClasses),
-        "focused": unwrap_bool(focused),
-        "htmlFor": from_opt(htmlFor),
-        "margin": from_opt(option_map(Margin.to_string, margin)),
-        "required": unwrap_bool(required),
-        "shrink": unwrap_bool(shrink),
-        "style": from_opt(style)
-      }
-    ),
-  children
-);
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~disableAnimation: option(bool)=?,
+        ~disabled: option(bool)=?,
+        ~error: option(bool)=?,
+        ~_FormControlClasses: option(Js.t({..}))=?,
+        ~focused: option(bool)=?,
+        ~htmlFor: option(string)=?,
+        ~margin: option(Margin.t)=?,
+        ~required: option(bool)=?,
+        ~shrink: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "disableAnimation": unwrap_bool(disableAnimation),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "FormControlClasses": from_opt(_FormControlClasses),
+            "focused": unwrap_bool(focused),
+            "htmlFor": from_opt(htmlFor),
+            "margin": from_opt(option_map(Margin.to_string, margin)),
+            "required": unwrap_bool(required),
+            "shrink": unwrap_bool(shrink),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
 };
 
 module Input = {
@@ -1465,6 +1476,92 @@ module Table = {
             "className": from_opt(className),
             "component": from_opt(component),
             "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module TextField = {
+  [@bs.module "material-ui/TextField"] external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~autoComplete: option(string)=?,
+        ~autoFocus: option(bool)=?,
+        ~className: option(string)=?,
+        ~defaultValue: option(string)=?,
+        ~disabled: option(bool)=?,
+        ~error: option(bool)=?,
+        ~_FormHelperTextProps: option(Js.t({..}))=?,
+        ~fullWidth: option(bool)=?,
+        /* TODO: change type to match Node */
+        ~helperText: option(string)=?,
+        ~helperTextClassName: option(string)=?,
+        ~id: option(string)=?,
+        /* Material-UI have two pais of similar props with different case. See: Git hub issue https://github.com/callemall/material-ui/issues/8232 */
+        ~inputClassName: option(string)=?,
+        ~_InputClassName: option(string)=?,
+        ~_InputLabelProps: option(Js.t({..}))=?,
+        ~inputProps: option(Js.t({..}))=?,
+        ~_InputProps: option(Js.t({..}))=?,
+        /* TODO: change type to match ref callback (see https://reasonml.github.io/reason-react/docs/en/react-ref.html) */
+        ~inputRef=?,
+        /* TODO: change type to match Node */
+        ~label: option(string)=?,
+        ~labelClassName: option(string)=?,
+        ~multiline: option(bool)=?,
+        ~name: option(string)=?,
+        ~onChange: option((ReactEventRe.Form.t => unit))=?,
+        ~placeholder: option(string)=?,
+        ~required: option(bool)=?,
+        /* TODO: change type to match ref callback (see https://reasonml.github.io/reason-react/docs/en/react-ref.html) */
+        ~rootRef=?,
+        ~rows: option([ | `Int(int) | `String(string)])=?,
+        ~rowsMax: option([ | `Int(int) | `String(string)])=?,
+        ~select: option(bool)=?,
+        ~_SelectProps: option(Js.t({..}))=?,
+        ~_type: option(string)=?,
+        ~value: option([ | `Int(int) | `String(string) | `Float(float)])=?,
+        ~margin: option(Margin.t)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "autoComplete": from_opt(autoComplete),
+            "autoFocus": unwrap_bool(autoFocus),
+            "className": from_opt(className),
+            "defaultValue": from_opt(defaultValue),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "FormHelperTextProps": from_opt(_FormHelperTextProps),
+            "fullWidth": unwrap_bool(fullWidth),
+            "helperText": from_opt(helperText),
+            "helperTextClassName": from_opt(helperTextClassName),
+            "id": from_opt(id),
+            "inputClassName": from_opt(inputClassName),
+            "InputClassName": from_opt(_InputClassName),
+            "InputLabelProps": from_opt(_InputLabelProps),
+            "inputProps": from_opt(inputProps),
+            "InputProps": from_opt(_InputProps),
+            "inputRef": from_opt(inputRef),
+            "label": from_opt(label),
+            "labelClassName": from_opt(labelClassName),
+            "multiline": unwrap_bool(multiline),
+            "name": from_opt(name),
+            "onChange": from_opt(onChange),
+            "placeholder": from_opt(placeholder),
+            "required": unwrap_bool(required),
+            "rootRef": from_opt(rootRef),
+            "rows": from_opt(option_map(unwrapValue, rows)),
+            "rowsMax": from_opt(option_map(unwrapValue, rowsMax)),
+            "select": unwrap_bool(select),
+            "SelectProps": from_opt(_SelectProps),
+            "type": from_opt(_type),
+            "value": from_opt(option_map(unwrapValue, value)),
+            "margin": from_opt(option_map(Margin.to_string, margin))
           }
         ),
       children
