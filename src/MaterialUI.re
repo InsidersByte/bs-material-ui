@@ -3,14 +3,21 @@ type jsUnsafe;
 external toJsUnsafe : 'a => jsUnsafe = "%identity";
 
 let unwrapValue =
-    (r: [< | `Int(int) | `IntArray(array(int)) | `String(string) | `StringArray(array(string)) | `Float(float) | `FloatArray(array(float)) ]) =>
+    (r: [< 
+      | `Int(int) 
+      | `IntArray(array(int)) 
+      | `String(string) 
+      | `StringArray(array(string)) 
+      | `Float(float) 
+      | `FloatArray(array(float)) 
+    ]) =>
   switch r {
   | `String(s) => toJsUnsafe(s)
   | `Int(i) => toJsUnsafe(i)
   | `StringArray(a) => toJsUnsafe(a)
   | `IntArray(a) => toJsUnsafe(a)
-  | `Float(f) => toJsUnsafe(f)
-  | `FloatArray(f) => toJsUnsafe(f)
+  | `Float(a) => toJsUnsafe(a)
+  | `FloatArray(a) => toJsUnsafe(a)
   };
 
 let unwrap_bool = (b: option(bool)) =>
@@ -1461,12 +1468,12 @@ module TextField = {
       ~placeholder: option(string)=?,
       ~required: option(bool)=?,
       ~rootRef=?,
-      ~rows: option([ | `Int(int) | `String(string) ])=?,
-      ~rowsMax: option([ | `Int(int) | `String(string) ])=?,
+      ~rows: option([ |`Int(int) | `String(string) | `Float(float) ])=?,
+      ~rowsMax: option([ | `Int(int) | `String(string) | `Float(float)])=?,
       ~select: option(bool)=?,
       ~selectProps: option(Js.t({..}))=?,
       ~_type: option(string)=?,
-      ~value:option([ | `Int(int) | `String(string) ])=?,
+      ~value:option([ |`Int(int) | `String(string) | `Float(float)])=?,
       ~margin: option(Margin.t)=?,
       children
     ) =>
@@ -1500,12 +1507,12 @@ module TextField = {
           "placeholder": from_opt(placeholder),
           "required": unwrap_bool(required),
           "rootRef": from_opt(rootRef),
-          "rows": from_opt(rows),
-          "rowsMax": from_opt(rowsMax),
+          "rows": from_opt(option_map(unwrapValue, rows)),
+          "rowsMax": from_opt(option_map(unwrapValue,rowsMax)),
           "select": unwrap_bool(select),
           "selectProps": from_opt(selectProps),
           "_type": from_opt(_type),
-          "value": from_opt(value),
+          "value": from_opt(option_map(unwrapValue, value)),
           "margin": from_opt(margin)
         }
       ),
