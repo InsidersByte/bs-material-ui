@@ -2,6 +2,12 @@ type jsUnsafe;
 
 external toJsUnsafe : 'a => jsUnsafe = "%identity";
 
+let unwrap_element = (r: [< | `String(string) | `ReactElement(ReasonReact.reactElement)]) =>
+  switch r {
+  | `String(s) => toJsUnsafe(s)
+  | `ReactElement(e) => toJsUnsafe(e)
+  };
+
 let unwrapValue =
     (
       r: [<
@@ -109,6 +115,44 @@ module Badge = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=Js.Nullable.({"badgeContent": badgeContent, "style": from_opt(style)}),
+      children
+    );
+};
+
+module BottomNavigationButton = {
+  [@bs.module "material-ui/BottomNavigation"] external reactClass : ReasonReact.reactClass =
+    "BottomNavigationButton";
+  let make =
+      (
+        ~classes: option(string)=?,
+        ~className: option(string)=?,
+        ~icon: option([ | `String(string) | `ReactElement(ReasonReact.reactElement)])=?,
+        ~label: option(string)=?,
+        ~onChange: option((ReactEventRe.Form.t => unit))=?,
+        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~selected: option(bool)=?,
+        ~showLabel: option(bool)=?,
+        ~value: option([ | `String(string) | `Int(int) | `Float(float)])=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "icon": from_opt(option_map(unwrap_element, icon)),
+            "label": from_opt(label),
+            "onChange": from_opt(onChange),
+            "onClick": from_opt(onClick),
+            "selected": unwrap_bool(selected),
+            "showLabel": unwrap_bool(showLabel),
+            "value": from_opt(option_map(unwrapValue, value)),
+            "style": from_opt(style)
+          }
+        ),
       children
     );
 };
