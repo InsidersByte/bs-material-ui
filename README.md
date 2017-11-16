@@ -52,7 +52,7 @@ let make = (_children) => {
 - [x] Avatar
 - [x] Badge
 - [x] BottomNavigationButton
-- [ ] BottomNavigation
+- [x] BottomNavigation
 - [x] ButtonBase
 - [x] Button
 - [x] CardActions

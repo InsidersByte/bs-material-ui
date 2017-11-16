@@ -2,12 +2,6 @@ type jsUnsafe;
 
 external toJsUnsafe : 'a => jsUnsafe = "%identity";
 
-let unwrap_element = (r: [< | `String(string) | `ReactElement(ReasonReact.reactElement)]) =>
-  switch r {
-  | `String(s) => toJsUnsafe(s)
-  | `ReactElement(e) => toJsUnsafe(e)
-  };
-
 let unwrapValue =
     (
       r: [<
@@ -17,6 +11,7 @@ let unwrapValue =
         | `StringArray(array(string))
         | `Float(float)
         | `FloatArray(array(float))
+        | `ReactElement(ReasonReact.reactElement)
       ]
     ) =>
   switch r {
@@ -26,6 +21,7 @@ let unwrapValue =
   | `IntArray(a) => toJsUnsafe(a)
   | `Float(a) => toJsUnsafe(a)
   | `FloatArray(a) => toJsUnsafe(a)
+  | `ReactElement(e) => toJsUnsafe(e)
   };
 
 let unwrap_bool = (b: option(bool)) =>
@@ -143,7 +139,7 @@ module BottomNavigationButton = {
           {
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "icon": from_opt(option_map(unwrap_element, icon)),
+            "icon": from_opt(option_map(unwrapValue, icon)),
             "label": from_opt(label),
             "onChange": from_opt(onChange),
             "onClick": from_opt(onClick),
@@ -151,6 +147,36 @@ module BottomNavigationButton = {
             "showLabel": unwrap_bool(showLabel),
             "value": from_opt(option_map(unwrapValue, value)),
             "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module BottomNavigation = {
+  [@bs.module "material-ui/BottomNavigation"] external reactClass : ReasonReact.reactClass =
+    "default";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~onChange: option((ReactEventRe.Form.t => unit))=?,
+        ~showLabels: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        ~value: option([ | `Int(int) | `String(string) | `Float(float)])=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "onChange": from_opt(onChange),
+            "showLabels": from_opt(showLabels),
+            "style": from_opt(style),
+            "value": from_opt(option_map(unwrapValue, value))
           }
         ),
       children
