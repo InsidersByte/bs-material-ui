@@ -952,6 +952,7 @@ module LinearProgress = {
   let make =
       (
         ~style: option(ReactDOMRe.style)=?,
+        ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~color: option(string)=?,
         ~value: option(int)=?,
@@ -964,6 +965,7 @@ module LinearProgress = {
       ~props=
         Js.Nullable.(
           {
+            "classes": from_opt(classes),
             "style": from_opt(style),
             "mode": from_opt(mode),
             "color": from_opt(color),
