@@ -1311,6 +1311,26 @@ module Select = {
     );
 };
 
+module Slide = {
+  [@bs.module "material-ui/transitions/Slide"] external slide : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~in_: option(bool)=?,
+        /* TODO: Input Props: direction should be a closed variant */
+        ~direction: option(string)=?,
+        ~timeout: option({. "enter": float, "exit": float})=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=slide,
+      ~props=
+        Js.Nullable.(
+          {"in": unwrap_bool(in_), "direction": from_opt(direction), "timeout": from_opt(timeout)}
+        ),
+      children
+    );
+};
+
 module TableBody = {
   [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableBody";
   let make =
