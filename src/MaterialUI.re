@@ -1437,6 +1437,7 @@ module TableRow = {
         ~selected: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~onDoubleClick: option((ReactEventRe.Mouse.t => unit))=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -1450,7 +1451,8 @@ module TableRow = {
             "hover": unwrap_bool(hover),
             "selected": unwrap_bool(selected),
             "style": from_opt(style),
-            "onClick": from_opt(onClick)
+            "onClick": from_opt(onClick),
+            "onDoubleClick": from_opt(onDoubleClick)
           }
         ),
       children
