@@ -329,11 +329,17 @@ module Chip = {
   [@bs.module "material-ui/Chip"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
+        ~avatar: option(ReasonReact.reactElement)=?,
         ~className: option(string)=?,
         ~classes: option(Js.t({..}))=?,
-        ~label: string,
+        ~deleteIcon: option(ReasonReact.reactElement)=?,
+        ~label: option(string),
+        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~onKeyDown: option(ReactEventRe.Keyboard.t)=?,
         ~onRequestDelete: option((ReactEventRe.Synthetic.t => unit))=?,
         ~style: option(ReactDOMRe.style)=?,
+        ~tabIndex: option([ | `String(string) | `Int(int)])=?,
+        ~theme: option(Js.t({..}))=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -341,11 +347,17 @@ module Chip = {
       ~props=
         Js.Nullable.(
           {
+            "avatar": from_opt(avatar),
             "className": from_opt(className),
             "classes": from_opt(classes),
-            "label": label,
+            "deleteIcon": from_opt(deleteIcon),
+            "label": from_opt(label),
+            "onClick": from_opt(onClick),
+            "onKeyDown": from_opt(onKeyDown),
             "onRequestDelete": from_opt(onRequestDelete),
-            "style": from_opt(style)
+            "style": from_opt(style),
+            "tabIndex": from_opt(option_map(unwrapValue, tabIndex)),
+            "theme": from_opt(theme)
           }
         ),
       children
