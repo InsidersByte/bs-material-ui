@@ -329,14 +329,25 @@ module Chip = {
   [@bs.module "material-ui/Chip"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
-        ~avatar: option(array(ReasonReact.reactElement))=?,
+        ~className: option(string)=?,
+        ~classes: option(Js.t({..}))=?,
         ~label: string,
+        ~onRequestDelete: option((ReactEventRe.Synthetic.t => unit))=?,
         ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
-      ~props=Js.Nullable.({"avatar": from_opt(avatar), "style": from_opt(style), "label": label}),
+      ~props=
+        Js.Nullable.(
+          {
+            "className": from_opt(className),
+            "classes": from_opt(classes),
+            "label": label,
+            "onRequestDelete": from_opt(onRequestDelete),
+            "style": from_opt(style)
+          }
+        ),
       children
     );
 };
