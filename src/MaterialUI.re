@@ -245,7 +245,7 @@ module CardHeader = {
       ~props=
         Js.Nullable.(
           {
-            "action": Js.Nullable.from_opt(action),
+            "action": from_opt(action),
             "avatar": from_opt(avatar),
             "classes": from_opt(classes),
             "className": from_opt(className),
