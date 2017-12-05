@@ -231,10 +231,13 @@ module CardHeader = {
   [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "CardHeader";
   let make =
       (
+        ~action: option(ReasonReact.reactElement)=?,
+        ~avatar: option(ReasonReact.reactElement)=?,
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        ~avatar: option(array(ReasonReact.reactElement))=?,
-        ~subheader: option(array(ReasonReact.reactElement))=?,
-        ~title: option(array(ReasonReact.reactElement))=?,
+        ~title: option(ReasonReact.reactElement)=?,
+        ~subheader: option(ReasonReact.reactElement)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -242,8 +245,11 @@ module CardHeader = {
       ~props=
         Js.Nullable.(
           {
-            "style": from_opt(style),
+            "action": from_opt(action),
             "avatar": from_opt(avatar),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "style": from_opt(style),
             "subheader": from_opt(subheader),
             "title": from_opt(title)
           }
