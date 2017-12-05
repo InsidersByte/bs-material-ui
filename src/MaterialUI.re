@@ -339,7 +339,6 @@ module Chip = {
         ~onRequestDelete: option((ReactEventRe.Synthetic.t => unit))=?,
         ~style: option(ReactDOMRe.style)=?,
         ~tabIndex: option([ | `String(string) | `Int(int)])=?,
-        ~theme: option(Js.t({..}))=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -356,8 +355,7 @@ module Chip = {
             "onKeyDown": from_opt(onKeyDown),
             "onRequestDelete": from_opt(onRequestDelete),
             "style": from_opt(style),
-            "tabIndex": from_opt(option_map(unwrapValue, tabIndex)),
-            "theme": from_opt(theme)
+            "tabIndex": from_opt(option_map(unwrapValue, tabIndex))
           }
         ),
       children
