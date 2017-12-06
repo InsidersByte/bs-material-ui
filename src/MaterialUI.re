@@ -291,10 +291,11 @@ module Checkbox = {
   let make =
       /* technically a union bool|string but why are you passing a string to `checked`? */
       (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
         ~checked: option(bool)=?,
         ~checkedClassName: option(string)=?,
         ~checkedIcon: option(ReasonReact.reactElement)=?,
-        /* TODO classes */
         ~disableRipple: option(bool)=?,
         ~disabled: option(bool)=?,
         ~disabledClassName: option(string)=?,
@@ -306,6 +307,7 @@ module Checkbox = {
         ~name: option(string)=?,
         ~onChange: option(((ReactEventRe.Selection.t, Js.boolean) => unit))=?,
         ~value: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -313,6 +315,8 @@ module Checkbox = {
       ~props=
         Js.Nullable.(
           {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
             "checked": unwrap_bool(checked),
             "checkedClassName": from_opt(checkedClassName),
             "checkedIcon": from_opt(checkedIcon),
@@ -324,7 +328,8 @@ module Checkbox = {
             "indeterminateIcon": from_opt(indeterminateIcon),
             "name": from_opt(name),
             "onChange": from_opt(onChange),
-            "value": from_opt(value)
+            "value": from_opt(value),
+            "style": from_opt(style)
           }
         ),
       children
