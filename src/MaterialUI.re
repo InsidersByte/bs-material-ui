@@ -296,7 +296,6 @@ module Checkbox = {
         ~checked: option(bool)=?,
         ~checkedClassName: option(string)=?,
         ~checkedIcon: option(ReasonReact.reactElement)=?,
-        /* TODO classes */
         ~disableRipple: option(bool)=?,
         ~disabled: option(bool)=?,
         ~disabledClassName: option(string)=?,
