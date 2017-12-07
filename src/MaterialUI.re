@@ -1313,11 +1313,23 @@ module Select = {
 
 module Slide = {
   [@bs.module "material-ui/transitions/Slide"] external slide : ReasonReact.reactClass = "default";
+  module Direction = {
+    type t =
+      | Up
+      | Down
+      | Left
+      | Right;
+    let to_string =
+      fun
+      | Up => "up"
+      | Down => "down"
+      | Left => "left"
+      | Right => "right";
+  };
   let make =
       (
         ~in_: option(bool)=?,
-        /* TODO: Input Props: direction should be a closed variant */
-        ~direction: option(string)=?,
+        ~direction_: option(Direction.t)=?,
         ~timeout: option({. "enter": float, "exit": float})=?,
         children
       ) =>
@@ -1325,7 +1337,11 @@ module Slide = {
       ~reactClass=slide,
       ~props=
         Js.Nullable.(
-          {"in": unwrap_bool(in_), "direction": from_opt(direction), "timeout": from_opt(timeout)}
+          {
+            "in": unwrap_bool(in_),
+            "direction": from_opt(option_map(Direction.to_string, direction_)),
+            "timeout": from_opt(timeout)
+          }
         ),
       children
     );
