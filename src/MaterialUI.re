@@ -984,6 +984,7 @@ module LinearProgress = {
   let make =
       (
         ~style: option(ReactDOMRe.style)=?,
+        ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~color: option(string)=?,
         ~value: option(int)=?,
@@ -996,6 +997,7 @@ module LinearProgress = {
       ~props=
         Js.Nullable.(
           {
+            "classes": from_opt(classes),
             "style": from_opt(style),
             "mode": from_opt(mode),
             "color": from_opt(color),
@@ -1335,6 +1337,42 @@ module Select = {
             "placeholder": from_opt(placeholder),
             "type": from_opt(inputType),
             "onChange": from_opt(onChange)
+          }
+        ),
+      children
+    );
+};
+
+module Slide = {
+  [@bs.module "material-ui/transitions/Slide"] external slide : ReasonReact.reactClass = "default";
+  module Direction = {
+    type t =
+      | Up
+      | Down
+      | Left
+      | Right;
+    let to_string =
+      fun
+      | Up => "up"
+      | Down => "down"
+      | Left => "left"
+      | Right => "right";
+  };
+  let make =
+      (
+        ~in_: option(bool)=?,
+        ~direction_: option(Direction.t)=?,
+        ~timeout: option({. "enter": float, "exit": float})=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=slide,
+      ~props=
+        Js.Nullable.(
+          {
+            "in": unwrap_bool(in_),
+            "direction": from_opt(option_map(Direction.to_string, direction_)),
+            "timeout": from_opt(timeout)
           }
         ),
       children
