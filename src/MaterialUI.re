@@ -1617,6 +1617,7 @@ module Tabs = {
         ~scrollButtons: option(ScrollButtons.t)=?,
         ~_TabScrollButton: option(Js.t({..}))=?,
         ~textColor: option(TextColor.t)=?,
+        ~theme: option(Js.t({...}))=?,
         ~value: int,
         ~style: option(ReactDOMRe.style)=?,
         children
@@ -1640,6 +1641,7 @@ module Tabs = {
               from_opt(MaterialUI.option_map(ScrollButtons.to_string, scrollButtons)),
             "_TabScrollButton": from_opt(_TabScrollButton),
             "textColor": from_opt(MaterialUI.option_map(TextColor.to_string, textColor)),
+            "theme": from_opt(theme),
             "value": value,
             "style": from_opt(style)
           }
