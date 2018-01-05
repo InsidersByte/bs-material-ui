@@ -1378,15 +1378,15 @@ module Tab = {
           {
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "disabled": MaterialUI.unwrap_bool(disabled),
+            "disabled": unwrap_bool(disabled),
             "fullWidth": unwrap_bool(fullWidth),
             "icon": from_opt(icon),
             "indicator": from_opt(indicator),
             "label": from_opt(label),
             "onChange": from_opt(onChange),
             "onClick": from_opt(onClick),
-            "selected": MaterialUI.unwrap_bool(selected),
-            "textColor": from_opt(MaterialUI.option_map(TextColor.to_string, textColor)),
+            "selected": unwrap_bool(selected),
+            "textColor": from_opt(option_map(TextColor.to_string, textColor)),
             "value": from_opt(value),
             "style": from_opt(style)
           }
@@ -1570,6 +1570,44 @@ module Table = {
     );
 };
 
+module TabScrollButton = {
+  module Direction = {
+    type t =
+      | Left
+      | Right;
+    let to_string =
+      fun
+      | Left => "left"
+      | Right => "right";
+  };
+  [@bs.module "material-ui/Tabs"] external reactClass : ReasonReact.reactClass = "TabScrollButton";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~direction: option(Direction.t)=?,
+        ~onClick: option(ReasonReact.Callback.t(ReactEventRe.Mouse.t))=?,
+        ~visible: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "direction": from_opt(option_map(Direction.to_string, direction)),
+            "onClick": from_opt(onClick),
+            "visible": unwrap_bool(visible),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
 module Tabs = {
   module IndicatorColor = {
     type t =
@@ -1611,13 +1649,14 @@ module Tabs = {
         ~className: option(string)=?,
         ~fullWidth: option(bool)=?,
         ~indicatorClassName: option(string)=?,
+        /* TODO:  Allow for string as well */
         ~indicatorColor: option(IndicatorColor.t)=?,
         ~onChange: option(((ReactEventRe.Synthetic.t, int) => unit))=?,
         ~scrollable: option(bool)=?,
         ~scrollButtons: option(ScrollButtons.t)=?,
-        ~_TabScrollButton: option(Js.t({..}))=?,
+        ~_TabScrollButton: option(ReasonReact.reactElement)=?,
         ~textColor: option(TextColor.t)=?,
-        ~theme: option(Js.t({...}))=?,
+        ~theme: option(Js.t({..}))=?,
         ~value: int,
         ~style: option(ReactDOMRe.style)=?,
         children
@@ -1628,19 +1667,17 @@ module Tabs = {
         Js.Nullable.(
           {
             "buttonClassName": from_opt(buttonClassName),
-            "centered": MaterialUI.unwrap_bool(centered),
+            "centered": unwrap_bool(centered),
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "fullWidth": MaterialUI.unwrap_bool(fullWidth),
+            "fullWidth": unwrap_bool(fullWidth),
             "indicatorClassName": from_opt(indicatorClassName),
-            "indicatorColor":
-              from_opt(MaterialUI.option_map(IndicatorColor.to_string, indicatorColor)),
+            "indicatorColor": from_opt(option_map(IndicatorColor.to_string, indicatorColor)),
             "onChange": from_opt(onChange),
-            "scrollable": MaterialUI.unwrap_bool(scrollable),
-            "scrollButtons":
-              from_opt(MaterialUI.option_map(ScrollButtons.to_string, scrollButtons)),
+            "scrollable": unwrap_bool(scrollable),
+            "scrollButtons": from_opt(option_map(ScrollButtons.to_string, scrollButtons)),
             "_TabScrollButton": from_opt(_TabScrollButton),
-            "textColor": from_opt(MaterialUI.option_map(TextColor.to_string, textColor)),
+            "textColor": from_opt(option_map(TextColor.to_string, textColor)),
             "theme": from_opt(theme),
             "value": value,
             "style": from_opt(style)
