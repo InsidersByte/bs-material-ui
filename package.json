@@ -30,7 +30,7 @@
     "format:reason": "refmt --in-place src/*.re",
     "format": "yarn format:js && yarn format:reason"
   },
-  "author": "Jonathon Kelly <jonathon@insidersbyte.com>",
+  "author": "Remi Bernal <bernal.rs@gmail.com>",
   "contributors": ["Remi Bernal <bernal.rs@gmail.com>"],
   "license": "MIT",
   "dependencies": {},
