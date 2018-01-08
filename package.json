@@ -1,6 +1,6 @@
 {
   "name": "bs-material-ui-plus",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "Reason bindings for material-ui",
   "main": "lib/js/src/MaterialUI.js",
   "keywords": [
