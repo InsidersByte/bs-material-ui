@@ -1,5 +1,5 @@
 {
-  "name": "bs-material-ui",
+  "name": "@bernalrs/bs-material-ui",
   "version": "0.1.16",
   "description": "Reason bindings for material-ui",
   "main": "lib/js/src/MaterialUI.js",
@@ -12,12 +12,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/InsidersByte/bs-material-ui.git"
+    "url": "git+https://github.com/bernalrs/bs-material-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/InsidersByte/bs-material-ui/issues"
+    "url": "https://github.com/bernalrs/bs-material-ui/issues"
   },
-  "homepage": "https://github.com/InsidersByte/bs-material-ui#readme",
+  "homepage": "https://github.com/bernalrs/bs-material-ui#readme",
   "scripts": {
     "precommit": "lint-staged",
     "build": "bsb -make-world",
@@ -34,6 +34,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "release-it": "5.2.0",
     "bs-platform": "2.1.0",
     "husky": "0.14.3",
     "lint-staged": "6.0.0",

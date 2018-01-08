@@ -1,8 +1,11 @@
 # Reason bindings for Material-UI
 
-[![npm](https://img.shields.io/npm/v/bs-material-ui.svg)](https://www.npmjs.com/package/bs-material-ui)  
+[![npm](https://img.shields.io/npm/v/@bernalrs/bs-material-ui.svg)](https://www.npmjs.com/package/@bernalrs/bs-material-ui)  
 
 [Reason](https://reasonml.github.io/) bindings for [material-ui](https://github.com/callemall/material-ui).
+
+Warning this is a fork, will probably ended up being merged into:
+[InsidersByte/bs-material-ui](https://github.com/InsidersByte/bs-material-ui)
 
 ## Status
 
@@ -111,7 +114,7 @@ let make = (_children) => {
 - [ ] Snackbar
 - [ ] SvgIcon
 - [ ] Switch
-- [ ] Tab
+- [X] Tab
 - [X] TableBody
 - [X] TableCell
 - [X] TableFooter
@@ -120,7 +123,7 @@ let make = (_children) => {
 - [X] TableRow
 - [ ] TableSortLabel
 - [X] Table
-- [ ] Tabs
+- [X] Tabs
 - [X] TextField
 - [X] Toolbar
 - [X] Tooltip
