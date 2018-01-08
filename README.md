@@ -4,7 +4,7 @@
 
 [Reason](https://reasonml.github.io/) bindings for [material-ui](https://github.com/callemall/material-ui).
 
-Warning this is a fork, will probably ended up being merged into:
+Warning this is a fork, will probably end up merged into bs-material-ui:
 [InsidersByte/bs-material-ui](https://github.com/InsidersByte/bs-material-ui)
 
 ## Status
