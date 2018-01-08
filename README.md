@@ -1,6 +1,6 @@
 # Reason bindings for Material-UI
 
-[![npm](https://img.shields.io/npm/v/@bernalrs/bs-material-ui.svg)](https://www.npmjs.com/package/@bernalrs/bs-material-ui)  
+[![npm](https://img.shields.io/npm/v/@bernalrs/bs-material-ui-plus.svg)](https://www.npmjs.com/package/bs-material-ui-plus)  
 
 [Reason](https://reasonml.github.io/) bindings for [material-ui](https://github.com/callemall/material-ui).
 
@@ -16,16 +16,16 @@ Feel free to create an issue or PR if you find anything missing.
 ## Installation
 
 ```
-yarn add bs-material-ui
-yarn add material-ui@1.0.0-beta.19
+yarn add bs-material-ui-plus
+yarn add material-ui@next
 ```
 
-Then add `bs-material-ui` to `bs-dev-dependencies` in your `bsconfig.json`:
+Then add `bs-material-ui-plus` to `bs-dev-dependencies` in your `bsconfig.json`:
 
 ```json
 {
   ...
-  "bs-dev-dependencies": ["bs-material-ui"]
+  "bs-dev-dependencies": ["bs-material-ui-plus"]
 }
 ```
 
