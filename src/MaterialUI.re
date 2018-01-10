@@ -34,6 +34,24 @@ let option_map = (fn, option) =>
   | None => None
   };
 
+  module Color = {
+    type t =
+      | Default
+      | Inherit
+      | Primary
+      | Contrast
+      | Accent
+      | Error;
+    let to_string =
+      fun
+      | Default => "default"
+      | Inherit => "inherit"
+      | Primary => "primary"
+      | Contrast => "contrast"
+      | Accent => "accent"
+      | Error => "error"
+  };
+
 module AppBar = {
   [@bs.module "material-ui/AppBar"] external reactClass : ReasonReact.reactClass = "default";
   let make =
@@ -147,21 +165,6 @@ module ButtonBase = {
 };
 
 module Button = {
-  module Color = {
-    type t =
-      | Default
-      | Inherit
-      | Primary
-      | Contrast
-      | Accent;
-    let to_string =
-      fun
-      | Default => "default"
-      | Inherit => "inherit"
-      | Primary => "primary"
-      | Contrast => "contrast"
-      | Accent => "accent";
-  };
   [@bs.module "material-ui/Button"] external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
@@ -1878,18 +1881,33 @@ module Tooltip = {
 };
 
 module Typography = {
+  module Align = {
+    type t =
+      | Inherit
+      | Left
+      | Center
+      | Right
+      | Justify;
+    let to_string =
+      fun
+      | Inherit => "inherit"
+      | Left => "left"
+      | Center => "center"
+      | Right => "right"
+      | Justify => "justify";
+  };
   [@bs.module "material-ui/Typography"] external typography : ReasonReact.reactClass = "default";
   let make =
       (
-        ~align: option(string)=?,
+        ~align: option(Align.t)=?,
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~component: option(string)=?,
-        ~color: option(string)=?,
-        ~gutterBottom=?,
+        ~color: option(Color.t)=?,
+        ~gutterBottom: option(bool)=?,
         ~headlineMapping: option(Js.t({..}))=?,
-        ~noWrap=?,
-        ~paragraph=?,
+        ~noWrap: option(bool)=?,
+        ~paragraph: option(bool)=?,
         ~_type: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
         children
@@ -1899,11 +1917,11 @@ module Typography = {
       ~props=
         Js.Nullable.(
           {
-            "align": from_opt(align),
+            "align": from_opt(option_map(Align.to_string, align)),
             "classes": from_opt(classes),
             "className": from_opt(className),
             "component": from_opt(component),
-            "color": from_opt(color),
+            "color": from_opt(option_map(Color.to_string, color)),
             "gutterBottom": unwrap_bool(gutterBottom),
             "headlineMapping": from_opt(headlineMapping),
             "noWrap": unwrap_bool(noWrap),
