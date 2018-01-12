@@ -172,21 +172,6 @@ module ButtonBase = {
 };
 
 module Button = {
-  module Color = {
-    type t =
-      | Default
-      | Inherit
-      | Primary
-      | Contrast
-      | Accent;
-    let to_string =
-      fun
-      | Default => "default"
-      | Inherit => "inherit"
-      | Primary => "primary"
-      | Contrast => "contrast"
-      | Accent => "accent";
-  };
   [@bs.module "material-ui/Button"]
   external reactClass : ReasonReact.reactClass = "default";
   let make =
@@ -922,21 +907,6 @@ module Grid = {
 };
 
 module IconButton = {
-  module Color = {
-    type t =
-      | Default
-      | Inherit
-      | Primary
-      | Contrast
-      | Accent;
-    let to_string =
-      fun
-      | Default => "default"
-      | Inherit => "inherit"
-      | Primary => "primary"
-      | Contrast => "contrast"
-      | Accent => "accent";
-  };
   [@bs.module "material-ui/IconButton"]
   external reactClass : ReasonReact.reactClass = "default";
   let make =
@@ -1227,17 +1197,6 @@ module ListItem = {
 };
 
 module ListSubheader = {
-  module Color = {
-    type t =
-      | Default
-      | Inherit
-      | Primary;
-    let to_string =
-      fun
-      | Default => "default"
-      | Inherit => "inherit"
-      | Primary => "primary";
-  };
   [@bs.module "material-ui/List"]
   external reactClass : ReasonReact.reactClass = "ListSubheader";
   let make =
