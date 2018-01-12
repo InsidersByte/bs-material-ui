@@ -34,6 +34,24 @@ let option_map = (fn, option) =>
   | None => None
   };
 
+module Color = {
+  type t =
+    | Default
+    | Inherit
+    | Primary
+    | Contrast
+    | Accent
+    | Error;
+  let to_string =
+    fun
+    | Default => "default"
+    | Inherit => "inherit"
+    | Primary => "primary"
+    | Contrast => "contrast"
+    | Accent => "accent"
+    | Error => "error";
+};
+
 module AppBar = {
   [@bs.module "material-ui/AppBar"]
   external reactClass : ReasonReact.reactClass = "default";
@@ -122,14 +140,15 @@ module ButtonBase = {
   external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
+        ~classes: option(Js.t({..}))=?,
         ~style: option(ReactDOMRe.style)=?,
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~component: option(string)=?,
         ~className: option(string)=?,
-        ~centerRipple=?,
-        ~disableRipple=?,
-        ~focusRipple=?,
-        ~disabled=?,
+        ~centerRipple: option(bool)=?,
+        ~disableRipple: option(bool)=?,
+        ~focusRipple: option(bool)=?,
+        ~disabled: option(bool)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -137,6 +156,7 @@ module ButtonBase = {
       ~props=
         Js.Nullable.(
           {
+            "classes": from_opt(classes),
             "focusRipple": wrap_bool(focusRipple),
             "centerRipple": wrap_bool(centerRipple),
             "disableRipple": wrap_bool(disableRipple),
@@ -152,21 +172,6 @@ module ButtonBase = {
 };
 
 module Button = {
-  module Color = {
-    type t =
-      | Default
-      | Inherit
-      | Primary
-      | Contrast
-      | Accent;
-    let to_string =
-      fun
-      | Default => "default"
-      | Inherit => "inherit"
-      | Primary => "primary"
-      | Contrast => "contrast"
-      | Accent => "accent";
-  };
   [@bs.module "material-ui/Button"]
   external reactClass : ReasonReact.reactClass = "default";
   let make =
@@ -902,21 +907,6 @@ module Grid = {
 };
 
 module IconButton = {
-  module Color = {
-    type t =
-      | Default
-      | Inherit
-      | Primary
-      | Contrast
-      | Accent;
-    let to_string =
-      fun
-      | Default => "default"
-      | Inherit => "inherit"
-      | Primary => "primary"
-      | Contrast => "contrast"
-      | Accent => "accent";
-  };
   [@bs.module "material-ui/IconButton"]
   external reactClass : ReasonReact.reactClass = "default";
   let make =
@@ -1207,17 +1197,6 @@ module ListItem = {
 };
 
 module ListSubheader = {
-  module Color = {
-    type t =
-      | Default
-      | Inherit
-      | Primary;
-    let to_string =
-      fun
-      | Default => "default"
-      | Inherit => "inherit"
-      | Primary => "primary";
-  };
   [@bs.module "material-ui/List"]
   external reactClass : ReasonReact.reactClass = "ListSubheader";
   let make =
@@ -1960,19 +1939,34 @@ module Tooltip = {
 };
 
 module Typography = {
+  module Align = {
+    type t =
+      | Inherit
+      | Left
+      | Center
+      | Right
+      | Justify;
+    let to_string =
+      fun
+      | Inherit => "inherit"
+      | Left => "left"
+      | Center => "center"
+      | Right => "right"
+      | Justify => "justify";
+  };
   [@bs.module "material-ui/Typography"]
   external typography : ReasonReact.reactClass = "default";
   let make =
       (
-        ~align: option(string)=?,
+        ~align: option(Align.t)=?,
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~component: option(string)=?,
-        ~color: option(string)=?,
-        ~gutterBottom=?,
+        ~color: option(Color.t)=?,
+        ~gutterBottom: option(bool)=?,
         ~headlineMapping: option(Js.t({..}))=?,
-        ~noWrap=?,
-        ~paragraph=?,
+        ~noWrap: option(bool)=?,
+        ~paragraph: option(bool)=?,
         ~_type: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
         children
@@ -1982,7 +1976,7 @@ module Typography = {
       ~props=
         Js.Nullable.(
           {
-            "align": from_opt(align),
+            "align": from_opt(option_map(Align.to_string, align)),
             "classes": from_opt(classes),
             "className": from_opt(className),
             "component": from_opt(component),
