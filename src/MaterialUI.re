@@ -122,14 +122,15 @@ module ButtonBase = {
   external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
+        ~classes: option(Js.t({..}))=?,
         ~style: option(ReactDOMRe.style)=?,
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~component: option(string)=?,
         ~className: option(string)=?,
-        ~centerRipple=?,
-        ~disableRipple=?,
-        ~focusRipple=?,
-        ~disabled=?,
+        ~centerRipple: option(bool)=?,
+        ~disableRipple: option(bool)=?,
+        ~focusRipple: option(bool)=?,
+        ~disabled: option(bool)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -137,6 +138,7 @@ module ButtonBase = {
       ~props=
         Js.Nullable.(
           {
+            "classes": from_opt(classes),
             "focusRipple": wrap_bool(focusRipple),
             "centerRipple": wrap_bool(centerRipple),
             "disableRipple": wrap_bool(disableRipple),
