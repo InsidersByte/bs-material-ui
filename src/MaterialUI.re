@@ -1980,7 +1980,7 @@ module Typography = {
             "classes": from_opt(classes),
             "className": from_opt(className),
             "component": from_opt(component),
-            "color": from_opt(color),
+            "color": from_opt(option_map(Color.to_string, color)),
             "gutterBottom": wrap_bool(gutterBottom),
             "headlineMapping": from_opt(headlineMapping),
             "noWrap": wrap_bool(noWrap),
