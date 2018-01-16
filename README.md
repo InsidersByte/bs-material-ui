@@ -45,7 +45,6 @@ let make = (_children) => {
     )
 };
 ```
-
 ## Bindings
 
 - [x] AppBar
@@ -111,7 +110,7 @@ let make = (_children) => {
 - [ ] Snackbar
 - [ ] SvgIcon
 - [ ] Switch
-- [ ] Tab
+- [X] Tab
 - [X] TableBody
 - [X] TableCell
 - [X] TableFooter
@@ -120,8 +119,8 @@ let make = (_children) => {
 - [X] TableRow
 - [ ] TableSortLabel
 - [X] Table
-- [ ] Tabs
-- [ ] TextField
+- [X] Tabs
+- [X] TextField
 - [X] Toolbar
 - [X] Tooltip
 - [X] Typography
