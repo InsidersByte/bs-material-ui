@@ -35,7 +35,8 @@ let option_map = (fn, option) =>
   };
 
 module AppBar = {
-  [@bs.module "material-ui/AppBar"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/AppBar"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~position: option(string)=?,
@@ -62,7 +63,8 @@ module AppBar = {
 };
 
 module Avatar = {
-  [@bs.module "material-ui/Avatar"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Avatar"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~alt: option(string)=?,
@@ -99,7 +101,8 @@ module Avatar = {
 };
 
 module Badge = {
-  [@bs.module "material-ui/Badge"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Badge"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~badgeContent: array(ReasonReact.reactElement),
@@ -108,17 +111,19 @@ module Badge = {
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
-      ~props=Js.Nullable.({"badgeContent": badgeContent, "style": from_opt(style)}),
+      ~props=
+        Js.Nullable.({"badgeContent": badgeContent, "style": from_opt(style)}),
       children
     );
 };
 
 module ButtonBase = {
-  [@bs.module "material-ui/ButtonBase"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/ButtonBase"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~style: option(ReactDOMRe.style)=?,
-        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~component: option(string)=?,
         ~className: option(string)=?,
         ~centerRipple=?,
@@ -162,7 +167,8 @@ module Button = {
       | Contrast => "contrast"
       | Accent => "accent";
   };
-  [@bs.module "material-ui/Button"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Button"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -177,7 +183,7 @@ module Button = {
         ~href: option(string)=?,
         ~raised=?,
         ~_type: option(string)=?,
-        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -205,20 +211,26 @@ module Button = {
 };
 
 module CardActions = {
-  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "CardActions";
-  let make = (~disableActionSpacing=?, ~style: option(ReactDOMRe.style)=?, children) =>
+  [@bs.module "material-ui/Card"]
+  external reactClass : ReasonReact.reactClass = "CardActions";
+  let make =
+      (~disableActionSpacing=?, ~style: option(ReactDOMRe.style)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
         Js.Nullable.(
-          {"disableActionSpacing": unwrap_bool(disableActionSpacing), "style": from_opt(style)}
+          {
+            "disableActionSpacing": unwrap_bool(disableActionSpacing),
+            "style": from_opt(style)
+          }
         ),
       children
     );
 };
 
 module CardContent = {
-  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "CardContent";
+  [@bs.module "material-ui/Card"]
+  external reactClass : ReasonReact.reactClass = "CardContent";
   let make = (~style: option(ReactDOMRe.style)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -228,7 +240,8 @@ module CardContent = {
 };
 
 module CardHeader = {
-  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "CardHeader";
+  [@bs.module "material-ui/Card"]
+  external reactClass : ReasonReact.reactClass = "CardHeader";
   let make =
       (
         ~action: option(ReasonReact.reactElement)=?,
@@ -259,19 +272,28 @@ module CardHeader = {
 };
 
 module CardMedia = {
-  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "CardMedia";
-  let make = (~style: option(ReactDOMRe.style)=?, ~image: option(string)=?, children) =>
+  [@bs.module "material-ui/Card"]
+  external reactClass : ReasonReact.reactClass = "CardMedia";
+  let make =
+      (~style: option(ReactDOMRe.style)=?, ~image: option(string)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
-      ~props=Js.Nullable.({"style": from_opt(style), "image": from_opt(image)}),
+      ~props=
+        Js.Nullable.({"style": from_opt(style), "image": from_opt(image)}),
       children
     );
 };
 
 module Card = {
-  [@bs.module "material-ui/Card"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Card"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
-      (~raised=?, ~style: option(ReactDOMRe.style)=?, ~className: option(string)=?, children) =>
+      (
+        ~raised=?,
+        ~style: option(ReactDOMRe.style)=?,
+        ~className: option(string)=?,
+        children
+      ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
@@ -287,7 +309,8 @@ module Card = {
 };
 
 module Checkbox = {
-  [@bs.module "material-ui/Checkbox"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Checkbox"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       /* technically a union bool|string but why are you passing a string to `checked`? */
       (
@@ -305,7 +328,7 @@ module Checkbox = {
         /* TODO inputProps */
         /* TODO inputRef */
         ~name: option(string)=?,
-        ~onChange: option(((ReactEventRe.Selection.t, Js.boolean) => unit))=?,
+        ~onChange: option((ReactEventRe.Selection.t, Js.boolean) => unit)=?,
         ~value: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
         children
@@ -337,7 +360,8 @@ module Checkbox = {
 };
 
 module Chip = {
-  [@bs.module "material-ui/Chip"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Chip"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~avatar: option(ReasonReact.reactElement)=?,
@@ -345,9 +369,9 @@ module Chip = {
         ~classes: option(Js.t({..}))=?,
         ~deleteIcon: option(ReasonReact.reactElement)=?,
         ~label: option(string),
-        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~onKeyDown: option(ReactEventRe.Keyboard.t)=?,
-        ~onRequestDelete: option((ReactEventRe.Synthetic.t => unit))=?,
+        ~onRequestDelete: option(ReactEventRe.Synthetic.t => unit)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~tabIndex: option([ | `String(string) | `Int(int)])=?,
         children
@@ -374,8 +398,8 @@ module Chip = {
 };
 
 module CircularProgress = {
-  [@bs.module "material-ui/Progress"] external reactClass : ReasonReact.reactClass =
-    "CircularProgress";
+  [@bs.module "material-ui/Progress"]
+  external reactClass : ReasonReact.reactClass = "CircularProgress";
   let make =
       (
         ~style: option(ReactDOMRe.style)=?,
@@ -410,21 +434,30 @@ module CircularProgress = {
 };
 
 module Collapse = {
-  [@bs.module "material-ui/transitions/Collapse"] external reactClass : ReasonReact.reactClass =
-    "default";
-  let make = (~expanded: option(bool)=?, ~transitionDuration: option(string)=?, children) =>
+  [@bs.module "material-ui/transitions/Collapse"]
+  external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~expanded: option(bool)=?,
+        ~transitionDuration: option(string)=?,
+        children
+      ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
         Js.Nullable.(
-          {"in": unwrap_bool(expanded), "transitionDuration": from_opt(transitionDuration)}
+          {
+            "in": unwrap_bool(expanded),
+            "transitionDuration": from_opt(transitionDuration)
+          }
         ),
       children
     );
 };
 
 module DialogActions = {
-  [@bs.module "material-ui/Dialog"] external reactClass : ReasonReact.reactClass = "DialogActions";
+  [@bs.module "material-ui/Dialog"]
+  external reactClass : ReasonReact.reactClass = "DialogActions";
   type dialogActionsClasses = {
     root: option(string),
     action: option(string),
@@ -439,8 +472,8 @@ module DialogActions = {
 };
 
 module DialogContentText = {
-  [@bs.module "material-ui/Dialog"] external reactClass : ReasonReact.reactClass =
-    "DialogContentText";
+  [@bs.module "material-ui/Dialog"]
+  external reactClass : ReasonReact.reactClass = "DialogContentText";
   let make = (~style: option(ReactDOMRe.style)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -450,7 +483,8 @@ module DialogContentText = {
 };
 
 module DialogContent = {
-  [@bs.module "material-ui/Dialog"] external reactClass : ReasonReact.reactClass = "DialogContent";
+  [@bs.module "material-ui/Dialog"]
+  external reactClass : ReasonReact.reactClass = "DialogContent";
   type dialogContentClasses = {root: option(string)};
   let make = (~classes: option(dialogContentClasses)=?, children) =>
     ReasonReact.wrapJsForReason(
@@ -461,14 +495,23 @@ module DialogContent = {
 };
 
 module DialogTitle = {
-  [@bs.module "material-ui/Dialog"] external reactClass : ReasonReact.reactClass = "DialogTitle";
+  [@bs.module "material-ui/Dialog"]
+  external reactClass : ReasonReact.reactClass = "DialogTitle";
   type dialogTitleClasses = {root: option(string)};
-  let make = (~classes: option(dialogTitleClasses)=?, ~disableTypography: option(bool)=?, children) =>
+  let make =
+      (
+        ~classes: option(dialogTitleClasses)=?,
+        ~disableTypography: option(bool)=?,
+        children
+      ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
         Js.Nullable.(
-          {"classes": from_opt(classes), "disableTypography": from_opt(disableTypography)}
+          {
+            "classes": from_opt(classes),
+            "disableTypography": from_opt(disableTypography)
+          }
         ),
       children
     );
@@ -483,7 +526,8 @@ module Dialog = {
     paperWidthMd: option(string),
     fullScreen: option(string)
   };
-  [@bs.module "material-ui/Dialog"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Dialog"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~classes: option(dialogClasses)=?,
@@ -493,15 +537,15 @@ module Dialog = {
         ~ignoreBackdropClick: option(bool)=?,
         ~ignoreEscapeKeyUp: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        ~onBackdropClick: option((unit => unit))=?,
-        ~onEnter: option((unit => unit))=?,
-        ~onEntered: option((unit => unit))=?,
-        ~onEntering: option((unit => unit))=?,
-        ~onEscapeKeyUp: option((unit => unit))=?,
-        ~onExit: option((unit => unit))=?,
-        ~onExited: option((unit => unit))=?,
-        ~onExiting: option((unit => unit))=?,
-        ~onRequestClose: option((unit => unit))=?,
+        ~onBackdropClick: option(unit => unit)=?,
+        ~onEnter: option(unit => unit)=?,
+        ~onEntered: option(unit => unit)=?,
+        ~onEntering: option(unit => unit)=?,
+        ~onEscapeKeyUp: option(unit => unit)=?,
+        ~onExit: option(unit => unit)=?,
+        ~onExited: option(unit => unit)=?,
+        ~onExiting: option(unit => unit)=?,
+        ~onRequestClose: option(unit => unit)=?,
         ~openDialog: option(bool)=?,
         children
       ) =>
@@ -534,7 +578,8 @@ module Dialog = {
 };
 
 module Divider = {
-  [@bs.module "material-ui/Divider"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Divider"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~inset: option(bool)=?,
@@ -583,7 +628,8 @@ module Drawer = {
       | Persistent => "persistent"
       | Temporary => "temporary";
   };
-  [@bs.module "material-ui/Drawer"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Drawer"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~anchor: option(Anchor.t)=?,
@@ -592,7 +638,7 @@ module Drawer = {
         ~elevation: option(int)=?,
         ~transitionDuration: option(Js.t({..}))=?,
         ~modalProps: option(Js.t({..}))=?,
-        ~onRequestClose: option((unit => unit))=?,
+        ~onRequestClose: option(unit => unit)=?,
         ~_open: option(bool)=?,
         ~slideProps: option(Js.t({..}))=?,
         ~_type: option(Type.t)=?,
@@ -634,7 +680,8 @@ module Margin = {
 };
 
 module FormControl = {
-  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormControl";
+  [@bs.module "material-ui/Form"]
+  external reactClass : ReasonReact.reactClass = "FormControl";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -643,8 +690,8 @@ module FormControl = {
         ~disabled: option(bool)=?,
         ~error: option(bool)=?,
         ~fullWidth: option(bool)=?,
-        ~onBlur: option((ReactEventRe.Focus.t => unit))=?,
-        ~onFocus: option((ReactEventRe.Focus.t => unit))=?,
+        ~onBlur: option(ReactEventRe.Focus.t => unit)=?,
+        ~onFocus: option(ReactEventRe.Focus.t => unit)=?,
         ~required: option(bool)=?,
         ~margin: option(Margin.t)=?,
         ~style: option(ReactDOMRe.style)=?,
@@ -673,8 +720,8 @@ module FormControl = {
 };
 
 module FormControlLabel = {
-  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass =
-    "FormControlLabel";
+  [@bs.module "material-ui/Form"]
+  external reactClass : ReasonReact.reactClass = "FormControlLabel";
   let make =
       /* technically a union bool|string but why are you passing a string to `checked`? */
       (
@@ -688,7 +735,7 @@ module FormControlLabel = {
         /* TODO: is actually a Node */
         ~label: option(string)=?,
         ~name: option(string)=?,
-        ~onChange: option((ReactEventRe.Selection.t => unit))=?,
+        ~onChange: option(ReactEventRe.Selection.t => unit)=?,
         ~value: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
         children
@@ -716,7 +763,8 @@ module FormControlLabel = {
 };
 
 module FormGroup = {
-  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormGroup";
+  [@bs.module "material-ui/Form"]
+  external reactClass : ReasonReact.reactClass = "FormGroup";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -741,7 +789,8 @@ module FormGroup = {
 };
 
 module FormHelperText = {
-  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormHelperText";
+  [@bs.module "material-ui/Form"]
+  external reactClass : ReasonReact.reactClass = "FormHelperText";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -770,7 +819,8 @@ module FormHelperText = {
 };
 
 module FormLabel = {
-  [@bs.module "material-ui/Form"] external reactClass : ReasonReact.reactClass = "FormLabel";
+  [@bs.module "material-ui/Form"]
+  external reactClass : ReasonReact.reactClass = "FormLabel";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -803,7 +853,8 @@ module FormLabel = {
 };
 
 module Grid = {
-  [@bs.module "material-ui/Grid"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Grid"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~align: option(string)=?,
@@ -866,7 +917,8 @@ module IconButton = {
       | Contrast => "contrast"
       | Accent => "accent";
   };
-  [@bs.module "material-ui/IconButton"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/IconButton"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -875,7 +927,7 @@ module IconButton = {
         ~disabled: option(bool)=?,
         ~disableRipple: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -897,7 +949,8 @@ module IconButton = {
 };
 
 module InputLabel = {
-  [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "InputLabel";
+  [@bs.module "material-ui/Input"]
+  external reactClass : ReasonReact.reactClass = "InputLabel";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -938,7 +991,8 @@ module InputLabel = {
 };
 
 module Input = {
-  [@bs.module "material-ui/Input"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Input"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~disableUnderline: option(bool)=?,
@@ -949,7 +1003,7 @@ module Input = {
         ~fullWidth: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~value: option(string)=?,
-        ~onChange: option((ReactEventRe.Form.t => unit))=?,
+        ~onChange: option(ReactEventRe.Form.t => unit)=?,
         ~placeholder: option(string)=?,
         ~className: option(string)=?,
         ~inputType: option(string)=?,
@@ -979,8 +1033,8 @@ module Input = {
 };
 
 module LinearProgress = {
-  [@bs.module "material-ui/Progress"] external reactClass : ReasonReact.reactClass =
-    "LinearProgress";
+  [@bs.module "material-ui/Progress"]
+  external reactClass : ReasonReact.reactClass = "LinearProgress";
   let make =
       (
         ~style: option(ReactDOMRe.style)=?,
@@ -1009,7 +1063,8 @@ module LinearProgress = {
 };
 
 module ListItemAvatar = {
-  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemAvatar";
+  [@bs.module "material-ui/List"]
+  external reactClass : ReasonReact.reactClass = "ListItemAvatar";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1032,7 +1087,8 @@ module ListItemAvatar = {
 };
 
 module ListItemIcon = {
-  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemIcon";
+  [@bs.module "material-ui/List"]
+  external reactClass : ReasonReact.reactClass = "ListItemIcon";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1055,8 +1111,8 @@ module ListItemIcon = {
 };
 
 module ListItemSecondaryAction = {
-  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass =
-    "ListItemSecondaryAction";
+  [@bs.module "material-ui/List"]
+  external reactClass : ReasonReact.reactClass = "ListItemSecondaryAction";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1079,7 +1135,8 @@ module ListItemSecondaryAction = {
 };
 
 module ListItemText = {
-  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItemText";
+  [@bs.module "material-ui/List"]
+  external reactClass : ReasonReact.reactClass = "ListItemText";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1110,7 +1167,8 @@ module ListItemText = {
 };
 
 module ListItem = {
-  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListItem";
+  [@bs.module "material-ui/List"]
+  external reactClass : ReasonReact.reactClass = "ListItem";
   let make =
       (
         ~button: option(bool)=?,
@@ -1122,7 +1180,7 @@ module ListItem = {
         ~disableGutters: option(bool)=?,
         ~divider: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~href: option(string)=?,
         children
       ) =>
@@ -1160,7 +1218,8 @@ module ListSubheader = {
       | Inherit => "inherit"
       | Primary => "primary";
   };
-  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "ListSubheader";
+  [@bs.module "material-ui/List"]
+  external reactClass : ReasonReact.reactClass = "ListSubheader";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1189,7 +1248,8 @@ module ListSubheader = {
 };
 
 module List = {
-  [@bs.module "material-ui/List"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/List"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1220,7 +1280,8 @@ module List = {
 };
 
 module MenuItem = {
-  [@bs.module "material-ui/Menu"] external reactClass : ReasonReact.reactClass = "MenuItem";
+  [@bs.module "material-ui/Menu"]
+  external reactClass : ReasonReact.reactClass = "MenuItem";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1228,7 +1289,7 @@ module MenuItem = {
         ~component: option(string)=?,
         ~role: option(string)=?,
         ~selected: option(bool)=?,
-        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~value: option([ | `String(string) | `Int(int)])=?,
         children
@@ -1253,7 +1314,8 @@ module MenuItem = {
 };
 
 module Paper = {
-  [@bs.module "material-ui/Paper"] external toolbar : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Paper"]
+  external toolbar : ReasonReact.reactClass = "default";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1282,7 +1344,8 @@ module Paper = {
 };
 
 module Select = {
-  [@bs.module "material-ui/Select"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Select"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~autoWidth: option(bool)=?,
@@ -1296,7 +1359,12 @@ module Select = {
         ~menuProps: option(Js.t({..}))=?,
         ~value:
            option(
-             [ | `Int(int) | `IntArray(array(int)) | `String(string) | `StringArray(array(string))]
+             [
+               | `Int(int)
+               | `IntArray(array(int))
+               | `String(string)
+               | `StringArray(array(string))
+             ]
            )=?,
         ~style: option(ReactDOMRe.style)=?,
         /* Input Props*/
@@ -1305,7 +1373,7 @@ module Select = {
         ~error: option(bool)=?,
         ~autoFocus: option(bool)=?,
         ~fullWidth: option(bool)=?,
-        ~onChange: option((ReactEventRe.Form.t => unit))=?,
+        ~onChange: option(ReactEventRe.Form.t => unit)=?,
         ~placeholder: option(string)=?,
         ~inputType: option(string)=?,
         children
@@ -1342,7 +1410,8 @@ module Select = {
 };
 
 module TableBody = {
-  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableBody";
+  [@bs.module "material-ui/Table"]
+  external toolbar : ReasonReact.reactClass = "TableBody";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1380,7 +1449,8 @@ module TableCell = {
       | Dense => "dense"
       | None => "none";
   };
-  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableCell";
+  [@bs.module "material-ui/Table"]
+  external toolbar : ReasonReact.reactClass = "TableCell";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1409,7 +1479,8 @@ module TableCell = {
 };
 
 module TableFooter = {
-  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableFooter";
+  [@bs.module "material-ui/Table"]
+  external toolbar : ReasonReact.reactClass = "TableFooter";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1434,7 +1505,8 @@ module TableFooter = {
 };
 
 module TableHead = {
-  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableHead";
+  [@bs.module "material-ui/Table"]
+  external toolbar : ReasonReact.reactClass = "TableHead";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1459,7 +1531,8 @@ module TableHead = {
 };
 
 module TableRow = {
-  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "TableRow";
+  [@bs.module "material-ui/Table"]
+  external toolbar : ReasonReact.reactClass = "TableRow";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1468,8 +1541,8 @@ module TableRow = {
         ~hover: option(bool)=?,
         ~selected: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        ~onClick: option((ReactEventRe.Mouse.t => unit))=?,
-        ~onDoubleClick: option((ReactEventRe.Mouse.t => unit))=?,
+        ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
+        ~onDoubleClick: option(ReactEventRe.Mouse.t => unit)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -1492,7 +1565,8 @@ module TableRow = {
 };
 
 module Table = {
-  [@bs.module "material-ui/Table"] external toolbar : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Table"]
+  external toolbar : ReasonReact.reactClass = "default";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1517,7 +1591,8 @@ module Table = {
 };
 
 module TextField = {
-  [@bs.module "material-ui/TextField"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/TextField"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
         ~autoComplete: option(string)=?,
@@ -1545,7 +1620,7 @@ module TextField = {
         ~labelClassName: option(string)=?,
         ~multiline: option(bool)=?,
         ~name: option(string)=?,
-        ~onChange: option((ReactEventRe.Form.t => unit))=?,
+        ~onChange: option(ReactEventRe.Form.t => unit)=?,
         ~placeholder: option(string)=?,
         ~required: option(bool)=?,
         /* TODO: change type to match ref callback (see https://reasonml.github.io/reason-react/docs/en/react-ref.html) */
@@ -1605,7 +1680,8 @@ module TextField = {
 };
 
 module Toolbar = {
-  [@bs.module "material-ui/Toolbar"] external toolbar : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Toolbar"]
+  external toolbar : ReasonReact.reactClass = "default";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1659,7 +1735,8 @@ module Tooltip = {
       | TopStart => "top-start"
       | Top => "top";
   };
-  [@bs.module "material-ui/Tooltip"] external toolbar : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Tooltip"]
+  external toolbar : ReasonReact.reactClass = "default";
   let make =
       (
         ~classes: option(Js.t({..}))=?,
@@ -1668,8 +1745,8 @@ module Tooltip = {
         ~disableTriggerHover: option(bool)=?,
         ~disableTriggerTouch: option(bool)=?,
         ~id: option(string)=?,
-        ~onRequestClose: option((unit => unit))=?,
-        ~onRequestOpen: option((unit => unit))=?,
+        ~onRequestClose: option(unit => unit)=?,
+        ~onRequestOpen: option(unit => unit)=?,
         ~_open: option(bool)=?,
         /* TODO: is actually a Node */
         ~title: option(string)=?,
@@ -1707,7 +1784,8 @@ module Tooltip = {
 };
 
 module Typography = {
-  [@bs.module "material-ui/Typography"] external typography : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Typography"]
+  external typography : ReasonReact.reactClass = "default";
   let make =
       (
         ~align: option(string)=?,
