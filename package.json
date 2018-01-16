@@ -14,9 +14,6 @@
     "type": "git",
     "url": "git+https://github.com/InsidersByte/bs-material-ui.git"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
   "bugs": {
     "url": "https://github.com/InsidersByte/bs-material-ui/issues"
   },
