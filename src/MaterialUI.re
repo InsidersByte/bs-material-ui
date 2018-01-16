@@ -294,7 +294,7 @@ module Card = {
   external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
-        ~raised=?,
+        ~raised: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~className: option(string)=?,
         children
