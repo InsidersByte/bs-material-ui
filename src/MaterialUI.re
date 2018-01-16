@@ -176,17 +176,20 @@ module Button = {
   external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
+        ~style: option(ReactDOMRe.style)=?,
+        ~centerRipple: option(bool)=?,
+        ~focusRipple: option(bool)=?,
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~color: option(Color.t)=?,
         ~component: option(string)=?,
-        ~dense=?,
-        ~disabled=?,
-        ~disableFocusRipple=?,
-        ~disableRipple=?,
-        ~fab=?,
+        ~dense: option(bool)=?,
+        ~disabled: option(bool)=?,
+        ~disableFocusRipple: option(bool)=?,
+        ~disableRipple: option(bool)=?,
+        ~fab: option(bool)=?,
         ~href: option(string)=?,
-        ~raised=?,
+        ~raised: option(bool)=?,
         ~_type: option(string)=?,
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         children
@@ -208,7 +211,10 @@ module Button = {
             "href": from_opt(href),
             "raised": wrap_bool(raised),
             "type": from_opt(_type),
-            "onClick": from_opt(onClick)
+            "onClick": from_opt(onClick),
+            "style": from_opt(style),
+            "centerRipple": wrap_bool(centerRipple),
+            "focusRipple": wrap_bool(focusRipple)
           }
         ),
       children
