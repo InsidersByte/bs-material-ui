@@ -122,14 +122,15 @@ module ButtonBase = {
   external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
+        ~classes: option(Js.t({..}))=?,
         ~style: option(ReactDOMRe.style)=?,
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~component: option(string)=?,
         ~className: option(string)=?,
-        ~centerRipple=?,
-        ~disableRipple=?,
-        ~focusRipple=?,
-        ~disabled=?,
+        ~centerRipple: option(bool)=?,
+        ~disableRipple: option(bool)=?,
+        ~focusRipple: option(bool)=?,
+        ~disabled: option(bool)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -137,6 +138,7 @@ module ButtonBase = {
       ~props=
         Js.Nullable.(
           {
+            "classes": from_opt(classes),
             "focusRipple": unwrap_bool(focusRipple),
             "centerRipple": unwrap_bool(centerRipple),
             "disableRipple": unwrap_bool(disableRipple),
@@ -171,17 +173,20 @@ module Button = {
   external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
+        ~style: option(ReactDOMRe.style)=?,
+        ~centerRipple: option(bool)=?,
+        ~focusRipple: option(bool)=?,
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~color: option(Color.t)=?,
         ~component: option(string)=?,
-        ~dense=?,
-        ~disabled=?,
-        ~disableFocusRipple=?,
-        ~disableRipple=?,
-        ~fab=?,
+        ~dense: option(bool)=?,
+        ~disabled: option(bool)=?,
+        ~disableFocusRipple: option(bool)=?,
+        ~disableRipple: option(bool)=?,
+        ~fab: option(bool)=?,
         ~href: option(string)=?,
-        ~raised=?,
+        ~raised: option(bool)=?,
         ~_type: option(string)=?,
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         children
@@ -203,7 +208,10 @@ module Button = {
             "href": from_opt(href),
             "raised": unwrap_bool(raised),
             "type": from_opt(_type),
-            "onClick": from_opt(onClick)
+            "onClick": from_opt(onClick),
+            "style": from_opt(style),
+            "centerRipple": unwrap_bool(centerRipple),
+            "focusRipple": unwrap_bool(focusRipple)
           }
         ),
       children
@@ -289,7 +297,7 @@ module Card = {
   external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
-        ~raised=?,
+        ~raised: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~className: option(string)=?,
         children
@@ -1409,6 +1417,180 @@ module Select = {
     );
 };
 
+module Tab = {
+  module TextColor = {
+    type t =
+      | Accent
+      | Primary
+      | Inherit;
+    let to_string =
+      fun
+      | Accent => "accent"
+      | Primary => "primary"
+      | Inherit => "inherit";
+  };
+  [@bs.module "material-ui/Tabs"]
+  external reactClass : ReasonReact.reactClass = "Tab";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~disabled: option(bool)=?,
+        ~fullWidth: option(bool)=?,
+        ~icon: option(ReasonReact.reactElement)=?,
+        ~indicator: option(ReasonReact.reactElement)=?,
+        ~label: option(ReasonReact.reactElement)=?,
+        ~onChange: option(ReasonReact.Callback.t(ReactEventRe.Synthetic.t))=?,
+        ~onClick: option(ReasonReact.Callback.t(ReactEventRe.Synthetic.t))=?,
+        ~selected: option(bool)=?,
+        ~textColor: option(TextColor.t)=?,
+        ~value: 'a=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "disabled": unwrap_bool(disabled),
+            "fullWidth": unwrap_bool(fullWidth),
+            "icon": from_opt(icon),
+            "indicator": from_opt(indicator),
+            "label": from_opt(label),
+            "onChange": from_opt(onChange),
+            "onClick": from_opt(onClick),
+            "selected": unwrap_bool(selected),
+            "textColor": from_opt(option_map(TextColor.to_string, textColor)),
+            "value": from_opt(value),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module TabScrollButton = {
+  module Direction = {
+    type t =
+      | Left
+      | Right;
+    let to_string =
+      fun
+      | Left => "left"
+      | Right => "right";
+  };
+  [@bs.module "material-ui/Tabs"]
+  external reactClass : ReasonReact.reactClass = "TabScrollButton";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~direction: option(Direction.t)=?,
+        ~onClick: option(ReasonReact.Callback.t(ReactEventRe.Mouse.t))=?,
+        ~visible: option(bool)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "direction": from_opt(option_map(Direction.to_string, direction)),
+            "onClick": from_opt(onClick),
+            "visible": unwrap_bool(visible),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module Tabs = {
+  module IndicatorColor = {
+    type t =
+      | Accent
+      | Primary;
+    let to_string =
+      fun
+      | Accent => "accent"
+      | Primary => "primary";
+  };
+  module ScrollButtons = {
+    type t =
+      | Auto
+      | On
+      | Off;
+    let to_string =
+      fun
+      | Auto => "auto"
+      | On => "on"
+      | Off => "off";
+  };
+  module TextColor = {
+    type t =
+      | Accent
+      | Primary
+      | Inherit;
+    let to_string =
+      fun
+      | Accent => "accent"
+      | Primary => "primary"
+      | Inherit => "inherit";
+  };
+  [@bs.module "material-ui/Tabs"]
+  external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~buttonClassName: option(string)=?,
+        ~centered: option(bool)=?,
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~fullWidth: option(bool)=?,
+        ~indicatorClassName: option(string)=?,
+        /* TODO:  Allow for string as well */
+        ~indicatorColor: option(IndicatorColor.t)=?,
+        ~onChange: option((ReactEventRe.Synthetic.t, int) => unit)=?,
+        ~scrollable: option(bool)=?,
+        ~scrollButtons: option(ScrollButtons.t)=?,
+        ~_TabScrollButton: option(ReasonReact.reactElement)=?,
+        ~textColor: option(TextColor.t)=?,
+        ~value: 'a=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "buttonClassName": from_opt(buttonClassName),
+            "centered": unwrap_bool(centered),
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "fullWidth": unwrap_bool(fullWidth),
+            "indicatorClassName": from_opt(indicatorClassName),
+            "indicatorColor":
+              from_opt(option_map(IndicatorColor.to_string, indicatorColor)),
+            "onChange": from_opt(onChange),
+            "scrollable": unwrap_bool(scrollable),
+            "scrollButtons":
+              from_opt(option_map(ScrollButtons.to_string, scrollButtons)),
+            "TabScrollButton": from_opt(_TabScrollButton),
+            "textColor": from_opt(option_map(TextColor.to_string, textColor)),
+            "value": from_opt(value),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
 module TableBody = {
   [@bs.module "material-ui/Table"]
   external toolbar : ReasonReact.reactClass = "TableBody";
@@ -1784,19 +1966,51 @@ module Tooltip = {
 };
 
 module Typography = {
+  module Color = {
+    type t =
+      | Default
+      | Inherit
+      | Primary
+      | Contrast
+      | Accent
+      | Error;
+    let to_string =
+      fun
+      | Default => "default"
+      | Inherit => "inherit"
+      | Primary => "primary"
+      | Contrast => "contrast"
+      | Accent => "accent"
+      | Error => "error";
+  };
+  module Align = {
+    type t =
+      | Inherit
+      | Left
+      | Center
+      | Right
+      | Justify;
+    let to_string =
+      fun
+      | Inherit => "inherit"
+      | Left => "left"
+      | Center => "center"
+      | Right => "right"
+      | Justify => "justify";
+  };
   [@bs.module "material-ui/Typography"]
   external typography : ReasonReact.reactClass = "default";
   let make =
       (
-        ~align: option(string)=?,
+        ~align: option(Align.t)=?,
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~component: option(string)=?,
-        ~color: option(string)=?,
-        ~gutterBottom=?,
+        ~color: option(Color.t)=?,
+        ~gutterBottom: option(bool)=?,
         ~headlineMapping: option(Js.t({..}))=?,
-        ~noWrap=?,
-        ~paragraph=?,
+        ~noWrap: option(bool)=?,
+        ~paragraph: option(bool)=?,
         ~_type: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
         children
@@ -1806,11 +2020,11 @@ module Typography = {
       ~props=
         Js.Nullable.(
           {
-            "align": from_opt(align),
+            "align": from_opt(option_map(Align.to_string, align)),
             "classes": from_opt(classes),
             "className": from_opt(className),
             "component": from_opt(component),
-            "color": from_opt(color),
+            "color": from_opt(option_map(Color.to_string, color)),
             "gutterBottom": unwrap_bool(gutterBottom),
             "headlineMapping": from_opt(headlineMapping),
             "noWrap": unwrap_bool(noWrap),
