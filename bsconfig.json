@@ -1,5 +1,5 @@
 {
-  "name": "bs-material-ui-plus",
+  "name": "bs-material-ui",
   "bsc-flags": ["-bs-super-errors"],
   "sources": ["src"],
   "bs-dependencies": ["reason-react"],

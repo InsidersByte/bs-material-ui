@@ -1,11 +1,8 @@
 # Reason bindings for Material-UI
 
-[![npm](https://img.shields.io/npm/v/@bernalrs/bs-material-ui-plus.svg)](https://www.npmjs.com/package/bs-material-ui-plus)  
+[![npm](https://img.shields.io/npm/v/bs-material-ui.svg)](https://www.npmjs.com/package/bs-material-ui)  
 
 [Reason](https://reasonml.github.io/) bindings for [material-ui](https://github.com/callemall/material-ui).
-
-Warning this is a fork, will probably end up merged into bs-material-ui:
-[InsidersByte/bs-material-ui](https://github.com/InsidersByte/bs-material-ui)
 
 ## Status
 
@@ -16,16 +13,16 @@ Feel free to create an issue or PR if you find anything missing.
 ## Installation
 
 ```
-yarn add bs-material-ui-plus
-yarn add material-ui@next
+yarn add bs-material-ui
+yarn add material-ui@1.0.0-beta.19
 ```
 
-Then add `bs-material-ui-plus` to `bs-dev-dependencies` in your `bsconfig.json`:
+Then add `bs-material-ui` to `bs-dev-dependencies` in your `bsconfig.json`:
 
 ```json
 {
   ...
-  "bs-dev-dependencies": ["bs-material-ui-plus"]
+  "bs-dev-dependencies": ["bs-material-ui"]
 }
 ```
 
@@ -47,7 +44,6 @@ let make = (_children) => {
       </AppBar>
     )
 };
-```
 
 ## Bindings
 
