@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/InsidersByte/bs-material-ui/issues"
   },
-  "homepage": "https://github.com/InsidesrByte/bs-material-ui#readme",
+  "homepage": "https://github.com/InsidersByte/bs-material-ui#readme",
   "scripts": {
     "precommit": "lint-staged",
     "build": "bsb -make-world",
