@@ -44,7 +44,7 @@ let make = (_children) => {
       </AppBar>
     )
 };
-
+```
 ## Bindings
 
 - [x] AppBar
