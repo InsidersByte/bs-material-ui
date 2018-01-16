@@ -1444,7 +1444,7 @@ module Tab = {
         ~onClick: option(ReasonReact.Callback.t(ReactEventRe.Synthetic.t))=?,
         ~selected: option(bool)=?,
         ~textColor: option(TextColor.t)=?,
-        ~value: option('a)=?,
+        ~value: 'a=?,
         ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
