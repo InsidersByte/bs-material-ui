@@ -22,7 +22,7 @@ let unwrapValue =
   | `FloatArray(a) => toJsUnsafe(a)
   };
 
-let wrap_bool = (b: option(bool)) =>
+let unwrap_bool = (b: option(bool)) =>
   switch b {
   | Some(value) => Js.Nullable.return(Js.Boolean.to_js_boolean(value))
   | None => Js.Nullable.undefined
@@ -157,10 +157,10 @@ module ButtonBase = {
         Js.Nullable.(
           {
             "classes": from_opt(classes),
-            "focusRipple": wrap_bool(focusRipple),
-            "centerRipple": wrap_bool(centerRipple),
-            "disableRipple": wrap_bool(disableRipple),
-            "disabled": wrap_bool(disabled),
+            "focusRipple": unwrap_bool(focusRipple),
+            "centerRipple": unwrap_bool(centerRipple),
+            "disableRipple": unwrap_bool(disableRipple),
+            "disabled": unwrap_bool(disabled),
             "onClick": from_opt(onClick),
             "component": from_opt(component),
             "className": from_opt(className),
@@ -203,18 +203,18 @@ module Button = {
             "className": from_opt(className),
             "color": from_opt(option_map(Color.to_string, color)),
             "component": from_opt(component),
-            "dense": wrap_bool(dense),
-            "disabled": wrap_bool(disabled),
-            "disableFocusRipple": wrap_bool(disableFocusRipple),
-            "disableRipple": wrap_bool(disableRipple),
-            "fab": wrap_bool(fab),
+            "dense": unwrap_bool(dense),
+            "disabled": unwrap_bool(disabled),
+            "disableFocusRipple": unwrap_bool(disableFocusRipple),
+            "disableRipple": unwrap_bool(disableRipple),
+            "fab": unwrap_bool(fab),
             "href": from_opt(href),
-            "raised": wrap_bool(raised),
+            "raised": unwrap_bool(raised),
             "type": from_opt(_type),
             "onClick": from_opt(onClick),
             "style": from_opt(style),
-            "centerRipple": wrap_bool(centerRipple),
-            "focusRipple": wrap_bool(focusRipple)
+            "centerRipple": unwrap_bool(centerRipple),
+            "focusRipple": unwrap_bool(focusRipple)
           }
         ),
       children
@@ -231,7 +231,7 @@ module CardActions = {
       ~props=
         Js.Nullable.(
           {
-            "disableActionSpacing": wrap_bool(disableActionSpacing),
+            "disableActionSpacing": unwrap_bool(disableActionSpacing),
             "style": from_opt(style)
           }
         ),
@@ -310,7 +310,7 @@ module Card = {
       ~props=
         Js.Nullable.(
           {
-            "raised": wrap_bool(raised),
+            "raised": unwrap_bool(raised),
             "style": from_opt(style),
             "className": from_opt(className)
           }
@@ -351,14 +351,14 @@ module Checkbox = {
           {
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "checked": wrap_bool(checked),
+            "checked": unwrap_bool(checked),
             "checkedClassName": from_opt(checkedClassName),
             "checkedIcon": from_opt(checkedIcon),
-            "disableRipple": wrap_bool(disableRipple),
-            "disabled": wrap_bool(disabled),
+            "disableRipple": unwrap_bool(disableRipple),
+            "disabled": unwrap_bool(disabled),
             "disabledClassName": from_opt(disabledClassName),
             "icon": from_opt(icon),
-            "indeterminate": wrap_bool(indeterminate),
+            "indeterminate": unwrap_bool(indeterminate),
             "indeterminateIcon": from_opt(indeterminateIcon),
             "name": from_opt(name),
             "onChange": from_opt(onChange),
@@ -458,7 +458,7 @@ module Collapse = {
       ~props=
         Js.Nullable.(
           {
-            "in": wrap_bool(expanded),
+            "in": unwrap_bool(expanded),
             "transitionDuration": from_opt(transitionDuration)
           }
         ),
@@ -604,9 +604,9 @@ module Divider = {
       ~props=
         Js.Nullable.(
           {
-            "light": wrap_bool(light),
-            "inset": wrap_bool(inset),
-            "absolute": wrap_bool(absolute),
+            "light": unwrap_bool(light),
+            "inset": unwrap_bool(inset),
+            "absolute": unwrap_bool(absolute),
             "className": from_opt(className)
           }
         ),
@@ -668,7 +668,7 @@ module Drawer = {
             "transitionDuration": from_opt(transitionDuration),
             "ModalProps": from_opt(modalProps),
             "onRequestClose": from_opt(onRequestClose),
-            "open": wrap_bool(_open),
+            "open": unwrap_bool(_open),
             "SlideProps": from_opt(slideProps),
             "type": from_opt(option_map(Type.to_string, _type)),
             "style": from_opt(style)
@@ -716,12 +716,12 @@ module FormControl = {
             "classes": from_opt(classes),
             "className": from_opt(className),
             "component": from_opt(component),
-            "disabled": wrap_bool(disabled),
-            "error": wrap_bool(error),
-            "fullWidth": wrap_bool(fullWidth),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "fullWidth": unwrap_bool(fullWidth),
             "onBlur": from_opt(onBlur),
             "onFocus": from_opt(onFocus),
-            "required": wrap_bool(required),
+            "required": unwrap_bool(required),
             "margin": from_opt(option_map(Margin.to_string, margin)),
             "style": from_opt(style)
           }
@@ -760,7 +760,7 @@ module FormControlLabel = {
             "classes": from_opt(classes),
             "className": from_opt(className),
             "control": from_opt(control),
-            "disabled": wrap_bool(disabled),
+            "disabled": unwrap_bool(disabled),
             "inputRef": from_opt(inputRef),
             "label": from_opt(label),
             "name": from_opt(name),
@@ -791,7 +791,7 @@ module FormGroup = {
           {
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "row": wrap_bool(row),
+            "row": unwrap_bool(row),
             "style": from_opt(style)
           }
         ),
@@ -819,8 +819,8 @@ module FormHelperText = {
           {
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "disabled": wrap_bool(disabled),
-            "error": wrap_bool(error),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
             "margin": from_opt(option_map(Margin.to_string, margin)),
             "style": from_opt(style)
           }
@@ -852,10 +852,10 @@ module FormLabel = {
             "classes": from_opt(classes),
             "className": from_opt(className),
             "component": from_opt(component),
-            "disabled": wrap_bool(disabled),
-            "error": wrap_bool(error),
-            "focused": wrap_bool(focused),
-            "required": wrap_bool(required),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "focused": unwrap_bool(focused),
+            "required": unwrap_bool(required),
             "style": from_opt(style)
           }
         ),
@@ -890,8 +890,8 @@ module Grid = {
       ~props=
         Js.Nullable.(
           {
-            "container": wrap_bool(container),
-            "item": wrap_bool(item),
+            "container": unwrap_bool(container),
+            "item": unwrap_bool(item),
             "style": from_opt(style),
             "className": from_opt(className),
             "align": from_opt(align),
@@ -934,8 +934,8 @@ module IconButton = {
             "classes": from_opt(classes),
             "className": from_opt(className),
             "color": from_opt(option_map(Color.to_string, color)),
-            "disableRipple": wrap_bool(disableRipple),
-            "disabled": wrap_bool(disabled),
+            "disableRipple": unwrap_bool(disableRipple),
+            "disabled": unwrap_bool(disabled),
             "style": from_opt(style),
             "onClick": from_opt(onClick)
           }
@@ -970,15 +970,15 @@ module InputLabel = {
           {
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "disableAnimation": wrap_bool(disableAnimation),
-            "disabled": wrap_bool(disabled),
-            "error": wrap_bool(error),
+            "disableAnimation": unwrap_bool(disableAnimation),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
             "FormControlClasses": from_opt(_FormControlClasses),
-            "focused": wrap_bool(focused),
+            "focused": unwrap_bool(focused),
             "htmlFor": from_opt(htmlFor),
             "margin": from_opt(option_map(Margin.to_string, margin)),
-            "required": wrap_bool(required),
-            "shrink": wrap_bool(shrink),
+            "required": unwrap_bool(required),
+            "shrink": unwrap_bool(shrink),
             "style": from_opt(style)
           }
         ),
@@ -1010,12 +1010,12 @@ module Input = {
       ~props=
         Js.Nullable.(
           {
-            "disableUnderline": wrap_bool(disableUnderline),
-            "disabled": wrap_bool(disabled),
-            "error": wrap_bool(error),
+            "disableUnderline": unwrap_bool(disableUnderline),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
             "id": from_opt(id),
-            "fullWidth": wrap_bool(fullWidth),
-            "autoFocus": wrap_bool(autoFocus),
+            "fullWidth": unwrap_bool(fullWidth),
+            "autoFocus": unwrap_bool(autoFocus),
             "style": from_opt(style),
             "placeholder": from_opt(placeholder),
             "className": from_opt(className),
@@ -1151,8 +1151,8 @@ module ListItemText = {
           {
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "disableTypography": wrap_bool(disableTypography),
-            "inset": wrap_bool(inset),
+            "disableTypography": unwrap_bool(disableTypography),
+            "inset": unwrap_bool(inset),
             "primary": from_opt(primary),
             "secondary": from_opt(secondary),
             "style": from_opt(style)
@@ -1185,14 +1185,14 @@ module ListItem = {
       ~props=
         Js.Nullable.(
           {
-            "button": wrap_bool(button),
+            "button": unwrap_bool(button),
             "classes": from_opt(classes),
             "className": from_opt(className),
             "component": from_opt(component),
-            "dense": wrap_bool(dense),
-            "disabled": wrap_bool(disabled),
-            "disableGutters": wrap_bool(disableGutters),
-            "divider": wrap_bool(divider),
+            "dense": unwrap_bool(dense),
+            "disabled": unwrap_bool(disabled),
+            "disableGutters": unwrap_bool(disableGutters),
+            "divider": unwrap_bool(divider),
             "style": from_opt(style),
             "onClick": from_opt(onClick),
             "href": from_opt(href)
@@ -1223,8 +1223,8 @@ module ListSubheader = {
             "classes": from_opt(classes),
             "className": from_opt(className),
             "color": from_opt(option_map(Color.to_string, color)),
-            "disableSticky": wrap_bool(disableSticky),
-            "inset": wrap_bool(inset),
+            "disableSticky": unwrap_bool(disableSticky),
+            "inset": unwrap_bool(inset),
             "style": from_opt(style)
           }
         ),
@@ -1254,8 +1254,8 @@ module List = {
             "classes": from_opt(classes),
             "className": from_opt(className),
             "component": from_opt(component),
-            "dense": wrap_bool(dense),
-            "disablePadding": wrap_bool(disablePadding),
+            "dense": unwrap_bool(dense),
+            "disablePadding": unwrap_bool(disablePadding),
             "subheader": from_opt(subheader),
             "style": from_opt(style)
           }
@@ -1288,7 +1288,7 @@ module MenuItem = {
             "className": from_opt(className),
             "component": from_opt(component),
             "role": from_opt(role),
-            "selected": wrap_bool(selected),
+            "selected": unwrap_bool(selected),
             "onClick": from_opt(onClick),
             "style": from_opt(style),
             "value": from_opt(option_map(unwrapValue, value))
@@ -1320,7 +1320,7 @@ module Paper = {
             "className": from_opt(className),
             "component": from_opt(component),
             "elevation": from_opt(elevation),
-            "square": wrap_bool(square),
+            "square": unwrap_bool(square),
             "style": from_opt(style)
           }
         ),
@@ -1368,23 +1368,23 @@ module Select = {
       ~props=
         Js.Nullable.(
           {
-            "autoWidth": wrap_bool(autoWidth),
+            "autoWidth": unwrap_bool(autoWidth),
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "displayEmpty": wrap_bool(displayEmpty),
+            "displayEmpty": unwrap_bool(displayEmpty),
             "input": from_opt(input),
             "InputClasses": from_opt(inputClasses),
-            "native": wrap_bool(native),
-            "multiple": wrap_bool(multiple),
+            "native": unwrap_bool(native),
+            "multiple": unwrap_bool(multiple),
             "MenuProps": from_opt(menuProps),
             "value": from_opt(option_map(unwrapValue, value)),
             "style": from_opt(style),
             /* TODO: Input Props: find a way to rectactor props duplication. */
-            "disableUnderline": wrap_bool(disableUnderline),
-            "disabled": wrap_bool(disabled),
-            "error": wrap_bool(error),
-            "fullWidth": wrap_bool(fullWidth),
-            "autoFocus": wrap_bool(autoFocus),
+            "disableUnderline": unwrap_bool(disableUnderline),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
+            "fullWidth": unwrap_bool(fullWidth),
+            "autoFocus": unwrap_bool(autoFocus),
             "placeholder": from_opt(placeholder),
             "type": from_opt(inputType),
             "onChange": from_opt(onChange)
@@ -1432,14 +1432,14 @@ module Tab = {
           {
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "disabled": wrap_bool(disabled),
-            "fullWidth": wrap_bool(fullWidth),
+            "disabled": unwrap_bool(disabled),
+            "fullWidth": unwrap_bool(fullWidth),
             "icon": from_opt(icon),
             "indicator": from_opt(indicator),
             "label": from_opt(label),
             "onChange": from_opt(onChange),
             "onClick": from_opt(onClick),
-            "selected": wrap_bool(selected),
+            "selected": unwrap_bool(selected),
             "textColor": from_opt(option_map(TextColor.to_string, textColor)),
             "value": from_opt(value),
             "style": from_opt(style)
@@ -1509,7 +1509,7 @@ module TableCell = {
             "classes": from_opt(classes),
             "className": from_opt(className),
             "component": from_opt(component),
-            "numeric": wrap_bool(numeric),
+            "numeric": unwrap_bool(numeric),
             "padding": from_opt(option_map(Padding.to_string, padding)),
             "style": from_opt(style)
           }
@@ -1593,8 +1593,8 @@ module TableRow = {
             "classes": from_opt(classes),
             "className": from_opt(className),
             "component": from_opt(component),
-            "hover": wrap_bool(hover),
-            "selected": wrap_bool(selected),
+            "hover": unwrap_bool(hover),
+            "selected": unwrap_bool(selected),
             "style": from_opt(style),
             "onClick": from_opt(onClick),
             "onDoubleClick": from_opt(onDoubleClick)
@@ -1661,7 +1661,7 @@ module TabScrollButton = {
             "className": from_opt(className),
             "direction": from_opt(option_map(Direction.to_string, direction)),
             "onClick": from_opt(onClick),
-            "visible": wrap_bool(visible),
+            "visible": unwrap_bool(visible),
             "style": from_opt(style)
           }
         ),
@@ -1729,15 +1729,15 @@ module Tabs = {
         Js.Nullable.(
           {
             "buttonClassName": from_opt(buttonClassName),
-            "centered": wrap_bool(centered),
+            "centered": unwrap_bool(centered),
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "fullWidth": wrap_bool(fullWidth),
+            "fullWidth": unwrap_bool(fullWidth),
             "indicatorClassName": from_opt(indicatorClassName),
             "indicatorColor":
               from_opt(option_map(IndicatorColor.to_string, indicatorColor)),
             "onChange": from_opt(onChange),
-            "scrollable": wrap_bool(scrollable),
+            "scrollable": unwrap_bool(scrollable),
             "scrollButtons":
               from_opt(option_map(ScrollButtons.to_string, scrollButtons)),
             "_TabScrollButton": from_opt(_TabScrollButton),
@@ -1802,13 +1802,13 @@ module TextField = {
         Js.Nullable.(
           {
             "autoComplete": from_opt(autoComplete),
-            "autoFocus": wrap_bool(autoFocus),
+            "autoFocus": unwrap_bool(autoFocus),
             "className": from_opt(className),
             "defaultValue": from_opt(defaultValue),
-            "disabled": wrap_bool(disabled),
-            "error": wrap_bool(error),
+            "disabled": unwrap_bool(disabled),
+            "error": unwrap_bool(error),
             "FormHelperTextProps": from_opt(_FormHelperTextProps),
-            "fullWidth": wrap_bool(fullWidth),
+            "fullWidth": unwrap_bool(fullWidth),
             "helperText": from_opt(helperText),
             "helperTextClassName": from_opt(helperTextClassName),
             "id": from_opt(id),
@@ -1820,15 +1820,15 @@ module TextField = {
             "inputRef": from_opt(inputRef),
             "label": from_opt(label),
             "labelClassName": from_opt(labelClassName),
-            "multiline": wrap_bool(multiline),
+            "multiline": unwrap_bool(multiline),
             "name": from_opt(name),
             "onChange": from_opt(onChange),
             "placeholder": from_opt(placeholder),
-            "required": wrap_bool(required),
+            "required": unwrap_bool(required),
             "rootRef": from_opt(rootRef),
             "rows": from_opt(option_map(unwrapValue, rows)),
             "rowsMax": from_opt(option_map(unwrapValue, rowsMax)),
-            "select": wrap_bool(select),
+            "select": unwrap_bool(select),
             "SelectProps": from_opt(_SelectProps),
             "type": from_opt(_type),
             "value": from_opt(option_map(unwrapValue, value)),
@@ -1858,7 +1858,7 @@ module Toolbar = {
           {
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "disableGutters": wrap_bool(disableGutters),
+            "disableGutters": unwrap_bool(disableGutters),
             "style": from_opt(style)
           }
         ),
@@ -1925,13 +1925,13 @@ module Tooltip = {
           {
             "classes": from_opt(classes),
             "className": from_opt(className),
-            "disableTriggerFocus": wrap_bool(disableTriggerFocus),
-            "disableTriggerHover": wrap_bool(disableTriggerHover),
-            "disableTriggerTouch": wrap_bool(disableTriggerTouch),
+            "disableTriggerFocus": unwrap_bool(disableTriggerFocus),
+            "disableTriggerHover": unwrap_bool(disableTriggerHover),
+            "disableTriggerTouch": unwrap_bool(disableTriggerTouch),
             "id": from_opt(id),
             "onRequestClose": from_opt(onRequestClose),
             "onRequestOpen": from_opt(onRequestOpen),
-            "open": wrap_bool(_open),
+            "open": unwrap_bool(_open),
             "title": from_opt(title),
             "enterDelay": from_opt(enterDelay),
             "leaveDelay": from_opt(leaveDelay),
@@ -1987,10 +1987,10 @@ module Typography = {
             "className": from_opt(className),
             "component": from_opt(component),
             "color": from_opt(option_map(Color.to_string, color)),
-            "gutterBottom": wrap_bool(gutterBottom),
+            "gutterBottom": unwrap_bool(gutterBottom),
             "headlineMapping": from_opt(headlineMapping),
-            "noWrap": wrap_bool(noWrap),
-            "paragraph": wrap_bool(paragraph),
+            "noWrap": unwrap_bool(noWrap),
+            "paragraph": unwrap_bool(paragraph),
             "type": from_opt(_type),
             "style": from_opt(style)
           }
