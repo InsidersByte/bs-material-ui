@@ -37,12 +37,12 @@
     "bs-platform": "2.1.0",
     "husky": "0.14.3",
     "lint-staged": "6.0.0",
-    "material-ui": "1.0.0-beta.20",
-    "prettier": "1.9.0",
-    "reason-react": "0.3.0"
+    "material-ui": "1.0.0-beta.29",
+    "prettier": "1.10.2",
+    "reason-react": "0.3.1"
   },
   "peerDependencies": {
-    "material-ui": "^1.0.0-beta.20",
+    "material-ui": "^1.0.0-beta.26",
     "reason-react": "^0.3.0"
   },
   "lint-staged": {
