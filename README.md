@@ -68,7 +68,7 @@ let make = (_children) => {
 - [x] DialogContent
 - [x] DialogTitle
 - [x] Dialog
-- [ ] Divider
+- [X] Divider
 - [x] Drawer
 - [ ] Fade
 - [x] FormControlLabel
@@ -83,9 +83,9 @@ let make = (_children) => {
 - [ ] Grow
 - [ ] Hidden
 - [ ] IconButton
-- [ ] Icon
+- [X] Icon
 - [ ] InputAdornment
-- [ ] InputLabel
+- [X] InputLabel
 - [x] Input
 - [x] LinearProgress
 - [x] ListItemAvatar

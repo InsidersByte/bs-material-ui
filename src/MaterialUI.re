@@ -379,7 +379,7 @@ module Chip = {
         ~label: option(string),
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~onKeyDown: option(ReactEventRe.Keyboard.t)=?,
-        ~onRequestDelete: option(ReactEventRe.Synthetic.t => unit)=?,
+        ~onDelete: option(ReactEventRe.Synthetic.t => unit)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~tabIndex: option([ | `String(string) | `Int(int)])=?,
         children
@@ -396,7 +396,7 @@ module Chip = {
             "label": from_opt(label),
             "onClick": from_opt(onClick),
             "onKeyDown": from_opt(onKeyDown),
-            "onRequestDelete": from_opt(onRequestDelete),
+            "onDelete": from_opt(onDelete),
             "style": from_opt(style),
             "tabIndex": from_opt(option_map(unwrapValue, tabIndex))
           }
@@ -539,13 +539,14 @@ module Dialog = {
   let make =
       (
         ~classes: option(dialogClasses)=?,
-        ~enterTransitionDuration: option(int)=?,
-        ~leaveTransitionDuration: option(int)=?,
+        ~className: option(string)=?,
+        ~disableBackdropClick: option(bool)=?,
+        ~disableEscapeKeyUp: option(bool)=?,
         ~fullScreen: option(bool)=?,
-        ~ignoreBackdropClick: option(bool)=?,
-        ~ignoreEscapeKeyUp: option(bool)=?,
-        ~style: option(ReactDOMRe.style)=?,
+        ~fullWidth: option(bool)=?,
+        /* TODO: add maxWidth */
         ~onBackdropClick: option(unit => unit)=?,
+        ~onClose: option(unit => unit)=?,
         ~onEnter: option(unit => unit)=?,
         ~onEntered: option(unit => unit)=?,
         ~onEntering: option(unit => unit)=?,
@@ -553,8 +554,10 @@ module Dialog = {
         ~onExit: option(unit => unit)=?,
         ~onExited: option(unit => unit)=?,
         ~onExiting: option(unit => unit)=?,
-        ~onRequestClose: option(unit => unit)=?,
-        ~openDialog: option(bool)=?,
+        ~_open: option(bool)=?,
+        /* TODO: add transition */
+        /* TODO: add transitionDuration */
+        ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -562,14 +565,14 @@ module Dialog = {
       ~props=
         Js.Nullable.(
           {
-            "style": from_opt(style),
             "classes": from_opt(classes),
+            "className": from_opt(className),
+            "disableBackdropClick": from_opt(disableBackdropClick),
+            "disableEscapeKeyUp": from_opt(disableEscapeKeyUp),
             "fullScreen": from_opt(fullScreen),
-            "leaveTransitionDuration": from_opt(leaveTransitionDuration),
-            "enterTransitionDuration": from_opt(enterTransitionDuration),
-            "ignoreEscapeKeyUp": from_opt(ignoreEscapeKeyUp),
-            "ignoreBackdropClick": from_opt(ignoreBackdropClick),
+            "fullWidth": from_opt(fullWidth),
             "onBackdropClick": from_opt(onBackdropClick),
+            "onClose": from_opt(onClose),
             "onEnter": from_opt(onEnter),
             "onEntered": from_opt(onEntered),
             "onEntering": from_opt(onEntering),
@@ -577,8 +580,8 @@ module Dialog = {
             "onExit": from_opt(onExit),
             "onExited": from_opt(onExited),
             "onExiting": from_opt(onExiting),
-            "onRequestClose": from_opt(onRequestClose),
-            "open": from_opt(openDialog)
+            "open": from_opt(_open),
+            "style": from_opt(style)
           }
         ),
       children
@@ -646,7 +649,7 @@ module Drawer = {
         ~elevation: option(int)=?,
         ~transitionDuration: option(Js.t({..}))=?,
         ~modalProps: option(Js.t({..}))=?,
-        ~onRequestClose: option(unit => unit)=?,
+        ~onClose: option(unit => unit)=?,
         ~_open: option(bool)=?,
         ~slideProps: option(Js.t({..}))=?,
         ~_type: option(Type.t)=?,
@@ -664,7 +667,7 @@ module Drawer = {
             "elevation": from_opt(elevation),
             "transitionDuration": from_opt(transitionDuration),
             "ModalProps": from_opt(modalProps),
-            "onRequestClose": from_opt(onRequestClose),
+            "onClose": from_opt(onClose),
             "open": unwrap_bool(_open),
             "SlideProps": from_opt(slideProps),
             "type": from_opt(option_map(Type.to_string, _type)),
@@ -1182,6 +1185,10 @@ module ListItem = {
         ~button: option(bool)=?,
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
+        ~disabled: option(bool)=?,
+        ~error: option(bool)=?,
+        ~_FormHelperTextProps: option(Js.t({..}))=?,
+        ~fullWidth: option(bool)=?,
         ~component: option(string)=?,
         ~dense: option(bool)=?,
         ~disabled: option(bool)=?,
@@ -1789,9 +1796,6 @@ module TextField = {
         ~helperText: option(string)=?,
         ~helperTextClassName: option(string)=?,
         ~id: option(string)=?,
-        /* Material-UI have two pais of similar props with different case. See: Git hub issue https://github.com/callemall/material-ui/issues/8232 */
-        ~inputClassName: option(string)=?,
-        ~_InputClassName: option(string)=?,
         ~_InputLabelProps: option(Js.t({..}))=?,
         ~inputProps: option(Js.t({..}))=?,
         ~_InputProps: option(Js.t({..}))=?,
@@ -1833,8 +1837,6 @@ module TextField = {
             "helperText": from_opt(helperText),
             "helperTextClassName": from_opt(helperTextClassName),
             "id": from_opt(id),
-            "inputClassName": from_opt(inputClassName),
-            "InputClassName": from_opt(_InputClassName),
             "InputLabelProps": from_opt(_InputLabelProps),
             "inputProps": from_opt(inputProps),
             "InputProps": from_opt(_InputProps),
@@ -1927,8 +1929,8 @@ module Tooltip = {
         ~disableTriggerHover: option(bool)=?,
         ~disableTriggerTouch: option(bool)=?,
         ~id: option(string)=?,
-        ~onRequestClose: option(unit => unit)=?,
-        ~onRequestOpen: option(unit => unit)=?,
+        ~onClose: option(unit => unit)=?,
+        ~onOpen: option(unit => unit)=?,
         ~_open: option(bool)=?,
         /* TODO: is actually a Node */
         ~title: option(string)=?,
@@ -1950,8 +1952,8 @@ module Tooltip = {
             "disableTriggerHover": unwrap_bool(disableTriggerHover),
             "disableTriggerTouch": unwrap_bool(disableTriggerTouch),
             "id": from_opt(id),
-            "onRequestClose": from_opt(onRequestClose),
-            "onRequestOpen": from_opt(onRequestOpen),
+            "onClose": from_opt(onClose),
+            "onOpen": from_opt(onOpen),
             "open": unwrap_bool(_open),
             "title": from_opt(title),
             "enterDelay": from_opt(enterDelay),
