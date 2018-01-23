@@ -50,8 +50,8 @@ let make = (_children) => {
 - [x] AppBar
 - [x] Avatar
 - [x] Badge
-- [ ] BottomNavigationButton
-- [ ] BottomNavigation
+- [x] BottomNavigationButton
+- [x] BottomNavigation
 - [x] ButtonBase
 - [x] Button
 - [x] CardActions

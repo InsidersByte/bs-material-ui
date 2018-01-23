@@ -11,6 +11,7 @@ let unwrapValue =
         | `StringArray(array(string))
         | `Float(float)
         | `FloatArray(array(float))
+        | `ReactElement(ReasonReact.reactElement)
       ]
     ) =>
   switch r {
@@ -20,6 +21,7 @@ let unwrapValue =
   | `IntArray(a) => toJsUnsafe(a)
   | `Float(a) => toJsUnsafe(a)
   | `FloatArray(a) => toJsUnsafe(a)
+  | `ReactElement(e) => toJsUnsafe(e)
   };
 
 let unwrap_bool = (b: option(bool)) =>
@@ -113,6 +115,77 @@ module Badge = {
       ~reactClass,
       ~props=
         Js.Nullable.({"badgeContent": badgeContent, "style": from_opt(style)}),
+      children
+    );
+};
+
+module BottomNavigationAction = {
+  [@bs.module "material-ui/BottomNavigation"]
+  external reactClass : ReasonReact.reactClass = "BottomNavigationAction";
+  let make =
+      (
+        ~classes: option(string)=?,
+        ~className: option(string)=?,
+        ~icon:
+           option(
+             [ | `String(string) | `ReactElement(ReasonReact.reactElement)]
+           )=?,
+        ~label: option(string)=?,
+        ~onChange: option(ReactEventRe.Form.t => unit)=?,
+        ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
+        ~selected: option(bool)=?,
+        ~showLabel: option(bool)=?,
+        ~value: 'a=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "icon": from_opt(option_map(unwrapValue, icon)),
+            "label": from_opt(label),
+            "onChange": from_opt(onChange),
+            "onClick": from_opt(onClick),
+            "selected": unwrap_bool(selected),
+            "showLabel": unwrap_bool(showLabel),
+            "value": from_opt(value),
+            "style": from_opt(style)
+          }
+        ),
+      children
+    );
+};
+
+module BottomNavigation = {
+  [@bs.module "material-ui/BottomNavigation"]
+  external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~className: option(string)=?,
+        ~onChange: option(ReactEventRe.Form.t => unit)=?,
+        ~showLabels: option(bool)=?,
+        ~value: 'a,
+        ~style: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": from_opt(classes),
+            "className": from_opt(className),
+            "onChange": from_opt(onChange),
+            "showLabels": unwrap_bool(showLabels),
+            "value": from_opt(value),
+            "style": from_opt(style)
+          }
+        ),
       children
     );
 };
