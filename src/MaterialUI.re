@@ -1115,21 +1115,21 @@ module Menu = {
         option(
           [
             | `Enum(TransitionDuration.t)
-            | `Float(float)
+            | `Float(int)
             | `Object({. "enter": int, "exit": int})
           ]
         )=?,
      ~_PopoverClasses: option(Js.t({..}))=?,
      ~_PaperProps: option(Js.t({..}))=?,
-     ~_open: option(bool)=?,
-     ~onRequestClose: option(ReactEventRe.Synthetic.t => unit )=?,
+     ~_open: option(bool),
+     ~onClose: option(ReactEventRe.Synthetic.t => unit )=?,
      ~onExited: option(ReactEventRe.Transition.t => unit)=?,
      ~onExiting: option(ReactEventRe.Transition.t => unit)=?,
      ~onExit: option(ReactEventRe.Transition.t => unit)=?,
      ~onEntered: option(ReactEventRe.Transition.t => unit)=?,
      ~onEntering: option(ReactEventRe.Transition.t => unit)=?,
      ~onEnter: option(ReactEventRe.Transition.t => unit)=?,
-     ~mMenuListProps: option(Js.t({..}))=?,
+     ~_MenuListProps: option(Js.t({..}))=?,
      ~anchorEl: option(Js.t({..}))=?,
      ~classes: option(Classes.t)=?,
      ~anchorPosition: option({. "top": int, "left": int})=?,
@@ -1183,7 +1183,7 @@ module Menu = {
           "onEntered": from_opt(onEntered),
           "onEntering": from_opt(onEntering),
           "onEnter": from_opt(onEnter),
-          "MenuListProps": from_opt(mMenuListProps),
+          "MenuListProps": from_opt(_MenuListProps),
           "anchorEl": from_opt(anchorEl),
           "theme": from_opt(theme),
           "classes": from_opt(optionMap(Classes.to_obj, classes)),
