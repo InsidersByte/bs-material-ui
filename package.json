@@ -1,6 +1,6 @@
 {
   "name": "bs-material-ui",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "Reason bindings for material-ui",
   "main": "lib/js/src/MaterialUI.js",
   "keywords": [
@@ -19,27 +19,34 @@
   },
   "homepage": "https://github.com/InsidersByte/bs-material-ui#readme",
   "scripts": {
+    "precommit": "lint-staged",
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "yarn run clean && yarn run build"
+    "prepare": "yarn run clean && yarn run build",
+    "format:js": "prettier --write ./*.{js,json} ./**/*.{js,json}",
+    "format:reason": "refmt --in-place src/*.re",
+    "format": "yarn format:js && yarn format:reason"
   },
   "author": "Jonathon Kelly <jonathon@insidersbyte.com>",
-  "contributors": [
-    "Remi Bernal <bernal.rs@gmail.com>"
-  ],
+  "contributors": ["Remi Bernal <bernal.rs@gmail.com>"],
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "bs-platform": "2.0.0",
-    "material-ui": "1.0.0-beta.20",
-    "reason-react": "0.2.4"
+    "bs-platform": "2.1.0",
+    "husky": "0.14.3",
+    "lint-staged": "6.0.0",
+    "material-ui": "1.0.0-beta.29",
+    "prettier": "1.10.2",
+    "reason-react": "0.3.1"
   },
   "peerDependencies": {
-    "material-ui": "1.0.0-beta.x",
-    "react": "^15.3.0 || ^16.0.0",
-    "react-dom": "^15.3.0 || ^16.0.0",
-    "reason-react": "^0.2.4"
+    "material-ui": "^1.0.0-beta.26",
+    "reason-react": "^0.3.0"
+  },
+  "lint-staged": {
+    "*.{js,json}": ["prettier --write", "git add"],
+    "src/**/*.re": ["refmt --in-place", "git add"]
   }
 }

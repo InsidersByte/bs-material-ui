@@ -45,7 +45,6 @@ let make = (_children) => {
     )
 };
 ```
-
 ## Bindings
 
 - [x] AppBar
@@ -69,14 +68,14 @@ let make = (_children) => {
 - [x] DialogContent
 - [x] DialogTitle
 - [x] Dialog
-- [ ] Divider
+- [X] Divider
 - [x] Drawer
 - [ ] Fade
 - [x] FormControlLabel
 - [x] FormControl
-- [ ] FormGroup
-- [ ] FormHelperText
-- [ ] FormLabel
+- [x] FormGroup
+- [x] FormHelperText
+- [x] FormLabel
 - [ ] GridListTitleBar
 - [ ] GridListTitle
 - [ ] GridList
@@ -84,9 +83,9 @@ let make = (_children) => {
 - [ ] Grow
 - [ ] Hidden
 - [ ] IconButton
-- [ ] Icon
+- [X] Icon
 - [ ] InputAdornment
-- [ ] InputLabel
+- [X] InputLabel
 - [x] Input
 - [x] LinearProgress
 - [x] ListItemAvatar
@@ -111,7 +110,7 @@ let make = (_children) => {
 - [ ] Snackbar
 - [ ] SvgIcon
 - [ ] Switch
-- [ ] Tab
+- [X] Tab
 - [X] TableBody
 - [X] TableCell
 - [X] TableFooter
@@ -120,8 +119,8 @@ let make = (_children) => {
 - [X] TableRow
 - [ ] TableSortLabel
 - [X] Table
-- [ ] Tabs
-- [ ] TextField
+- [X] Tabs
+- [X] TextField
 - [X] Toolbar
-- [ ] Tooltip
+- [X] Tooltip
 - [X] Typography
