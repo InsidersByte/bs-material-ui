@@ -124,3 +124,6 @@ let make = (_children) => {
 - [X] Toolbar
 - [X] Tooltip
 - [X] Typography
+
+## Useful resources  
+* [reason-react-material-ui-demo: A `bs-material-ui` usage example (a simple form)](https://github.com/mmazzarolo/reason-react-material-ui-demo)
