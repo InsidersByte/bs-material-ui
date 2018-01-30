@@ -25,7 +25,7 @@
     "clean": "bsb -clean-world",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "yarn run clean && yarn run build",
-    "format:js": "prettier --write ./*.{js,json} ./**/*.{js,json}",
+    "format:js": "prettier --write ./*.{js,json,md} ./**/*.{js,json,md}",
     "format:reason": "refmt --in-place src/*.re",
     "format": "yarn format:js && yarn format:reason"
   },
@@ -46,7 +46,7 @@
     "reason-react": "^0.3.0"
   },
   "lint-staged": {
-    "*.{js,json}": ["prettier --write", "git add"],
+    "*.{js,json,md}": ["prettier --write", "git add"],
     "src/**/*.re": ["refmt --in-place", "git add"]
   }
 }

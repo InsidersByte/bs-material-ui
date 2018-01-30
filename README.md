@@ -1,6 +1,6 @@
 # Reason bindings for Material-UI
 
-[![npm](https://img.shields.io/npm/v/bs-material-ui.svg)](https://www.npmjs.com/package/bs-material-ui)  
+[![npm](https://img.shields.io/npm/v/bs-material-ui.svg)](https://www.npmjs.com/package/bs-material-ui)
 
 [Reason](https://reasonml.github.io/) bindings for [material-ui](https://github.com/callemall/material-ui).
 
@@ -34,93 +34,96 @@ let component = ReasonReact.statelessComponent("Header");
 let make = (_children) => {
   ...component,
   render: (_self) =>
-    MaterialUI.(
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <Typography _type="title" color="inherit">
-            (ReasonReact.stringToElement("Title"))
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    )
+    <MaterialUI.AppBar position="static" color="default">
+      <MaterialUI.Toolbar>
+        <MaterialUI.Typography
+          _type="title" color=MaterialUI.Typography.Color.Inherit>
+          (ReasonReact.stringToElement("Title"))
+        </MaterialUI.Typography>
+      </MaterialUI.Toolbar>
+    </MaterialUI.AppBar>
 };
 ```
+
+> It is not recommended to open this module as it will clash with other modules.  
+> If you wish to do so please be aware that the `List` component will clash with the standard library `List` module.
+
 ## Bindings
 
-- [x] AppBar
-- [x] Avatar
-- [x] Badge
-- [ ] BottomNavigationButton
-- [ ] BottomNavigation
-- [x] ButtonBase
-- [x] Button
-- [x] CardActions
-- [x] CardContent
-- [x] CardHeader
-- [x] CardMedia
-- [x] Card
-- [x] Checkbox
-- [x] Chip
-- [x] CircularProgress
-- [x] Collapse
-- [x] DialogActions
-- [x] DialogContentText
-- [x] DialogContent
-- [x] DialogTitle
-- [x] Dialog
-- [X] Divider
-- [x] Drawer
-- [ ] Fade
-- [x] FormControlLabel
-- [x] FormControl
-- [x] FormGroup
-- [x] FormHelperText
-- [x] FormLabel
-- [ ] GridListTitleBar
-- [ ] GridListTitle
-- [ ] GridList
-- [x] Grid
-- [ ] Grow
-- [ ] Hidden
-- [ ] IconButton
-- [X] Icon
-- [ ] InputAdornment
-- [X] InputLabel
-- [x] Input
-- [x] LinearProgress
-- [x] ListItemAvatar
-- [x] ListItemIcon
-- [x] ListItemSecondaryAction
-- [x] ListItemText
-- [x] ListItem
-- [x] ListSubheader
-- [x] List
-- [x] MenuItem
-- [ ] MenuList
-- [ ] Menu
-- [ ] MobileStepper
-- [ ] MuiThemeProvider
-- [X] Paper
-- [ ] Popover
-- [ ] RadioGroup
-- [ ] Radio
-- [x] Select
-- [ ] Slide
-- [ ] SnackbarContent
-- [ ] Snackbar
-- [ ] SvgIcon
-- [ ] Switch
-- [X] Tab
-- [X] TableBody
-- [X] TableCell
-- [X] TableFooter
-- [X] TableHead
-- [ ] TablePagination
-- [X] TableRow
-- [ ] TableSortLabel
-- [X] Table
-- [X] Tabs
-- [X] TextField
-- [X] Toolbar
-- [X] Tooltip
-- [X] Typography
+* [x] AppBar
+* [x] Avatar
+* [x] Badge
+* [ ] BottomNavigationButton
+* [ ] BottomNavigation
+* [x] ButtonBase
+* [x] Button
+* [x] CardActions
+* [x] CardContent
+* [x] CardHeader
+* [x] CardMedia
+* [x] Card
+* [x] Checkbox
+* [x] Chip
+* [x] CircularProgress
+* [x] Collapse
+* [x] DialogActions
+* [x] DialogContentText
+* [x] DialogContent
+* [x] DialogTitle
+* [x] Dialog
+* [x] Divider
+* [x] Drawer
+* [ ] Fade
+* [x] FormControlLabel
+* [x] FormControl
+* [x] FormGroup
+* [x] FormHelperText
+* [x] FormLabel
+* [ ] GridListTitleBar
+* [ ] GridListTitle
+* [ ] GridList
+* [x] Grid
+* [ ] Grow
+* [ ] Hidden
+* [ ] IconButton
+* [x] Icon
+* [ ] InputAdornment
+* [x] InputLabel
+* [x] Input
+* [x] LinearProgress
+* [x] ListItemAvatar
+* [x] ListItemIcon
+* [x] ListItemSecondaryAction
+* [x] ListItemText
+* [x] ListItem
+* [x] ListSubheader
+* [x] List
+* [x] MenuItem
+* [ ] MenuList
+* [ ] Menu
+* [ ] MobileStepper
+* [ ] MuiThemeProvider
+* [x] Paper
+* [ ] Popover
+* [ ] RadioGroup
+* [ ] Radio
+* [x] Select
+* [ ] Slide
+* [ ] SnackbarContent
+* [ ] Snackbar
+* [ ] SvgIcon
+* [ ] Switch
+* [x] Tab
+* [x] TableBody
+* [x] TableCell
+* [x] TableFooter
+* [x] TableHead
+* [ ] TablePagination
+* [x] TableRow
+* [ ] TableSortLabel
+* [x] Table
+* [x] Tabs
+* [x] TextField
+* [x] Toolbar
+* [x] Tooltip
+* [x] Typography
