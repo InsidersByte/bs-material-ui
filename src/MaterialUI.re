@@ -1349,7 +1349,7 @@ module Menu = {
         ~classes: option(Js.t({..}))=?,
         ~_PopoverClasses: option(Js.t({..}))=?,
         ~_PaperProps: option(Js.t({..}))=?,
-        ~_open: option(bool),
+        ~_open: option(bool)=?,
         ~onClose: option(ReactEventRe.Synthetic.t => unit)=?,
         ~onExited: option(ReactEventRe.Transition.t => unit)=?,
         ~onExiting: option(ReactEventRe.Transition.t => unit)=?,
@@ -1372,8 +1372,8 @@ module Menu = {
            option(
              {
                .
-               "horizontal": _,
-               "vertical": _
+               "horizontal": 'a,
+               "vertical": 'a
              }
            )=?,
         ~elevation: option(float)=?,
@@ -1384,13 +1384,13 @@ module Menu = {
            option(
              {
                .
-               "horizontal": _,
-               "vertical": _
+               "horizontal": 'b,
+               "vertical": 'b
              }
            )=?,
         ~transitionDuration: option(int)=?,
         ~transitionClasses: option(Js.t({..}))=?,
-        ~style: option(ReactDOMRe.style),
+        ~style: option(ReactDOMRe.style)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
