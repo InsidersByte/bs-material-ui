@@ -1341,116 +1341,88 @@ module Menu = {
       | AnchorEl => "anchorEl"
       | AnchorPosition => "anchorPosition";
   };
-  module Classes = {
-    type classesType =
-      | Paper(string);
-    type t = list(classesType);
-    let to_string =
-      fun
-      | Paper(_) => "paper";
-    let to_obj = (listOfClasses) =>
-      listOfClasses
-      |> StdLabels.List.fold_left(
-           ~f=
-             (obj, classType) => {
-               switch classType {
-               | Paper(className) => Js.Dict.set(obj, to_string(classType), className)
-               };
-               obj
-             },
-           ~init=Js.Dict.empty()
-         );
-  };
-  [@bs.module "material-ui/Menu"] external reactClass : ReasonReact.reactClass = "default";
+  [@bs.module "material-ui/Menu"]
+  external reactClass : ReasonReact.reactClass = "default";
   let make =
+      /*TODO: transition duration should be it own type. */
       (
-        ~transitionDuration:
-        option(
-          [
-            | `Enum(TransitionDuration.t)
-            | `Float(int)
-            | `Object({. "enter": int, "exit": int})
-          ]
-        )=?,
-     ~_PopoverClasses: option(Js.t({..}))=?,
-     ~_PaperProps: option(Js.t({..}))=?,
-     ~_open: option(bool),
-     ~onClose: option(ReactEventRe.Synthetic.t => unit )=?,
-     ~onExited: option(ReactEventRe.Transition.t => unit)=?,
-     ~onExiting: option(ReactEventRe.Transition.t => unit)=?,
-     ~onExit: option(ReactEventRe.Transition.t => unit)=?,
-     ~onEntered: option(ReactEventRe.Transition.t => unit)=?,
-     ~onEntering: option(ReactEventRe.Transition.t => unit)=?,
-     ~onEnter: option(ReactEventRe.Transition.t => unit)=?,
-     ~_MenuListProps: option(Js.t({..}))=?,
-     ~anchorEl: option(Js.t({..}))=?,
-     ~classes: option(Classes.t)=?,
-     ~anchorPosition: option({. "top": int, "left": int})=?,
-     ~anchorReference: option(AnchorReference.t)=?,
-     ~anchorOrigin: option({. "horizontal": _, "vertical": _})=?,
-     ~elevation: option(float)=?,
-     ~getContentAnchorEl: option('a)=?,
-     ~marginThreshold: option(float)=?,
-     ~role: option(string)=?,
-     ~transformOrigin: option({. "horizontal": _, "vertical": _})=?,
-     ~transitionClasses:
-        option(
-          [
-            | `String(string)
-            | `Object(
-                {
-                  .
-                  "appear": string,
-                  "appearActive": string,
-                  "enter": string,
-                  "enterActive": string,
-                  "exit": string,
-                  "exitActive": string
-                }
-              )
-          ]
-        )=?,
-      ~style: option(ReactDOMRe.style)
-     children
+        ~classes: option(Js.t({..}))=?,
+        ~_PopoverClasses: option(Js.t({..}))=?,
+        ~_PaperProps: option(Js.t({..}))=?,
+        ~_open: option(bool),
+        ~onClose: option(ReactEventRe.Synthetic.t => unit)=?,
+        ~onExited: option(ReactEventRe.Transition.t => unit)=?,
+        ~onExiting: option(ReactEventRe.Transition.t => unit)=?,
+        ~onExit: option(ReactEventRe.Transition.t => unit)=?,
+        ~onEntered: option(ReactEventRe.Transition.t => unit)=?,
+        ~onEntering: option(ReactEventRe.Transition.t => unit)=?,
+        ~onEnter: option(ReactEventRe.Transition.t => unit)=?,
+        ~_MenuListProps: option(Js.t({..}))=?,
+        ~anchorEl: option(Js.t({..}))=?,
+        ~anchorPosition:
+           option(
+             {
+               .
+               "top": int,
+               "left": int
+             }
+           )=?,
+        ~anchorReference: option(AnchorReference.t)=?,
+        ~anchorOrigin:
+           option(
+             {
+               .
+               "horizontal": _,
+               "vertical": _
+             }
+           )=?,
+        ~elevation: option(float)=?,
+        ~getContentAnchorEl: option('a)=?,
+        ~marginThreshold: option(float)=?,
+        ~role: option(string)=?,
+        ~transformOrigin:
+           option(
+             {
+               .
+               "horizontal": _,
+               "vertical": _
+             }
+           )=?,
+        ~transitionDuration: option(int)=?,
+        ~transitionClasses: option(Js.t({..}))=?,
+        ~style: option(ReactDOMRe.style),
+        children
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
         Js.Nullable.(
           {
-            "transitionDuration": from_opt(
-              optionMap(
-                fun
-                | `Enum(e) => unwrapValue(`String(TransitionDuration.to_string(e)))
-                | x => unwrapValue(x),
-                transitionDuration
-              )
-            ),
-          "PopoverClasses": from_opt(_PopoverClasses),
-          "PaperProps": from_opt(_PaperProps),
-          "open": from_opt(optionMap(Js.Boolean.to_js_boolean, _open)),
-          "onRequestClose": from_opt(onRequestClose),
-          "onExited": from_opt(onExited),
-          "onExiting": from_opt(onExiting),
-          "onExit": from_opt(onExit),
-          "onEntered": from_opt(onEntered),
-          "onEntering": from_opt(onEntering),
-          "onEnter": from_opt(onEnter),
-          "MenuListProps": from_opt(_MenuListProps),
-          "anchorEl": from_opt(anchorEl),
-          "theme": from_opt(theme),
-          "classes": from_opt(optionMap(Classes.to_obj, classes)),
-          "anchorPosition": from_opt(anchorPosition),
-          "anchorReference":
-            from_opt(optionMap(AnchorReference.to_string, anchorReference)),
-          "anchorOrigin": from_opt(anchorOrigin),
-          "elevation": from_opt(elevation),
-          "getContentAnchorEl": from_opt(getContentAnchorEl),
-          "marginThreshold": from_opt(marginThreshold),
-          "role": from_opt(role),
-          "transformOrigin": from_opt(transformOrigin),
-          "transitionClasses": from_opt(optionMap(unwrapValue, transitionClasses)),
-          "style": from_opt(style)
+            "classes": from_opt(classes),
+            "PopoverClasses": from_opt(_PopoverClasses),
+            "PaperProps": from_opt(_PaperProps),
+            "open": unwrap_bool(_open),
+            "onClose": from_opt(onClose),
+            "onExited": from_opt(onExited),
+            "onExiting": from_opt(onExiting),
+            "onExit": from_opt(onExit),
+            "onEntered": from_opt(onEntered),
+            "onEntering": from_opt(onEntering),
+            "onEnter": from_opt(onEnter),
+            "MenuListProps": from_opt(_MenuListProps),
+            "anchorEl": from_opt(anchorEl),
+            "anchorPosition": from_opt(anchorPosition),
+            "anchorReference":
+              from_opt(option_map(AnchorReference.to_string, anchorReference)),
+            "anchorOrigin": from_opt(anchorOrigin),
+            "elevation": from_opt(elevation),
+            "getContentAnchorEl": from_opt(getContentAnchorEl),
+            "marginThreshold": from_opt(marginThreshold),
+            "role": from_opt(role),
+            "transformOrigin": from_opt(transformOrigin),
+            "transitionDuration": from_opt(transitionDuration),
+            "transitionClasses": from_opt(transitionClasses),
+            "style": from_opt(style)
           }
         ),
       children
