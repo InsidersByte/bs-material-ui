@@ -97,7 +97,7 @@ let make = (_children) => {
 - [x] List
 - [x] MenuItem
 - [ ] MenuList
-- [ ] Menu
+- [x] Menu
 - [ ] MobileStepper
 - [ ] MuiThemeProvider
 - [X] Paper
