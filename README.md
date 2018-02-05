@@ -34,15 +34,13 @@ let component = ReasonReact.statelessComponent("Header");
 let make = (_children) => {
   ...component,
   render: (_self) =>
-    MaterialUI.(
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <Typography _type="title" color="inherit">
+      <MaterialUI.AppBar position="static" color="default">
+        <MaterialUI.Toolbar>
+          <MaterialUI.Typography _type="title" color="inherit">
             (ReasonReact.stringToElement("Title"))
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    )
+          </MaterialUI.Typography>
+        </MaterialUI.Toolbar>
+      </MaterialUI.AppBar>  
 };
 ```
 ## Bindings
