@@ -14,7 +14,7 @@ Feel free to create an issue or PR if you find anything missing.
 
 ```
 yarn add bs-material-ui
-yarn add material-ui@1.0.0-beta.19
+yarn add material-ui@next
 ```
 
 Then add `bs-material-ui` to `bs-dev-dependencies` in your `bsconfig.json`:
