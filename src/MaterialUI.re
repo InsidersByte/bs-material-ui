@@ -51,11 +51,11 @@ module AppBar = {
       ~props=
         Js.Nullable.(
           {
-            "position": from_opt(position),
-            "color": from_opt(color),
-            "classes": from_opt(classes),
-            "style": from_opt(style),
-            "className": from_opt(className)
+            "position": fromOption(position),
+            "color": fromOption(color),
+            "classes": fromOption(classes),
+            "style": fromOption(style),
+            "className": fromOption(className)
           }
         ),
       children
@@ -84,16 +84,16 @@ module Avatar = {
       ~props=
         Js.Nullable.(
           {
-            "alt": from_opt(alt),
-            "childrenClassName": from_opt(childrenClassName),
-            "className": from_opt(className),
-            "classes": from_opt(classes),
-            "component": from_opt(component),
-            "imgProps": from_opt(imgProps),
-            "sizes": from_opt(sizes),
-            "src": from_opt(src),
-            "srcSet": from_opt(srcSet),
-            "style": from_opt(style)
+            "alt": fromOption(alt),
+            "childrenClassName": fromOption(childrenClassName),
+            "className": fromOption(className),
+            "classes": fromOption(classes),
+            "component": fromOption(component),
+            "imgProps": fromOption(imgProps),
+            "sizes": fromOption(sizes),
+            "src": fromOption(src),
+            "srcSet": fromOption(srcSet),
+            "style": fromOption(style)
           }
         ),
       children
@@ -112,7 +112,9 @@ module Badge = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
-        Js.Nullable.({"badgeContent": badgeContent, "style": from_opt(style)}),
+        Js.Nullable.(
+          {"badgeContent": badgeContent, "style": fromOption(style)}
+        ),
       children
     );
 };
@@ -138,15 +140,15 @@ module ButtonBase = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
+            "classes": fromOption(classes),
             "focusRipple": unwrap_bool(focusRipple),
             "centerRipple": unwrap_bool(centerRipple),
             "disableRipple": unwrap_bool(disableRipple),
             "disabled": unwrap_bool(disabled),
-            "onClick": from_opt(onClick),
-            "component": from_opt(component),
-            "className": from_opt(className),
-            "style": from_opt(style)
+            "onClick": fromOption(onClick),
+            "component": fromOption(component),
+            "className": fromOption(className),
+            "style": fromOption(style)
           }
         ),
       children
@@ -196,20 +198,20 @@ module Button = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "color": from_opt(option_map(Color.to_string, color)),
-            "component": from_opt(component),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "color": fromOption(option_map(Color.to_string, color)),
+            "component": fromOption(component),
             "dense": unwrap_bool(dense),
             "disabled": unwrap_bool(disabled),
             "disableFocusRipple": unwrap_bool(disableFocusRipple),
             "disableRipple": unwrap_bool(disableRipple),
             "fab": unwrap_bool(fab),
-            "href": from_opt(href),
+            "href": fromOption(href),
             "raised": unwrap_bool(raised),
-            "type": from_opt(_type),
-            "onClick": from_opt(onClick),
-            "style": from_opt(style),
+            "type": fromOption(_type),
+            "onClick": fromOption(onClick),
+            "style": fromOption(style),
             "centerRipple": unwrap_bool(centerRipple),
             "focusRipple": unwrap_bool(focusRipple)
           }
@@ -229,7 +231,7 @@ module CardActions = {
         Js.Nullable.(
           {
             "disableActionSpacing": unwrap_bool(disableActionSpacing),
-            "style": from_opt(style)
+            "style": fromOption(style)
           }
         ),
       children
@@ -242,7 +244,7 @@ module CardContent = {
   let make = (~style: option(ReactDOMRe.style)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
-      ~props=Js.Nullable.({"style": from_opt(style)}),
+      ~props=Js.Nullable.({"style": fromOption(style)}),
       children
     );
 };
@@ -266,13 +268,13 @@ module CardHeader = {
       ~props=
         Js.Nullable.(
           {
-            "action": from_opt(action),
-            "avatar": from_opt(avatar),
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "style": from_opt(style),
-            "subheader": from_opt(subheader),
-            "title": from_opt(title)
+            "action": fromOption(action),
+            "avatar": fromOption(avatar),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "style": fromOption(style),
+            "subheader": fromOption(subheader),
+            "title": fromOption(title)
           }
         ),
       children
@@ -287,7 +289,7 @@ module CardMedia = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
-        Js.Nullable.({"style": from_opt(style), "image": from_opt(image)}),
+        Js.Nullable.({"style": fromOption(style), "image": fromOption(image)}),
       children
     );
 };
@@ -308,8 +310,8 @@ module Card = {
         Js.Nullable.(
           {
             "raised": unwrap_bool(raised),
-            "style": from_opt(style),
-            "className": from_opt(className)
+            "style": fromOption(style),
+            "className": fromOption(className)
           }
         ),
       children
@@ -346,21 +348,21 @@ module Checkbox = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
             "checked": unwrap_bool(checked),
-            "checkedClassName": from_opt(checkedClassName),
-            "checkedIcon": from_opt(checkedIcon),
+            "checkedClassName": fromOption(checkedClassName),
+            "checkedIcon": fromOption(checkedIcon),
             "disableRipple": unwrap_bool(disableRipple),
             "disabled": unwrap_bool(disabled),
-            "disabledClassName": from_opt(disabledClassName),
-            "icon": from_opt(icon),
+            "disabledClassName": fromOption(disabledClassName),
+            "icon": fromOption(icon),
             "indeterminate": unwrap_bool(indeterminate),
-            "indeterminateIcon": from_opt(indeterminateIcon),
-            "name": from_opt(name),
-            "onChange": from_opt(onChange),
-            "value": from_opt(value),
-            "style": from_opt(style)
+            "indeterminateIcon": fromOption(indeterminateIcon),
+            "name": fromOption(name),
+            "onChange": fromOption(onChange),
+            "value": fromOption(value),
+            "style": fromOption(style)
           }
         ),
       children
@@ -389,16 +391,16 @@ module Chip = {
       ~props=
         Js.Nullable.(
           {
-            "avatar": from_opt(avatar),
-            "className": from_opt(className),
-            "classes": from_opt(classes),
-            "deleteIcon": from_opt(deleteIcon),
-            "label": from_opt(label),
-            "onClick": from_opt(onClick),
-            "onKeyDown": from_opt(onKeyDown),
-            "onDelete": from_opt(onDelete),
-            "style": from_opt(style),
-            "tabIndex": from_opt(option_map(unwrapValue, tabIndex))
+            "avatar": fromOption(avatar),
+            "className": fromOption(className),
+            "classes": fromOption(classes),
+            "deleteIcon": fromOption(deleteIcon),
+            "label": fromOption(label),
+            "onClick": fromOption(onClick),
+            "onKeyDown": fromOption(onKeyDown),
+            "onDelete": fromOption(onDelete),
+            "style": fromOption(style),
+            "tabIndex": fromOption(option_map(unwrapValue, tabIndex))
           }
         ),
       children
@@ -426,15 +428,15 @@ module CircularProgress = {
       ~props=
         Js.Nullable.(
           {
-            "style": from_opt(style),
-            "mode": from_opt(mode),
-            "color": from_opt(color),
-            "valueBuffer": from_opt(valueBuffer),
-            "value": from_opt(value),
-            "size": from_opt(size),
-            "max": from_opt(max),
-            "min": from_opt(min),
-            "className": from_opt(className)
+            "style": fromOption(style),
+            "mode": fromOption(mode),
+            "color": fromOption(color),
+            "valueBuffer": fromOption(valueBuffer),
+            "value": fromOption(value),
+            "size": fromOption(size),
+            "max": fromOption(max),
+            "min": fromOption(min),
+            "className": fromOption(className)
           }
         ),
       children
@@ -456,7 +458,7 @@ module Collapse = {
         Js.Nullable.(
           {
             "in": unwrap_bool(expanded),
-            "transitionDuration": from_opt(transitionDuration)
+            "transitionDuration": fromOption(transitionDuration)
           }
         ),
       children
@@ -474,7 +476,7 @@ module DialogActions = {
   let make = (~classes: option(dialogActionsClasses)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
-      ~props=Js.Nullable.({"classes": from_opt(classes)}),
+      ~props=Js.Nullable.({"classes": fromOption(classes)}),
       children
     );
 };
@@ -485,7 +487,7 @@ module DialogContentText = {
   let make = (~style: option(ReactDOMRe.style)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
-      ~props=Js.Nullable.({"style": from_opt(style)}),
+      ~props=Js.Nullable.({"style": fromOption(style)}),
       children
     );
 };
@@ -497,7 +499,7 @@ module DialogContent = {
   let make = (~classes: option(dialogContentClasses)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
-      ~props=Js.Nullable.({"classes": from_opt(classes)}),
+      ~props=Js.Nullable.({"classes": fromOption(classes)}),
       children
     );
 };
@@ -517,8 +519,8 @@ module DialogTitle = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "disableTypography": from_opt(disableTypography)
+            "classes": fromOption(classes),
+            "disableTypography": fromOption(disableTypography)
           }
         ),
       children
@@ -565,23 +567,23 @@ module Dialog = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "disableBackdropClick": from_opt(disableBackdropClick),
-            "disableEscapeKeyUp": from_opt(disableEscapeKeyUp),
-            "fullScreen": from_opt(fullScreen),
-            "fullWidth": from_opt(fullWidth),
-            "onBackdropClick": from_opt(onBackdropClick),
-            "onClose": from_opt(onClose),
-            "onEnter": from_opt(onEnter),
-            "onEntered": from_opt(onEntered),
-            "onEntering": from_opt(onEntering),
-            "onEscapeKeyUp": from_opt(onEscapeKeyUp),
-            "onExit": from_opt(onExit),
-            "onExited": from_opt(onExited),
-            "onExiting": from_opt(onExiting),
-            "open": from_opt(_open),
-            "style": from_opt(style)
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "disableBackdropClick": fromOption(disableBackdropClick),
+            "disableEscapeKeyUp": fromOption(disableEscapeKeyUp),
+            "fullScreen": fromOption(fullScreen),
+            "fullWidth": fromOption(fullWidth),
+            "onBackdropClick": fromOption(onBackdropClick),
+            "onClose": fromOption(onClose),
+            "onEnter": fromOption(onEnter),
+            "onEntered": fromOption(onEntered),
+            "onEntering": fromOption(onEntering),
+            "onEscapeKeyUp": fromOption(onEscapeKeyUp),
+            "onExit": fromOption(onExit),
+            "onExited": fromOption(onExited),
+            "onExiting": fromOption(onExiting),
+            "open": fromOption(_open),
+            "style": fromOption(style)
           }
         ),
       children
@@ -607,7 +609,7 @@ module Divider = {
             "light": unwrap_bool(light),
             "inset": unwrap_bool(inset),
             "absolute": unwrap_bool(absolute),
-            "className": from_opt(className)
+            "className": fromOption(className)
           }
         ),
       children
@@ -661,17 +663,17 @@ module Drawer = {
       ~props=
         Js.Nullable.(
           {
-            "anchor": from_opt(option_map(Anchor.to_string, anchor)),
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "elevation": from_opt(elevation),
-            "transitionDuration": from_opt(transitionDuration),
-            "ModalProps": from_opt(modalProps),
-            "onClose": from_opt(onClose),
+            "anchor": fromOption(option_map(Anchor.to_string, anchor)),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "elevation": fromOption(elevation),
+            "transitionDuration": fromOption(transitionDuration),
+            "ModalProps": fromOption(modalProps),
+            "onClose": fromOption(onClose),
             "open": unwrap_bool(_open),
-            "SlideProps": from_opt(slideProps),
-            "type": from_opt(option_map(Type.to_string, _type)),
-            "style": from_opt(style)
+            "SlideProps": fromOption(slideProps),
+            "type": fromOption(option_map(Type.to_string, _type)),
+            "style": fromOption(style)
           }
         ),
       children
@@ -713,17 +715,17 @@ module FormControl = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
             "fullWidth": unwrap_bool(fullWidth),
-            "onBlur": from_opt(onBlur),
-            "onFocus": from_opt(onFocus),
+            "onBlur": fromOption(onBlur),
+            "onFocus": fromOption(onFocus),
             "required": unwrap_bool(required),
-            "margin": from_opt(option_map(Margin.to_string, margin)),
-            "style": from_opt(style)
+            "margin": fromOption(option_map(Margin.to_string, margin)),
+            "style": fromOption(style)
           }
         ),
       children
@@ -756,17 +758,17 @@ module FormControlLabel = {
       ~props=
         Js.Nullable.(
           {
-            "checked": from_opt(checked),
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "control": from_opt(control),
+            "checked": fromOption(checked),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "control": fromOption(control),
             "disabled": unwrap_bool(disabled),
-            "inputRef": from_opt(inputRef),
-            "label": from_opt(label),
-            "name": from_opt(name),
-            "onChange": from_opt(onChange),
-            "value": from_opt(value),
-            "style": from_opt(style)
+            "inputRef": fromOption(inputRef),
+            "label": fromOption(label),
+            "name": fromOption(name),
+            "onChange": fromOption(onChange),
+            "value": fromOption(value),
+            "style": fromOption(style)
           }
         ),
       children
@@ -789,10 +791,10 @@ module FormGroup = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
             "row": unwrap_bool(row),
-            "style": from_opt(style)
+            "style": fromOption(style)
           }
         ),
       children
@@ -817,12 +819,12 @@ module FormHelperText = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
-            "margin": from_opt(option_map(Margin.to_string, margin)),
-            "style": from_opt(style)
+            "margin": fromOption(option_map(Margin.to_string, margin)),
+            "style": fromOption(style)
           }
         ),
       children
@@ -849,14 +851,14 @@ module FormLabel = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
             "focused": unwrap_bool(focused),
             "required": unwrap_bool(required),
-            "style": from_opt(style)
+            "style": fromOption(style)
           }
         ),
       children
@@ -892,20 +894,20 @@ module Grid = {
           {
             "container": unwrap_bool(container),
             "item": unwrap_bool(item),
-            "style": from_opt(style),
-            "className": from_opt(className),
-            "align": from_opt(align),
-            "component": from_opt(component),
-            "direction": from_opt(direction),
-            "wrap": from_opt(wrap),
-            "justify": from_opt(justify),
-            "xl": from_opt(xl),
-            "lg": from_opt(lg),
-            "md": from_opt(md),
-            "sm": from_opt(sm),
-            "xs": from_opt(xs),
-            "spacing": from_opt(spacing),
-            "wrp": from_opt(wrap)
+            "style": fromOption(style),
+            "className": fromOption(className),
+            "align": fromOption(align),
+            "component": fromOption(component),
+            "direction": fromOption(direction),
+            "wrap": fromOption(wrap),
+            "justify": fromOption(justify),
+            "xl": fromOption(xl),
+            "lg": fromOption(lg),
+            "md": fromOption(md),
+            "sm": fromOption(sm),
+            "xs": fromOption(xs),
+            "spacing": fromOption(spacing),
+            "wrp": fromOption(wrap)
           }
         ),
       children
@@ -946,13 +948,13 @@ module IconButton = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "color": from_opt(option_map(Color.to_string, color)),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "color": fromOption(option_map(Color.to_string, color)),
             "disableRipple": unwrap_bool(disableRipple),
             "disabled": unwrap_bool(disabled),
-            "style": from_opt(style),
-            "onClick": from_opt(onClick)
+            "style": fromOption(style),
+            "onClick": fromOption(onClick)
           }
         ),
       children
@@ -983,18 +985,18 @@ module InputLabel = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
             "disableAnimation": unwrap_bool(disableAnimation),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
-            "FormControlClasses": from_opt(_FormControlClasses),
+            "FormControlClasses": fromOption(_FormControlClasses),
             "focused": unwrap_bool(focused),
-            "htmlFor": from_opt(htmlFor),
-            "margin": from_opt(option_map(Margin.to_string, margin)),
+            "htmlFor": fromOption(htmlFor),
+            "margin": fromOption(option_map(Margin.to_string, margin)),
             "required": unwrap_bool(required),
             "shrink": unwrap_bool(shrink),
-            "style": from_opt(style)
+            "style": fromOption(style)
           }
         ),
       children
@@ -1028,15 +1030,15 @@ module Input = {
             "disableUnderline": unwrap_bool(disableUnderline),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
-            "id": from_opt(id),
+            "id": fromOption(id),
             "fullWidth": unwrap_bool(fullWidth),
             "autoFocus": unwrap_bool(autoFocus),
-            "style": from_opt(style),
-            "placeholder": from_opt(placeholder),
-            "className": from_opt(className),
-            "type": from_opt(inputType),
-            "value": from_opt(value),
-            "onChange": from_opt(onChange)
+            "style": fromOption(style),
+            "placeholder": fromOption(placeholder),
+            "className": fromOption(className),
+            "type": fromOption(inputType),
+            "value": fromOption(value),
+            "onChange": fromOption(onChange)
           }
         ),
       children
@@ -1061,12 +1063,12 @@ module LinearProgress = {
       ~props=
         Js.Nullable.(
           {
-            "style": from_opt(style),
-            "mode": from_opt(mode),
-            "color": from_opt(color),
-            "valueBuffer": from_opt(valueBuffer),
-            "value": from_opt(value),
-            "className": from_opt(className)
+            "style": fromOption(style),
+            "mode": fromOption(mode),
+            "color": fromOption(color),
+            "valueBuffer": fromOption(valueBuffer),
+            "value": fromOption(value),
+            "className": fromOption(className)
           }
         ),
       children
@@ -1088,9 +1090,9 @@ module ListItemAvatar = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "style": from_opt(style),
-            "className": from_opt(className)
+            "classes": fromOption(classes),
+            "style": fromOption(style),
+            "className": fromOption(className)
           }
         ),
       children
@@ -1112,9 +1114,9 @@ module ListItemIcon = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "style": from_opt(style),
-            "className": from_opt(className)
+            "classes": fromOption(classes),
+            "style": fromOption(style),
+            "className": fromOption(className)
           }
         ),
       children
@@ -1136,9 +1138,9 @@ module ListItemSecondaryAction = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "style": from_opt(style),
-            "className": from_opt(className)
+            "classes": fromOption(classes),
+            "style": fromOption(style),
+            "className": fromOption(className)
           }
         ),
       children
@@ -1164,13 +1166,13 @@ module ListItemText = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
             "disableTypography": unwrap_bool(disableTypography),
             "inset": unwrap_bool(inset),
-            "primary": from_opt(primary),
-            "secondary": from_opt(secondary),
-            "style": from_opt(style)
+            "primary": fromOption(primary),
+            "secondary": fromOption(secondary),
+            "style": fromOption(style)
           }
         ),
       children
@@ -1201,16 +1203,16 @@ module ListItem = {
         Js.Nullable.(
           {
             "button": unwrap_bool(button),
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
             "dense": unwrap_bool(dense),
             "disabled": unwrap_bool(disabled),
             "disableGutters": unwrap_bool(disableGutters),
             "divider": unwrap_bool(divider),
-            "style": from_opt(style),
-            "onClick": from_opt(onClick),
-            "href": from_opt(href)
+            "style": fromOption(style),
+            "onClick": fromOption(onClick),
+            "href": fromOption(href)
           }
         ),
       children
@@ -1246,12 +1248,12 @@ module ListSubheader = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "color": from_opt(option_map(Color.to_string, color)),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "color": fromOption(option_map(Color.to_string, color)),
             "disableSticky": unwrap_bool(disableSticky),
             "inset": unwrap_bool(inset),
-            "style": from_opt(style)
+            "style": fromOption(style)
           }
         ),
       children
@@ -1277,13 +1279,13 @@ module List = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
             "dense": unwrap_bool(dense),
             "disablePadding": unwrap_bool(disablePadding),
-            "subheader": from_opt(subheader),
-            "style": from_opt(style)
+            "subheader": fromOption(subheader),
+            "style": fromOption(style)
           }
         ),
       children
@@ -1310,14 +1312,14 @@ module MenuItem = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
-            "role": from_opt(role),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
+            "role": fromOption(role),
             "selected": unwrap_bool(selected),
-            "onClick": from_opt(onClick),
-            "style": from_opt(style),
-            "value": from_opt(option_map(unwrapValue, value))
+            "onClick": fromOption(onClick),
+            "style": fromOption(style),
+            "value": fromOption(option_map(unwrapValue, value))
           }
         ),
       children
@@ -1342,12 +1344,12 @@ module Paper = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
-            "elevation": from_opt(elevation),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
+            "elevation": fromOption(elevation),
             "square": unwrap_bool(square),
-            "style": from_opt(style)
+            "style": fromOption(style)
           }
         ),
       children
@@ -1395,25 +1397,25 @@ module Select = {
         Js.Nullable.(
           {
             "autoWidth": unwrap_bool(autoWidth),
-            "classes": from_opt(classes),
-            "className": from_opt(className),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
             "displayEmpty": unwrap_bool(displayEmpty),
-            "input": from_opt(input),
-            "InputClasses": from_opt(inputClasses),
+            "input": fromOption(input),
+            "InputClasses": fromOption(inputClasses),
             "native": unwrap_bool(native),
             "multiple": unwrap_bool(multiple),
-            "MenuProps": from_opt(menuProps),
-            "value": from_opt(option_map(unwrapValue, value)),
-            "style": from_opt(style),
+            "MenuProps": fromOption(menuProps),
+            "value": fromOption(option_map(unwrapValue, value)),
+            "style": fromOption(style),
             /* TODO: Input Props: find a way to rectactor props duplication. */
             "disableUnderline": unwrap_bool(disableUnderline),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
             "fullWidth": unwrap_bool(fullWidth),
             "autoFocus": unwrap_bool(autoFocus),
-            "placeholder": from_opt(placeholder),
-            "type": from_opt(inputType),
-            "onChange": from_opt(onChange)
+            "placeholder": fromOption(placeholder),
+            "type": fromOption(inputType),
+            "onChange": fromOption(onChange)
           }
         ),
       children
@@ -1456,19 +1458,19 @@ module Tab = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
             "disabled": unwrap_bool(disabled),
             "fullWidth": unwrap_bool(fullWidth),
-            "icon": from_opt(icon),
-            "indicator": from_opt(indicator),
-            "label": from_opt(label),
-            "onChange": from_opt(onChange),
-            "onClick": from_opt(onClick),
+            "icon": fromOption(icon),
+            "indicator": fromOption(indicator),
+            "label": fromOption(label),
+            "onChange": fromOption(onChange),
+            "onClick": fromOption(onClick),
             "selected": unwrap_bool(selected),
-            "textColor": from_opt(option_map(TextColor.to_string, textColor)),
-            "value": from_opt(value),
-            "style": from_opt(style)
+            "textColor": fromOption(option_map(TextColor.to_string, textColor)),
+            "value": fromOption(value),
+            "style": fromOption(style)
           }
         ),
       children
@@ -1502,12 +1504,12 @@ module TabScrollButton = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "direction": from_opt(option_map(Direction.to_string, direction)),
-            "onClick": from_opt(onClick),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "direction": fromOption(option_map(Direction.to_string, direction)),
+            "onClick": fromOption(onClick),
             "visible": unwrap_bool(visible),
-            "style": from_opt(style)
+            "style": fromOption(style)
           }
         ),
       children
@@ -1572,22 +1574,22 @@ module Tabs = {
       ~props=
         Js.Nullable.(
           {
-            "buttonClassName": from_opt(buttonClassName),
+            "buttonClassName": fromOption(buttonClassName),
             "centered": unwrap_bool(centered),
-            "classes": from_opt(classes),
-            "className": from_opt(className),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
             "fullWidth": unwrap_bool(fullWidth),
-            "indicatorClassName": from_opt(indicatorClassName),
+            "indicatorClassName": fromOption(indicatorClassName),
             "indicatorColor":
-              from_opt(option_map(IndicatorColor.to_string, indicatorColor)),
-            "onChange": from_opt(onChange),
+              fromOption(option_map(IndicatorColor.to_string, indicatorColor)),
+            "onChange": fromOption(onChange),
             "scrollable": unwrap_bool(scrollable),
             "scrollButtons":
-              from_opt(option_map(ScrollButtons.to_string, scrollButtons)),
-            "TabScrollButton": from_opt(_TabScrollButton),
-            "textColor": from_opt(option_map(TextColor.to_string, textColor)),
-            "value": from_opt(value),
-            "style": from_opt(style)
+              fromOption(option_map(ScrollButtons.to_string, scrollButtons)),
+            "TabScrollButton": fromOption(_TabScrollButton),
+            "textColor": fromOption(option_map(TextColor.to_string, textColor)),
+            "value": fromOption(value),
+            "style": fromOption(style)
           }
         ),
       children
@@ -1610,10 +1612,10 @@ module TableBody = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
-            "style": from_opt(style)
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
+            "style": fromOption(style)
           }
         ),
       children
@@ -1651,12 +1653,12 @@ module TableCell = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
             "numeric": unwrap_bool(numeric),
-            "padding": from_opt(option_map(Padding.to_string, padding)),
-            "style": from_opt(style)
+            "padding": fromOption(option_map(Padding.to_string, padding)),
+            "style": fromOption(style)
           }
         ),
       children
@@ -1679,10 +1681,10 @@ module TableFooter = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
-            "style": from_opt(style)
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
+            "style": fromOption(style)
           }
         ),
       children
@@ -1705,10 +1707,10 @@ module TableHead = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
-            "style": from_opt(style)
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
+            "style": fromOption(style)
           }
         ),
       children
@@ -1735,14 +1737,14 @@ module TableRow = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
             "hover": unwrap_bool(hover),
             "selected": unwrap_bool(selected),
-            "style": from_opt(style),
-            "onClick": from_opt(onClick),
-            "onDoubleClick": from_opt(onDoubleClick)
+            "style": fromOption(style),
+            "onClick": fromOption(onClick),
+            "onDoubleClick": fromOption(onDoubleClick)
           }
         ),
       children
@@ -1765,10 +1767,10 @@ module Table = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
-            "style": from_opt(style)
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
+            "style": fromOption(style)
           }
         ),
       children
@@ -1822,37 +1824,37 @@ module TextField = {
       ~props=
         Js.Nullable.(
           {
-            "autoComplete": from_opt(autoComplete),
+            "autoComplete": fromOption(autoComplete),
             "autoFocus": unwrap_bool(autoFocus),
-            "className": from_opt(className),
-            "defaultValue": from_opt(defaultValue),
+            "className": fromOption(className),
+            "defaultValue": fromOption(defaultValue),
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
-            "FormHelperTextProps": from_opt(_FormHelperTextProps),
+            "FormHelperTextProps": fromOption(_FormHelperTextProps),
             "fullWidth": unwrap_bool(fullWidth),
-            "helperText": from_opt(helperText),
-            "helperTextClassName": from_opt(helperTextClassName),
-            "id": from_opt(id),
-            "InputLabelProps": from_opt(_InputLabelProps),
-            "inputProps": from_opt(inputProps),
-            "InputProps": from_opt(_InputProps),
-            "inputRef": from_opt(inputRef),
-            "label": from_opt(label),
-            "labelClassName": from_opt(labelClassName),
+            "helperText": fromOption(helperText),
+            "helperTextClassName": fromOption(helperTextClassName),
+            "id": fromOption(id),
+            "InputLabelProps": fromOption(_InputLabelProps),
+            "inputProps": fromOption(inputProps),
+            "InputProps": fromOption(_InputProps),
+            "inputRef": fromOption(inputRef),
+            "label": fromOption(label),
+            "labelClassName": fromOption(labelClassName),
             "multiline": unwrap_bool(multiline),
-            "name": from_opt(name),
-            "onChange": from_opt(onChange),
-            "placeholder": from_opt(placeholder),
+            "name": fromOption(name),
+            "onChange": fromOption(onChange),
+            "placeholder": fromOption(placeholder),
             "required": unwrap_bool(required),
-            "rootRef": from_opt(rootRef),
-            "rows": from_opt(option_map(unwrapValue, rows)),
-            "rowsMax": from_opt(option_map(unwrapValue, rowsMax)),
+            "rootRef": fromOption(rootRef),
+            "rows": fromOption(option_map(unwrapValue, rows)),
+            "rowsMax": fromOption(option_map(unwrapValue, rowsMax)),
             "select": unwrap_bool(select),
-            "SelectProps": from_opt(_SelectProps),
-            "type": from_opt(_type),
-            "value": from_opt(option_map(unwrapValue, value)),
-            "margin": from_opt(option_map(Margin.to_string, margin)),
-            "style": from_opt(style)
+            "SelectProps": fromOption(_SelectProps),
+            "type": fromOption(_type),
+            "value": fromOption(option_map(unwrapValue, value)),
+            "margin": fromOption(option_map(Margin.to_string, margin)),
+            "style": fromOption(style)
           }
         ),
       children
@@ -1875,10 +1877,10 @@ module Toolbar = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
             "disableGutters": unwrap_bool(disableGutters),
-            "style": from_opt(style)
+            "style": fromOption(style)
           }
         ),
       children
@@ -1942,21 +1944,21 @@ module Tooltip = {
       ~props=
         Js.Nullable.(
           {
-            "classes": from_opt(classes),
-            "className": from_opt(className),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
             "disableTriggerFocus": unwrap_bool(disableTriggerFocus),
             "disableTriggerHover": unwrap_bool(disableTriggerHover),
             "disableTriggerTouch": unwrap_bool(disableTriggerTouch),
-            "id": from_opt(id),
-            "onClose": from_opt(onClose),
-            "onOpen": from_opt(onOpen),
+            "id": fromOption(id),
+            "onClose": fromOption(onClose),
+            "onOpen": fromOption(onOpen),
             "open": unwrap_bool(_open),
-            "title": from_opt(title),
-            "enterDelay": from_opt(enterDelay),
-            "leaveDelay": from_opt(leaveDelay),
-            "placement": from_opt(option_map(Placement.to_string, placement)),
-            "PopperProps": from_opt(popperProps),
-            "style": from_opt(style)
+            "title": fromOption(title),
+            "enterDelay": fromOption(enterDelay),
+            "leaveDelay": fromOption(leaveDelay),
+            "placement": fromOption(option_map(Placement.to_string, placement)),
+            "PopperProps": fromOption(popperProps),
+            "style": fromOption(style)
           }
         ),
       children
@@ -2018,17 +2020,17 @@ module Typography = {
       ~props=
         Js.Nullable.(
           {
-            "align": from_opt(option_map(Align.to_string, align)),
-            "classes": from_opt(classes),
-            "className": from_opt(className),
-            "component": from_opt(component),
-            "color": from_opt(option_map(Color.to_string, color)),
+            "align": fromOption(option_map(Align.to_string, align)),
+            "classes": fromOption(classes),
+            "className": fromOption(className),
+            "component": fromOption(component),
+            "color": fromOption(option_map(Color.to_string, color)),
             "gutterBottom": unwrap_bool(gutterBottom),
-            "headlineMapping": from_opt(headlineMapping),
+            "headlineMapping": fromOption(headlineMapping),
             "noWrap": unwrap_bool(noWrap),
             "paragraph": unwrap_bool(paragraph),
-            "type": from_opt(_type),
-            "style": from_opt(style)
+            "type": fromOption(_type),
+            "style": fromOption(style)
           }
         ),
       children
