@@ -11,6 +11,7 @@ let unwrapValue =
         | `StringArray(array(string))
         | `Float(float)
         | `FloatArray(array(float))
+        | `Boolean(bool)
       ],
     ) =>
   switch (r) {
@@ -20,6 +21,7 @@ let unwrapValue =
   | `IntArray(a) => toJsUnsafe(a)
   | `Float(a) => toJsUnsafe(a)
   | `FloatArray(a) => toJsUnsafe(a)
+  | `Boolean(b) => toJsUnsafe(Js.Boolean.to_js_boolean(b))
   };
 
 let unwrap_bool = (b: option(bool)) =>
@@ -474,12 +476,7 @@ module Collapse = {
 module DialogActions = {
   [@bs.module "material-ui/Dialog"]
   external reactClass : ReasonReact.reactClass = "DialogActions";
-  type dialogActionsClasses = {
-    root: option(string),
-    action: option(string),
-    button: option(string),
-  };
-  let make = (~classes: option(dialogActionsClasses)=?, children) =>
+  let make = (~classes: option(Js.t({..}))=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=Js.Nullable.({"classes": fromOption(classes)}),
@@ -501,8 +498,7 @@ module DialogContentText = {
 module DialogContent = {
   [@bs.module "material-ui/Dialog"]
   external reactClass : ReasonReact.reactClass = "DialogContent";
-  type dialogContentClasses = {root: option(string)};
-  let make = (~classes: option(dialogContentClasses)=?, children) =>
+  let make = (~classes: option(Js.t({..}))=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=Js.Nullable.({"classes": fromOption(classes)}),
@@ -513,10 +509,9 @@ module DialogContent = {
 module DialogTitle = {
   [@bs.module "material-ui/Dialog"]
   external reactClass : ReasonReact.reactClass = "DialogTitle";
-  type dialogTitleClasses = {root: option(string)};
   let make =
       (
-        ~classes: option(dialogTitleClasses)=?,
+        ~classes: option(Js.t({..}))=?,
         ~disableTypography: option(bool)=?,
         children,
       ) =>
@@ -534,19 +529,11 @@ module DialogTitle = {
 };
 
 module Dialog = {
-  type dialogClasses = {
-    root: option(string),
-    paper: option(string),
-    paperWidthXs: option(string),
-    paperWidthSm: option(string),
-    paperWidthMd: option(string),
-    fullScreen: option(string),
-  };
   [@bs.module "material-ui/Dialog"]
   external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
-        ~classes: option(dialogClasses)=?,
+        ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~disableBackdropClick: option(bool)=?,
         ~disableEscapeKeyUp: option(bool)=?,
@@ -1428,6 +1415,44 @@ module Select = {
     );
 };
 
+module Switch = {
+  module Color = {
+    type t =
+      | Accent
+      | Primary
+      | Inherit;
+    let to_string =
+      fun
+      | Accent => "accent"
+      | Primary => "primary"
+      | Inherit => "inherit";
+  };
+  [@bs.module "material-ui/Switch"]
+  external reactClass : ReasonReact.reactClass = "default";
+  /* TODO: add all props */
+  let make =
+      (
+        ~checked: option([ | `String(string) | `Boolean(bool)])=?,
+        ~color: option(Color.t)=?,
+        ~onChange: option(ReactEventRe.Synthetic.t => unit)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children,
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "checked": fromOption(option_map(unwrapValue, checked)),
+            "color": fromOption(option_map(Color.to_string, color)),
+            "onChange": fromOption(onChange),
+            "style": fromOption(style),
+          }
+        ),
+      children,
+    );
+};
+
 module Tab = {
   module TextColor = {
     type t =
@@ -1656,6 +1681,7 @@ module TableCell = {
         ~component: option(string)=?,
         ~numeric: option(bool)=?,
         ~padding: option(Padding.t)=?,
+        ~colSpan: option(int)=?,
         ~style: option(ReactDOMRe.style)=?,
         children,
       ) =>
@@ -1669,6 +1695,7 @@ module TableCell = {
             "component": fromOption(component),
             "numeric": unwrap_bool(numeric),
             "padding": fromOption(option_map(Padding.to_string, padding)),
+            "colSpan": fromOption(colSpan),
             "style": fromOption(style),
           }
         ),
@@ -1721,6 +1748,54 @@ module TableHead = {
             "classes": fromOption(classes),
             "className": fromOption(className),
             "component": fromOption(component),
+            "style": fromOption(style),
+          }
+        ),
+      children,
+    );
+};
+
+module TablePagination = {
+  [@bs.module "material-ui/Table"]
+  external toolbar : ReasonReact.reactClass = "TablePagination";
+  /* TODO: add all props */
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~colSpan: option(int)=?,
+        ~count: int,
+        ~rowsPerPage: int,
+        ~rowsPerPageOptions: option(array(int))=?,
+        ~page: int,
+        ~labelDisplayedRows:
+           option(
+             {
+               .
+               "from": int,
+               "_to": int,
+               "count": int,
+             } =>
+             string,
+           )=?,
+        ~onChangePage: (Js.Nullable.t(ReactEventRe.Synthetic.t), int) => unit,
+        ~onChangeRowsPerPage: option(ReactEventRe.Form.t => unit)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children,
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": fromOption(classes),
+            "colSpan": colSpan,
+            "count": count,
+            "rowsPerPage": rowsPerPage,
+            "rowsPerPageOptions": fromOption(rowsPerPageOptions),
+            "page": page,
+            "labelDisplayedRows": fromOption(labelDisplayedRows),
+            "onChangePage": onChangePage,
+            "onChangeRowsPerPage": fromOption(onChangeRowsPerPage),
             "style": fromOption(style),
           }
         ),

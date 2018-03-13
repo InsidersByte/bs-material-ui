@@ -112,13 +112,13 @@ let make = (_children) => {
 * [ ] SnackbarContent
 * [ ] Snackbar
 * [ ] SvgIcon
-* [ ] Switch
+* [x] Switch
 * [x] Tab
 * [x] TableBody
 * [x] TableCell
 * [x] TableFooter
 * [x] TableHead
-* [ ] TablePagination
+* [x] TablePagination
 * [x] TableRow
 * [ ] TableSortLabel
 * [x] Table
