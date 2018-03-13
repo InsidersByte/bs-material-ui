@@ -1429,6 +1429,7 @@ module Switch = {
   };
   [@bs.module "material-ui/Switch"]
   external reactClass : ReasonReact.reactClass = "default";
+  /* TODO: add all props */
   let make =
       (
         ~checked: option([ | `String(string) | `Boolean(bool)])=?,
