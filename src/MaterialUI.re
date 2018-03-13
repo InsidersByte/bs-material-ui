@@ -474,12 +474,7 @@ module Collapse = {
 module DialogActions = {
   [@bs.module "material-ui/Dialog"]
   external reactClass : ReasonReact.reactClass = "DialogActions";
-  type dialogActionsClasses = {
-    root: option(string),
-    action: option(string),
-    button: option(string),
-  };
-  let make = (~classes: option(dialogActionsClasses)=?, children) =>
+  let make = (~classes: option(Js.t({..}))=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=Js.Nullable.({"classes": fromOption(classes)}),
@@ -501,8 +496,7 @@ module DialogContentText = {
 module DialogContent = {
   [@bs.module "material-ui/Dialog"]
   external reactClass : ReasonReact.reactClass = "DialogContent";
-  type dialogContentClasses = {root: option(string)};
-  let make = (~classes: option(dialogContentClasses)=?, children) =>
+  let make = (~classes: option(Js.t({..}))=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=Js.Nullable.({"classes": fromOption(classes)}),
@@ -513,10 +507,9 @@ module DialogContent = {
 module DialogTitle = {
   [@bs.module "material-ui/Dialog"]
   external reactClass : ReasonReact.reactClass = "DialogTitle";
-  type dialogTitleClasses = {root: option(string)};
   let make =
       (
-        ~classes: option(dialogTitleClasses)=?,
+        ~classes: option(Js.t({..}))=?,
         ~disableTypography: option(bool)=?,
         children,
       ) =>
@@ -534,19 +527,11 @@ module DialogTitle = {
 };
 
 module Dialog = {
-  type dialogClasses = {
-    root: option(string),
-    paper: option(string),
-    paperWidthXs: option(string),
-    paperWidthSm: option(string),
-    paperWidthMd: option(string),
-    fullScreen: option(string),
-  };
   [@bs.module "material-ui/Dialog"]
   external reactClass : ReasonReact.reactClass = "default";
   let make =
       (
-        ~classes: option(dialogClasses)=?,
+        ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~disableBackdropClick: option(bool)=?,
         ~disableEscapeKeyUp: option(bool)=?,
