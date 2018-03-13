@@ -36,10 +36,10 @@
   "devDependencies": {
     "bs-platform": "2.2.2",
     "husky": "0.14.3",
-    "lint-staged": "6.0.0",
+    "lint-staged": "7.0.0",
     "material-ui": "1.0.0-beta.29",
-    "prettier": "1.10.2",
-    "reason-react": "0.3.1"
+    "prettier": "1.11.1",
+    "reason-react": "0.3.4"
   },
   "peerDependencies": {
     "material-ui": "^1.0.0-beta.26",

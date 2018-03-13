@@ -11,9 +11,9 @@ let unwrapValue =
         | `StringArray(array(string))
         | `Float(float)
         | `FloatArray(array(float))
-      ]
+      ],
     ) =>
-  switch r {
+  switch (r) {
   | `String(s) => toJsUnsafe(s)
   | `Int(i) => toJsUnsafe(i)
   | `StringArray(a) => toJsUnsafe(a)
@@ -23,13 +23,13 @@ let unwrapValue =
   };
 
 let unwrap_bool = (b: option(bool)) =>
-  switch b {
+  switch (b) {
   | Some(value) => Js.Nullable.return(Js.Boolean.to_js_boolean(value))
   | None => Js.Nullable.undefined
   };
 
 let option_map = (fn, option) =>
-  switch option {
+  switch (option) {
   | Some(value) => Some(fn(value))
   | None => None
   };
@@ -44,7 +44,7 @@ module AppBar = {
         ~classes: option(Js.t({..}))=?,
         ~style: option(ReactDOMRe.style)=?,
         ~className: option(string)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -55,10 +55,10 @@ module AppBar = {
             "color": fromOption(color),
             "classes": fromOption(classes),
             "style": fromOption(style),
-            "className": fromOption(className)
+            "className": fromOption(className),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -77,7 +77,7 @@ module Avatar = {
         ~src: option(string)=?,
         ~srcSet: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -93,10 +93,10 @@ module Avatar = {
             "sizes": fromOption(sizes),
             "src": fromOption(src),
             "srcSet": fromOption(srcSet),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -107,7 +107,7 @@ module Badge = {
       (
         ~badgeContent: array(ReasonReact.reactElement),
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -115,7 +115,7 @@ module Badge = {
         Js.Nullable.(
           {"badgeContent": badgeContent, "style": fromOption(style)}
         ),
-      children
+      children,
     );
 };
 
@@ -133,7 +133,7 @@ module ButtonBase = {
         ~disableRipple: option(bool)=?,
         ~focusRipple: option(bool)=?,
         ~disabled: option(bool)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -148,10 +148,10 @@ module ButtonBase = {
             "onClick": fromOption(onClick),
             "component": fromOption(component),
             "className": fromOption(className),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -191,7 +191,7 @@ module Button = {
         ~raised: option(bool)=?,
         ~_type: option(string)=?,
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -213,10 +213,10 @@ module Button = {
             "onClick": fromOption(onClick),
             "style": fromOption(style),
             "centerRipple": unwrap_bool(centerRipple),
-            "focusRipple": unwrap_bool(focusRipple)
+            "focusRipple": unwrap_bool(focusRipple),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -231,10 +231,10 @@ module CardActions = {
         Js.Nullable.(
           {
             "disableActionSpacing": unwrap_bool(disableActionSpacing),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -245,7 +245,7 @@ module CardContent = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=Js.Nullable.({"style": fromOption(style)}),
-      children
+      children,
     );
 };
 
@@ -261,7 +261,7 @@ module CardHeader = {
         ~style: option(ReactDOMRe.style)=?,
         ~title: option(ReasonReact.reactElement)=?,
         ~subheader: option(ReasonReact.reactElement)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -274,10 +274,10 @@ module CardHeader = {
             "className": fromOption(className),
             "style": fromOption(style),
             "subheader": fromOption(subheader),
-            "title": fromOption(title)
+            "title": fromOption(title),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -285,12 +285,18 @@ module CardMedia = {
   [@bs.module "material-ui/Card"]
   external reactClass : ReasonReact.reactClass = "CardMedia";
   let make =
-      (~style: option(ReactDOMRe.style)=?, ~image: option(string)=?, children) =>
+      (
+        ~style: option(ReactDOMRe.style)=?,
+        ~image: option(string)=?,
+        children,
+      ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=
-        Js.Nullable.({"style": fromOption(style), "image": fromOption(image)}),
-      children
+        Js.Nullable.(
+          {"style": fromOption(style), "image": fromOption(image)}
+        ),
+      children,
     );
 };
 
@@ -302,7 +308,7 @@ module Card = {
         ~raised: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~className: option(string)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -311,10 +317,10 @@ module Card = {
           {
             "raised": unwrap_bool(raised),
             "style": fromOption(style),
-            "className": fromOption(className)
+            "className": fromOption(className),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -341,7 +347,7 @@ module Checkbox = {
         ~onChange: option((ReactEventRe.Selection.t, Js.boolean) => unit)=?,
         ~value: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -362,10 +368,10 @@ module Checkbox = {
             "name": fromOption(name),
             "onChange": fromOption(onChange),
             "value": fromOption(value),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -384,7 +390,7 @@ module Chip = {
         ~onDelete: option(ReactEventRe.Synthetic.t => unit)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~tabIndex: option([ | `String(string) | `Int(int)])=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -400,10 +406,10 @@ module Chip = {
             "onKeyDown": fromOption(onKeyDown),
             "onDelete": fromOption(onDelete),
             "style": fromOption(style),
-            "tabIndex": fromOption(option_map(unwrapValue, tabIndex))
+            "tabIndex": fromOption(option_map(unwrapValue, tabIndex)),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -421,7 +427,7 @@ module CircularProgress = {
         ~size: option(int)=?,
         ~max: option(int)=?,
         ~min: option(int)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -436,10 +442,10 @@ module CircularProgress = {
             "size": fromOption(size),
             "max": fromOption(max),
             "min": fromOption(min),
-            "className": fromOption(className)
+            "className": fromOption(className),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -450,7 +456,7 @@ module Collapse = {
       (
         ~expanded: option(bool)=?,
         ~transitionDuration: option(string)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -458,10 +464,10 @@ module Collapse = {
         Js.Nullable.(
           {
             "in": unwrap_bool(expanded),
-            "transitionDuration": fromOption(transitionDuration)
+            "transitionDuration": fromOption(transitionDuration),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -471,13 +477,13 @@ module DialogActions = {
   type dialogActionsClasses = {
     root: option(string),
     action: option(string),
-    button: option(string)
+    button: option(string),
   };
   let make = (~classes: option(dialogActionsClasses)=?, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=Js.Nullable.({"classes": fromOption(classes)}),
-      children
+      children,
     );
 };
 
@@ -488,7 +494,7 @@ module DialogContentText = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=Js.Nullable.({"style": fromOption(style)}),
-      children
+      children,
     );
 };
 
@@ -500,7 +506,7 @@ module DialogContent = {
     ReasonReact.wrapJsForReason(
       ~reactClass,
       ~props=Js.Nullable.({"classes": fromOption(classes)}),
-      children
+      children,
     );
 };
 
@@ -512,7 +518,7 @@ module DialogTitle = {
       (
         ~classes: option(dialogTitleClasses)=?,
         ~disableTypography: option(bool)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -520,10 +526,10 @@ module DialogTitle = {
         Js.Nullable.(
           {
             "classes": fromOption(classes),
-            "disableTypography": fromOption(disableTypography)
+            "disableTypography": fromOption(disableTypography),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -534,7 +540,7 @@ module Dialog = {
     paperWidthXs: option(string),
     paperWidthSm: option(string),
     paperWidthMd: option(string),
-    fullScreen: option(string)
+    fullScreen: option(string),
   };
   [@bs.module "material-ui/Dialog"]
   external reactClass : ReasonReact.reactClass = "default";
@@ -560,7 +566,7 @@ module Dialog = {
         /* TODO: add transition */
         /* TODO: add transitionDuration */
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -583,10 +589,10 @@ module Dialog = {
             "onExited": fromOption(onExited),
             "onExiting": fromOption(onExiting),
             "open": fromOption(_open),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -599,7 +605,7 @@ module Divider = {
         ~light: option(bool)=?,
         ~absolute: option(bool)=?,
         ~className: option(string)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -609,10 +615,10 @@ module Divider = {
             "light": unwrap_bool(light),
             "inset": unwrap_bool(inset),
             "absolute": unwrap_bool(absolute),
-            "className": fromOption(className)
+            "className": fromOption(className),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -656,7 +662,7 @@ module Drawer = {
         ~slideProps: option(Js.t({..}))=?,
         ~_type: option(Type.t)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -673,10 +679,10 @@ module Drawer = {
             "open": unwrap_bool(_open),
             "SlideProps": fromOption(slideProps),
             "type": fromOption(option_map(Type.to_string, _type)),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -708,7 +714,7 @@ module FormControl = {
         ~required: option(bool)=?,
         ~margin: option(Margin.t)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -725,10 +731,10 @@ module FormControl = {
             "onFocus": fromOption(onFocus),
             "required": unwrap_bool(required),
             "margin": fromOption(option_map(Margin.to_string, margin)),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -751,7 +757,7 @@ module FormControlLabel = {
         ~onChange: option(ReactEventRe.Selection.t => unit)=?,
         ~value: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -768,10 +774,10 @@ module FormControlLabel = {
             "name": fromOption(name),
             "onChange": fromOption(onChange),
             "value": fromOption(value),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -784,7 +790,7 @@ module FormGroup = {
         ~className: option(string)=?,
         ~row: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -794,10 +800,10 @@ module FormGroup = {
             "classes": fromOption(classes),
             "className": fromOption(className),
             "row": unwrap_bool(row),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -812,7 +818,7 @@ module FormHelperText = {
         ~error: option(bool)=?,
         ~margin: option(Margin.t)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -824,10 +830,10 @@ module FormHelperText = {
             "disabled": unwrap_bool(disabled),
             "error": unwrap_bool(error),
             "margin": fromOption(option_map(Margin.to_string, margin)),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -844,7 +850,7 @@ module FormLabel = {
         ~focused: option(bool)=?,
         ~required: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -858,10 +864,10 @@ module FormLabel = {
             "error": unwrap_bool(error),
             "focused": unwrap_bool(focused),
             "required": unwrap_bool(required),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -885,7 +891,7 @@ module Grid = {
         ~item: option(bool)=?,
         ~className: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -907,10 +913,10 @@ module Grid = {
             "sm": fromOption(sm),
             "xs": fromOption(xs),
             "spacing": fromOption(spacing),
-            "wrp": fromOption(wrap)
+            "wrp": fromOption(wrap),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -941,7 +947,7 @@ module IconButton = {
         ~disableRipple: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -954,10 +960,10 @@ module IconButton = {
             "disableRipple": unwrap_bool(disableRipple),
             "disabled": unwrap_bool(disabled),
             "style": fromOption(style),
-            "onClick": fromOption(onClick)
+            "onClick": fromOption(onClick),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -978,7 +984,7 @@ module InputLabel = {
         ~required: option(bool)=?,
         ~shrink: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -996,10 +1002,10 @@ module InputLabel = {
             "margin": fromOption(option_map(Margin.to_string, margin)),
             "required": unwrap_bool(required),
             "shrink": unwrap_bool(shrink),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1020,7 +1026,7 @@ module Input = {
         ~placeholder: option(string)=?,
         ~className: option(string)=?,
         ~inputType: option(string)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1038,10 +1044,10 @@ module Input = {
             "className": fromOption(className),
             "type": fromOption(inputType),
             "value": fromOption(value),
-            "onChange": fromOption(onChange)
+            "onChange": fromOption(onChange),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1056,7 +1062,7 @@ module LinearProgress = {
         ~value: option(int)=?,
         ~valueBuffer: option(int)=?,
         ~mode: option(string)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1068,10 +1074,10 @@ module LinearProgress = {
             "color": fromOption(color),
             "valueBuffer": fromOption(valueBuffer),
             "value": fromOption(value),
-            "className": fromOption(className)
+            "className": fromOption(className),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1083,7 +1089,7 @@ module ListItemAvatar = {
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1092,10 +1098,10 @@ module ListItemAvatar = {
           {
             "classes": fromOption(classes),
             "style": fromOption(style),
-            "className": fromOption(className)
+            "className": fromOption(className),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1107,7 +1113,7 @@ module ListItemIcon = {
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1116,10 +1122,10 @@ module ListItemIcon = {
           {
             "classes": fromOption(classes),
             "style": fromOption(style),
-            "className": fromOption(className)
+            "className": fromOption(className),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1131,7 +1137,7 @@ module ListItemSecondaryAction = {
         ~classes: option(Js.t({..}))=?,
         ~className: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1140,10 +1146,10 @@ module ListItemSecondaryAction = {
           {
             "classes": fromOption(classes),
             "style": fromOption(style),
-            "className": fromOption(className)
+            "className": fromOption(className),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1159,7 +1165,7 @@ module ListItemText = {
         ~primary: option(string)=?,
         ~secondary: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1172,10 +1178,10 @@ module ListItemText = {
             "inset": unwrap_bool(inset),
             "primary": fromOption(primary),
             "secondary": fromOption(secondary),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1195,7 +1201,7 @@ module ListItem = {
         ~style: option(ReactDOMRe.style)=?,
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~href: option(string)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1212,10 +1218,10 @@ module ListItem = {
             "divider": unwrap_bool(divider),
             "style": fromOption(style),
             "onClick": fromOption(onClick),
-            "href": fromOption(href)
+            "href": fromOption(href),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1241,7 +1247,7 @@ module ListSubheader = {
         ~disableSticky: option(bool)=?,
         ~inset: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1253,10 +1259,10 @@ module ListSubheader = {
             "color": fromOption(option_map(Color.to_string, color)),
             "disableSticky": unwrap_bool(disableSticky),
             "inset": unwrap_bool(inset),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1272,7 +1278,7 @@ module List = {
         ~disablePadding: option(bool)=?,
         ~subheader: option(ReasonReact.reactElement)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1285,10 +1291,10 @@ module List = {
             "dense": unwrap_bool(dense),
             "disablePadding": unwrap_bool(disablePadding),
             "subheader": fromOption(subheader),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1305,7 +1311,7 @@ module MenuItem = {
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~value: option([ | `String(string) | `Int(int)])=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1319,10 +1325,10 @@ module MenuItem = {
             "selected": unwrap_bool(selected),
             "onClick": fromOption(onClick),
             "style": fromOption(style),
-            "value": fromOption(option_map(unwrapValue, value))
+            "value": fromOption(option_map(unwrapValue, value)),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1337,7 +1343,7 @@ module Paper = {
         ~elevation: option(int)=?,
         ~square: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=toolbar,
@@ -1349,10 +1355,10 @@ module Paper = {
             "component": fromOption(component),
             "elevation": fromOption(elevation),
             "square": unwrap_bool(square),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1377,7 +1383,7 @@ module Select = {
                | `IntArray(array(int))
                | `String(string)
                | `StringArray(array(string))
-             ]
+             ],
            )=?,
         ~style: option(ReactDOMRe.style)=?,
         /* Input Props*/
@@ -1389,7 +1395,7 @@ module Select = {
         ~onChange: option(ReactEventRe.Form.t => unit)=?,
         ~placeholder: option(string)=?,
         ~inputType: option(string)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1415,10 +1421,10 @@ module Select = {
             "autoFocus": unwrap_bool(autoFocus),
             "placeholder": fromOption(placeholder),
             "type": fromOption(inputType),
-            "onChange": fromOption(onChange)
+            "onChange": fromOption(onChange),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1451,7 +1457,7 @@ module Tab = {
         ~textColor: option(TextColor.t)=?,
         ~value: 'a=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1468,12 +1474,13 @@ module Tab = {
             "onChange": fromOption(onChange),
             "onClick": fromOption(onClick),
             "selected": unwrap_bool(selected),
-            "textColor": fromOption(option_map(TextColor.to_string, textColor)),
+            "textColor":
+              fromOption(option_map(TextColor.to_string, textColor)),
             "value": fromOption(value),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1497,7 +1504,7 @@ module TabScrollButton = {
         ~onClick: option(ReasonReact.Callback.t(ReactEventRe.Mouse.t))=?,
         ~visible: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1506,13 +1513,14 @@ module TabScrollButton = {
           {
             "classes": fromOption(classes),
             "className": fromOption(className),
-            "direction": fromOption(option_map(Direction.to_string, direction)),
+            "direction":
+              fromOption(option_map(Direction.to_string, direction)),
             "onClick": fromOption(onClick),
             "visible": unwrap_bool(visible),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1567,7 +1575,7 @@ module Tabs = {
         ~textColor: option(TextColor.t)=?,
         ~value: 'a=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1581,18 +1589,21 @@ module Tabs = {
             "fullWidth": unwrap_bool(fullWidth),
             "indicatorClassName": fromOption(indicatorClassName),
             "indicatorColor":
-              fromOption(option_map(IndicatorColor.to_string, indicatorColor)),
+              fromOption(
+                option_map(IndicatorColor.to_string, indicatorColor),
+              ),
             "onChange": fromOption(onChange),
             "scrollable": unwrap_bool(scrollable),
             "scrollButtons":
               fromOption(option_map(ScrollButtons.to_string, scrollButtons)),
             "TabScrollButton": fromOption(_TabScrollButton),
-            "textColor": fromOption(option_map(TextColor.to_string, textColor)),
+            "textColor":
+              fromOption(option_map(TextColor.to_string, textColor)),
             "value": fromOption(value),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1605,7 +1616,7 @@ module TableBody = {
         ~className: option(string)=?,
         ~component: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=toolbar,
@@ -1615,10 +1626,10 @@ module TableBody = {
             "classes": fromOption(classes),
             "className": fromOption(className),
             "component": fromOption(component),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1646,7 +1657,7 @@ module TableCell = {
         ~numeric: option(bool)=?,
         ~padding: option(Padding.t)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=toolbar,
@@ -1658,10 +1669,10 @@ module TableCell = {
             "component": fromOption(component),
             "numeric": unwrap_bool(numeric),
             "padding": fromOption(option_map(Padding.to_string, padding)),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1674,7 +1685,7 @@ module TableFooter = {
         ~className: option(string)=?,
         ~component: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=toolbar,
@@ -1684,10 +1695,10 @@ module TableFooter = {
             "classes": fromOption(classes),
             "className": fromOption(className),
             "component": fromOption(component),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1700,7 +1711,7 @@ module TableHead = {
         ~className: option(string)=?,
         ~component: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=toolbar,
@@ -1710,10 +1721,10 @@ module TableHead = {
             "classes": fromOption(classes),
             "className": fromOption(className),
             "component": fromOption(component),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1730,7 +1741,7 @@ module TableRow = {
         ~style: option(ReactDOMRe.style)=?,
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         ~onDoubleClick: option(ReactEventRe.Mouse.t => unit)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=toolbar,
@@ -1744,10 +1755,10 @@ module TableRow = {
             "selected": unwrap_bool(selected),
             "style": fromOption(style),
             "onClick": fromOption(onClick),
-            "onDoubleClick": fromOption(onDoubleClick)
+            "onDoubleClick": fromOption(onDoubleClick),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1760,7 +1771,7 @@ module Table = {
         ~className: option(string)=?,
         ~component: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=toolbar,
@@ -1770,10 +1781,10 @@ module Table = {
             "classes": fromOption(classes),
             "className": fromOption(className),
             "component": fromOption(component),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1817,7 +1828,7 @@ module TextField = {
         ~value: option([ | `Int(int) | `String(string) | `Float(float)])=?,
         ~margin: option(Margin.t)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass,
@@ -1854,10 +1865,10 @@ module TextField = {
             "type": fromOption(_type),
             "value": fromOption(option_map(unwrapValue, value)),
             "margin": fromOption(option_map(Margin.to_string, margin)),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1870,7 +1881,7 @@ module Toolbar = {
         ~className: option(string)=?,
         ~disableGutters=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=toolbar,
@@ -1880,10 +1891,10 @@ module Toolbar = {
             "classes": fromOption(classes),
             "className": fromOption(className),
             "disableGutters": unwrap_bool(disableGutters),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -1937,7 +1948,7 @@ module Tooltip = {
         ~placement: option(Placement.t)=?,
         ~popperProps: option(Js.t({..}))=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=toolbar,
@@ -1956,12 +1967,13 @@ module Tooltip = {
             "title": fromOption(title),
             "enterDelay": fromOption(enterDelay),
             "leaveDelay": fromOption(leaveDelay),
-            "placement": fromOption(option_map(Placement.to_string, placement)),
+            "placement":
+              fromOption(option_map(Placement.to_string, placement)),
             "PopperProps": fromOption(popperProps),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
 
@@ -2013,7 +2025,7 @@ module Typography = {
         ~paragraph: option(bool)=?,
         ~_type: option(string)=?,
         ~style: option(ReactDOMRe.style)=?,
-        children
+        children,
       ) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=typography,
@@ -2030,9 +2042,9 @@ module Typography = {
             "noWrap": unwrap_bool(noWrap),
             "paragraph": unwrap_bool(paragraph),
             "type": fromOption(_type),
-            "style": fromOption(style)
+            "style": fromOption(style),
           }
         ),
-      children
+      children,
     );
 };
