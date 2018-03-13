@@ -1681,6 +1681,7 @@ module TableCell = {
         ~component: option(string)=?,
         ~numeric: option(bool)=?,
         ~padding: option(Padding.t)=?,
+        ~colSpan: option(int)=?,
         ~style: option(ReactDOMRe.style)=?,
         children,
       ) =>
@@ -1694,6 +1695,7 @@ module TableCell = {
             "component": fromOption(component),
             "numeric": unwrap_bool(numeric),
             "padding": fromOption(option_map(Padding.to_string, padding)),
+            "colSpan": fromOption(colSpan),
             "style": fromOption(style),
           }
         ),
