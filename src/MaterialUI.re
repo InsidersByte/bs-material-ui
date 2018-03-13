@@ -1755,6 +1755,54 @@ module TableHead = {
     );
 };
 
+module TablePagination = {
+  [@bs.module "material-ui/Table"]
+  external toolbar : ReasonReact.reactClass = "TablePagination";
+  /* TODO: add all props */
+  let make =
+      (
+        ~classes: option(Js.t({..}))=?,
+        ~colSpan: option(int)=?,
+        ~count: int,
+        ~rowsPerPage: int,
+        ~rowsPerPageOptions: option(array(int))=?,
+        ~page: option(int),
+        ~labelDisplayedRows:
+           option(
+             {
+               .
+               "from": int,
+               "_to": int,
+               "count": int,
+             } =>
+             string,
+           ),
+        ~onChangePage: (Js.Nullable.t(ReactEventRe.Synthetic.t), int) => unit,
+        ~onChangeRowsPerPage: option(ReactEventRe.Form.t => unit)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children,
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=toolbar,
+      ~props=
+        Js.Nullable.(
+          {
+            "classes": fromOption(classes),
+            "colSpan": colSpan,
+            "count": count,
+            "rowsPerPage": rowsPerPage,
+            "rowsPerPageOptions": fromOption(rowsPerPageOptions),
+            "page": fromOption(page),
+            "labelDisplayedRows": fromOption(labelDisplayedRows),
+            "onChangePage": onChangePage,
+            "onChangeRowsPerPage": fromOption(onChangeRowsPerPage),
+            "style": fromOption(style),
+          }
+        ),
+      children,
+    );
+};
+
 module TableRow = {
   [@bs.module "material-ui/Table"]
   external toolbar : ReasonReact.reactClass = "TableRow";
