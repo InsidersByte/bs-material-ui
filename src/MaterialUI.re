@@ -1434,7 +1434,7 @@ module Switch = {
       (
         ~checked: option([ | `String(string) | `Boolean(bool)])=?,
         ~color: option(Color.t)=?,
-        ~onChange: option(ReactEventRe.Selection.t)=?,
+        ~onChange: option(ReactEventRe.Synthetic.t => unit)=?,
         ~style: option(ReactDOMRe.style)=?,
         children,
       ) =>
@@ -1766,7 +1766,7 @@ module TablePagination = {
         ~count: int,
         ~rowsPerPage: int,
         ~rowsPerPageOptions: option(array(int))=?,
-        ~page: option(int),
+        ~page: int,
         ~labelDisplayedRows:
            option(
              {
@@ -1776,7 +1776,7 @@ module TablePagination = {
                "count": int,
              } =>
              string,
-           ),
+           )=?,
         ~onChangePage: (Js.Nullable.t(ReactEventRe.Synthetic.t), int) => unit,
         ~onChangeRowsPerPage: option(ReactEventRe.Form.t => unit)=?,
         ~style: option(ReactDOMRe.style)=?,
@@ -1792,7 +1792,7 @@ module TablePagination = {
             "count": count,
             "rowsPerPage": rowsPerPage,
             "rowsPerPageOptions": fromOption(rowsPerPageOptions),
-            "page": fromOption(page),
+            "page": page,
             "labelDisplayedRows": fromOption(labelDisplayedRows),
             "onChangePage": onChangePage,
             "onChangeRowsPerPage": fromOption(onChangeRowsPerPage),
