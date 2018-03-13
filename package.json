@@ -34,7 +34,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "bs-platform": "2.1.0",
+    "bs-platform": "2.2.2",
     "husky": "0.14.3",
     "lint-staged": "6.0.0",
     "material-ui": "1.0.0-beta.29",
