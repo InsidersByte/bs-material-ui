@@ -112,7 +112,7 @@ let make = (_children) => {
 * [ ] SnackbarContent
 * [ ] Snackbar
 * [ ] SvgIcon
-* [ ] Switch
+* [x] Switch
 * [x] Tab
 * [x] TableBody
 * [x] TableCell

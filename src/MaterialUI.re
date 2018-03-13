@@ -11,6 +11,7 @@ let unwrapValue =
         | `StringArray(array(string))
         | `Float(float)
         | `FloatArray(array(float))
+        | `Boolean(bool)
       ],
     ) =>
   switch (r) {
@@ -20,6 +21,7 @@ let unwrapValue =
   | `IntArray(a) => toJsUnsafe(a)
   | `Float(a) => toJsUnsafe(a)
   | `FloatArray(a) => toJsUnsafe(a)
+  | `Boolean(b) => toJsUnsafe(Js.Boolean.to_js_boolean(b))
   };
 
 let unwrap_bool = (b: option(bool)) =>
@@ -1407,6 +1409,43 @@ module Select = {
             "placeholder": fromOption(placeholder),
             "type": fromOption(inputType),
             "onChange": fromOption(onChange),
+          }
+        ),
+      children,
+    );
+};
+
+module Switch = {
+  module Color = {
+    type t =
+      | Accent
+      | Primary
+      | Inherit;
+    let to_string =
+      fun
+      | Accent => "accent"
+      | Primary => "primary"
+      | Inherit => "inherit";
+  };
+  [@bs.module "material-ui/Switch"]
+  external reactClass : ReasonReact.reactClass = "default";
+  let make =
+      (
+        ~checked: option([ | `String(string) | `Boolean(bool)])=?,
+        ~color: option(Color.t)=?,
+        ~onChange: option(ReactEventRe.Selection.t)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        children,
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props=
+        Js.Nullable.(
+          {
+            "checked": fromOption(option_map(unwrapValue, checked)),
+            "color": fromOption(option_map(Color.to_string, color)),
+            "onChange": fromOption(onChange),
+            "style": fromOption(style),
           }
         ),
       children,
