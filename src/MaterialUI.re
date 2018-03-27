@@ -173,6 +173,28 @@ module Button = {
       | Contrast => "contrast"
       | Accent => "accent";
   };
+  module Size = {
+    type t =
+      | Small
+      | Medium
+      | Large;
+    let to_string =
+      fun
+      | Small => "small"
+      | Medium => "medium"
+      | Large => "large";
+  };
+  module Variant = {
+    type t =
+      | Flat
+      | Raised
+      | Fab;
+    let to_string =
+      fun
+      | Flat => "flat"
+      | Raised => "raised"
+      | Fab => "fab";
+  };
   [@bs.module "material-ui/Button"]
   external reactClass : ReasonReact.reactClass = "default";
   let make =
@@ -184,13 +206,14 @@ module Button = {
         ~className: option(string)=?,
         ~color: option(Color.t)=?,
         ~component: option(string)=?,
-        ~dense: option(bool)=?,
         ~disabled: option(bool)=?,
         ~disableFocusRipple: option(bool)=?,
         ~disableRipple: option(bool)=?,
-        ~fab: option(bool)=?,
         ~href: option(string)=?,
-        ~raised: option(bool)=?,
+        ~fullWidth: option(bool)=?,
+        ~mini: option(bool)=?,
+        ~size: option(Size.t)=?,
+        ~variant: option(Variant.t)=?,
         ~_type: option(string)=?,
         ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         children,
@@ -204,13 +227,14 @@ module Button = {
             "className": fromOption(className),
             "color": fromOption(option_map(Color.to_string, color)),
             "component": fromOption(component),
-            "dense": unwrap_bool(dense),
             "disabled": unwrap_bool(disabled),
             "disableFocusRipple": unwrap_bool(disableFocusRipple),
             "disableRipple": unwrap_bool(disableRipple),
-            "fab": unwrap_bool(fab),
             "href": fromOption(href),
-            "raised": unwrap_bool(raised),
+            "fullWidth": unwrap_bool(fullWidth),
+            "mini": unwrap_bool(mini),
+            "variant": fromOption(option_map(Variant.to_string, variant)),
+            "size": fromOption(option_map(Size.to_string, size)),
             "type": fromOption(_type),
             "onClick": fromOption(onClick),
             "style": fromOption(style),
