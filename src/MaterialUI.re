@@ -310,6 +310,7 @@ module Card = {
         ~raised: option(bool)=?,
         ~style: option(ReactDOMRe.style)=?,
         ~className: option(string)=?,
+        ~onClick: option(ReactEventRe.Mouse.t => unit)=?,
         children,
       ) =>
     ReasonReact.wrapJsForReason(
@@ -320,6 +321,7 @@ module Card = {
             "raised": unwrap_bool(raised),
             "style": fromOption(style),
             "className": fromOption(className),
+            "onClick": fromOption(onClick),
           }
         ),
       children,
