@@ -5,4 +5,5 @@
 5.  colSpan missing on TableRow
 6.  upgrade to bs-platform@3.0.0
 7.  TableRow missing onDoubleClick
-8.  TablePagination incorrect props: onChangeRowsPerPage; onChangePage; labelDisplayedRows
+8.  TablePagination onChangeRowsPerPage, onChangePage and labelDisplayedRows incorrect
+9.  Checkbox onChange incorrect
