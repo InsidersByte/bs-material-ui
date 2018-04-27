@@ -1560,6 +1560,7 @@ module Card = {
       ~component: 'union_h=?,
       ~elevation: 'number_j=?,
       ~square: bool=?,
+      ~onClick: ReasonReact.Callback.t(ReactEventRe.Mouse.t)=?,
       ~style: ReactDOMRe.style=?,
       unit
     ) =>
@@ -1573,6 +1574,7 @@ module Card = {
            option([ | `String(string) | `Element(ReasonReact.reactElement)])=?,
         ~elevation: option([ | `Int(int) | `Float(float)])=?,
         ~square: option(bool)=?,
+        ~onClick: option(ReasonReact.Callback.t(ReactEventRe.Mouse.t))=?,
         ~style: option(ReactDOMRe.style)=?,
         children,
       ) =>
@@ -1585,6 +1587,7 @@ module Card = {
           ~component=?Js.Option.map((. v) => unwrapValue(v), component),
           ~elevation=?Js.Option.map((. v) => unwrapValue(v), elevation),
           ~square?,
+          ~onClick?,
           ~style?,
           (),
         ),
