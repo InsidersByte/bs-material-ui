@@ -34,11 +34,10 @@ let component = ReasonReact.statelessComponent("Header");
 let make = (_children) => {
   ...component,
   render: (_self) =>
-    <MaterialUI.AppBar position="static" color="default">
+    <MaterialUI.AppBar position=`Static color=`Inherit>
       <MaterialUI.Toolbar>
-        <MaterialUI.Typography
-          _type="title" color=MaterialUI.Typography.Color.Inherit>
-          (ReasonReact.stringToElement("Title"))
+        <MaterialUI.Typography variant=`Title color=`Inherit>
+          (ReasonReact.string("Title"))
         </MaterialUI.Typography>
       </MaterialUI.Toolbar>
     </MaterialUI.AppBar>
